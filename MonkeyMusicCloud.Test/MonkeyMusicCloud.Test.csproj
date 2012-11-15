@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1C41411F-4DA1-46BD-BC5B-4918D37F76EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonkeyMusicCloud.Test</RootNamespace>
+    <AssemblyName>MonkeyMusicCloud.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MicroMvvm">
+      <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MongoDB.Driver, Version=1.6.0.4624, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\Solution Items\Librairies\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\ViewModels\AddSongsViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\ContentBodyViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\PlayerViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\PlayListViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SongListViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
+    <Compile Include="Domain\Model\FileShould.cs" />
+    <Compile Include="Domain\Model\SongShould.cs" />
+    <Compile Include="Helper\Create.cs" />
+    <Compile Include="Helper\EventCatcher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BaseRepositoryTests.cs" />
+    <Compile Include="Repository\RepositoryShould.cs" />
+    <Compile Include="Service\MusicServiceShould.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonkeyMusicCloud.Client\MonkeyMusicCloud.Client.csproj">
+      <Project>{502929A3-7D79-45B5-836D-13605CBAF41A}</Project>
+      <Name>MonkeyMusicCloud.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Domain\MonkeyMusicCloud.Domain.csproj">
+      <Project>{91F7E391-578F-4B91-9D7D-492582A824CD}</Project>
+      <Name>MonkeyMusicCloud.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Repository\MonkeyMusicCloud.Repository.csproj">
+      <Project>{43D4CCD6-03EF-4564-A820-B847EA9F7036}</Project>
+      <Name>MonkeyMusicCloud.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Service\MonkeyMusicCloud.Service.csproj">
+      <Project>{1B7455CF-E77F-4170-8E7A-541D980DF6D8}</Project>
+      <Name>MonkeyMusicCloud.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Utilities\MonkeyMusicCloud.Utilities.csproj">
+      <Project>{AF28CBCE-6D28-4FD6-B7A7-B421322EF99C}</Project>
+      <Name>MonkeyMusicCloud.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

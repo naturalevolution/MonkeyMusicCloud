@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfSong">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Song" nillable="true" type="tns:Song" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSong" nillable="true" type="tns:ArrayOfSong" />
+  <xs:complexType name="Song">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Media">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Song" nillable="true" type="tns:Song" />
+  <xs:complexType name="Media">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="File" nillable="true" type="tns:File" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Media" nillable="true" type="tns:Media" />
+  <xs:complexType name="Entity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entity" nillable="true" type="tns:Entity" />
+  <xs:complexType name="File">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Entity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="File" nillable="true" type="tns:File" />
+</xs:schema>

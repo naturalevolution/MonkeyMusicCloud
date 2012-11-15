@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.PlayListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" xmlns:Views="clr-namespace:MonkeyMusicCloud.Client.Views" mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <ViewModels:PlayListViewModel />
+    </UserControl.DataContext>
+    <Grid HorizontalAlignment="Center">
+        <Grid.Resources>
+            <Style TargetType="StackPanel">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="52"></RowDefinition>
+            <RowDefinition Height="600"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Width="48" Height="48" Command="{Binding PreviousSongCommand}">
+                <Image Source="../Themes/Images/PlayerPrecedente.png" />
+            </Button>
+            <Button Width="48" Height="48" Command="{Binding PlaySongCommand}" CommandParameter="{Binding ElementName=lvSongList, Path=SelectedItem }">
+                <Image Source="../Themes/Images/PlayerPlay.png" />
+            </Button>
+            <Button Width="48" Height="48" Command="{Binding NextSongCommand}">
+                <Image Source="../Themes/Images/PlayerSuivante.png"/>
+            </Button>
+        </StackPanel>
+        <Views:PlayerView  Grid.Row="1" />
+        <ListView Grid.Row="2" Name="lvSongList" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top" Height="600" Width="300" 
+                  ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Length}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

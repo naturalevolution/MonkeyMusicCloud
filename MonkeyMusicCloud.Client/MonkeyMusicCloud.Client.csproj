@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{502929A3-7D79-45B5-836D-13605CBAF41A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonkeyMusicCloud.Client</RootNamespace>
+    <AssemblyName>MonkeyMusicCloud.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MicroMvvm">
+      <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Common">
+      <HintPath>..\Solution Items\Librairies\PixelLab.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Core">
+      <HintPath>..\Solution Items\Librairies\PixelLab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Wpf">
+      <HintPath>..\Solution Items\Librairies\PixelLab.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Events\EventsManager.cs" />
+    <Compile Include="Service References\Service.Proxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\MusicPlayerInstance.cs" />
+    <Compile Include="Utilities\ServiceInstance.cs" />
+    <Compile Include="Utilities\StreamInstance.cs" />
+    <Compile Include="ViewModels\AddSongsViewModel.cs" />
+    <Compile Include="ViewModels\ContentBodyViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\PlayListViewModel.cs" />
+    <Compile Include="ViewModels\SongListViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\BodyViews\AddSongsView.xaml.cs">
+      <DependentUpon>AddSongsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BodyViews\SongDetailView.xaml.cs">
+      <DependentUpon>SongDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BodyViews\IBodyView.cs" />
+    <Compile Include="Views\BodyViews\SongListView.xaml.cs">
+      <DependentUpon>SongListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentBodyView.xaml.cs">
+      <DependentUpon>ContentBodyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayListView.xaml.cs">
+      <DependentUpon>PlayListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BodyViews\AddSongsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BodyViews\SongDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BodyViews\SongListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ContentBodyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlayerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\MonkeyMusicCloud.Domain.Model.Song.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\Service.Proxy\MonkeyMusicCloud.Domain.Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service.Proxy\service.wsdl" />
+    <None Include="Service References\Service.Proxy\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Service.Proxy\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonkeyMusicCloud.Domain\MonkeyMusicCloud.Domain.csproj">
+      <Project>{91F7E391-578F-4B91-9D7D-492582A824CD}</Project>
+      <Name>MonkeyMusicCloud.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Resource\MonkeyMusicCloud.Resource.csproj">
+      <Project>{C2878D75-28A9-45B5-AF39-D737AA2C0743}</Project>
+      <Name>MonkeyMusicCloud.Resource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Utilities\MonkeyMusicCloud.Utilities.csproj">
+      <Project>{AF28CBCE-6D28-4FD6-B7A7-B421322EF99C}</Project>
+      <Name>MonkeyMusicCloud.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\add.png" />
+    <Resource Include="Themes\Images\drive.png" />
+    <Resource Include="Themes\Images\Play.png" />
+    <Resource Include="Themes\Images\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Service.Proxy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service.Proxy\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service.Proxy\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Service.Proxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\PlayerPause.png" />
+    <Resource Include="Themes\Images\PlayerPlay.png" />
+    <Resource Include="Themes\Images\PlayerPrecedente.png" />
+    <Resource Include="Themes\Images\PlayerStop.png" />
+    <Resource Include="Themes\Images\PlayerSuivante.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\CustomControls\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(SolutionDir)Solution Items\Librairies\ikpMP3.dll" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
