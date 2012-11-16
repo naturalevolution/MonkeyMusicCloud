@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Domain.IRepository;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Repository;
 using MonkeyMusicCloud.Service;
 using MonkeyMusicCloud.Test.Helper;
 using Moq;
@@ -12,11 +13,11 @@ namespace MonkeyMusicCloud.Test.Service
     [TestClass]
     public class MusicServiceShould
     {
-        private Mock<IRepository<Song>> Repository { get; set; }
+        private Mock<SongRepository> Repository { get; set; }
 
         [TestInitialize]
         public void TestInitialize(){
-            Repository = new Mock<IRepository<Song>>();
+            Repository = new Mock<SongRepository>();
         }
 
         [TestMethod]
@@ -35,6 +36,33 @@ namespace MonkeyMusicCloud.Test.Service
 
             Repository.Verify(r => r.GetAll(), Times.Once());
             Assert.AreEqual(expectedSongs, findMusics);
+        }
+
+        [TestMethod]
+        public void SearchSongs()
+        {
+            const string filter = "filter";
+            ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
+            Repository.Setup(r => r.GetByFilter(filter)).Returns(expectedSongs);
+            MusicService service = new MusicService(Repository.Object);
+
+            IList<Song> findMusics = service.SearchSongs(filter);
+
+            Repository.Verify(r => r.GetByFilter(filter), Times.Once());
+            Assert.AreEqual(expectedSongs, findMusics);
+        }
+
+        [TestMethod]
+        public void SearchSongsAndReturnReturnAnEmptyListIfFilterIsEmpty()
+        {
+            ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
+            Repository.Setup(r => r.GetByFilter(It.IsAny<string>())).Returns(expectedSongs);
+            MusicService service = new MusicService(Repository.Object);
+
+            IList<Song> findMusics = service.SearchSongs(string.Empty);
+
+            Repository.Verify(r => r.GetByFilter(It.IsAny<string>()), Times.Never());
+            Assert.AreEqual(0, findMusics.Count);
         }
 
         [TestMethod]

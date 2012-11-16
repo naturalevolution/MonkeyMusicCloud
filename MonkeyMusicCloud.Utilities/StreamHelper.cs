@@ -13,6 +13,7 @@ namespace MonkeyMusicCloud.Utilities
             Stream = new FileStream(path, FileMode.Open);
             var memoryStream = new MemoryStream();
             Stream.CopyTo(memoryStream);
+            Stream.Close();
             return memoryStream.ToArray();
         }
     }

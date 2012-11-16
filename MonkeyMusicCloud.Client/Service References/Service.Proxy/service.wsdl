@@ -21,6 +21,12 @@
   <wsdl:message name="IMusicService_GetAllSongs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllSongsResponse" />
   </wsdl:message>
+  <wsdl:message name="IMusicService_SearchSongs_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchSongs" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_SearchSongs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchSongsResponse" />
+  </wsdl:message>
   <wsdl:message name="IMusicService_AddASong_InputMessage">
     <wsdl:part name="parameters" element="tns:AddASong" />
   </wsdl:message>
@@ -32,6 +38,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetAllSongs" message="tns:IMusicService_GetAllSongs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetAllSongsResponse" message="tns:IMusicService_GetAllSongs_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SearchSongs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/SearchSongs" message="tns:IMusicService_SearchSongs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/SearchSongsResponse" message="tns:IMusicService_SearchSongs_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddASong">
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/AddASong" message="tns:IMusicService_AddASong_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/AddASongResponse" message="tns:IMusicService_AddASong_OutputMessage" />
@@ -42,6 +52,15 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetAllSongs">
       <soap12:operation soapAction="http://tempuri.org/IMusicService/GetAllSongs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchSongs">
+      <soap12:operation soapAction="http://tempuri.org/IMusicService/SearchSongs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

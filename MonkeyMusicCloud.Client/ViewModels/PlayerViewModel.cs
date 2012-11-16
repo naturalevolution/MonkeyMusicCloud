@@ -28,6 +28,8 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                                 {
                                                     PurcentagePlayed = purcentage;
                                                 };
+
+            MusicPlayer.SongFinished += EventsManager.InvokeCurrentSongFinished;
         }
 
         private void PlaySong(Song song)

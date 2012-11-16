@@ -14,7 +14,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         protected Mock<IMusicPlayer> MusicPlayer { get; set; }
 
         [TestInitialize]
-        public void Initialize()
+        public virtual void Initialize()
         {
             Service = new Mock<IMusicService>();
             new ServiceInstance(Service.Object);

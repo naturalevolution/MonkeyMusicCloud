@@ -10,6 +10,10 @@ namespace MonkeyMusicCloud.Service
         [OperationContract]
         IList<Song> GetAllSongs();
 
+
+        [OperationContract]
+        IList<Song> SearchSongs(string filter);
+
         [OperationContract]
         void AddASong(Song song);
     }

@@ -18,11 +18,17 @@ namespace MonkeyMusicCloud.Test.Helper
                 PlaySongInvoked = true;
                 SongToPlay = song;
             };
+
+            EventsManager.CurrentSongFinished += delegate()
+            {
+                SongFinishedInvoked = true;
+            };
         }
 
         public ObservableCollection<Song> AddToPlayListSongs { get; set; }
         public Song SongToPlay { get; set; }
         public bool AddToPlayListInvoked;
         public bool PlaySongInvoked;
+        public bool SongFinishedInvoked;
     }
 }

@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solution Items\Librairies\Log4Net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
@@ -52,6 +56,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +64,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="taglib-sharp">
+      <HintPath>..\Solution Items\Librairies\TagLib\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -78,12 +86,14 @@
     <Compile Include="Utilities\MusicPlayerInstance.cs" />
     <Compile Include="Utilities\ServiceInstance.cs" />
     <Compile Include="Utilities\StreamInstance.cs" />
-    <Compile Include="ViewModels\AddSongsViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\AddSongsViewModel.cs" />
     <Compile Include="ViewModels\ContentBodyViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayListViewModel.cs" />
-    <Compile Include="ViewModels\SongListViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\SongListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\MenuItem.cs" />
+    <Compile Include="ViewModels\SubViewModels\SongToAdd.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\BodyViews\AddSongsView.xaml.cs">
       <DependentUpon>AddSongsView.xaml</DependentUpon>
@@ -98,6 +108,7 @@
     <Compile Include="Views\ContentBodyView.xaml.cs">
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomControls\Behaviours.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -233,9 +244,7 @@
     <Resource Include="Themes\Images\PlayerStop.png" />
     <Resource Include="Themes\Images\PlayerSuivante.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\CustomControls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

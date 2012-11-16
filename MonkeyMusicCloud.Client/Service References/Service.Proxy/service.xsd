@@ -13,10 +13,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SearchSongs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchSongsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" minOccurs="0" name="SearchSongsResult" nillable="true" type="q2:ArrayOfSong" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddASong">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" minOccurs="0" name="song" nillable="true" type="q2:Song" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" minOccurs="0" name="song" nillable="true" type="q3:Song" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

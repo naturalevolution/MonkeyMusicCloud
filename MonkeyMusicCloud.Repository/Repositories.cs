@@ -2,6 +2,6 @@
 {
     public static class Repositories
     {
-        public static MusicRepository Music { get { return new MusicRepository(); } }
+        public static SongRepository Song { get { return new SongRepository(); } }
     }
 }

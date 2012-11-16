@@ -10,19 +10,28 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     [TestClass]
     public class PlayListViewModelShould : ViewModelsBaseTest
     {
+        private PlayListViewModel ViewModel { get; set; }
+
+        [TestInitialize]
+        public override void Initialize()
+        {
+            base.Initialize();
+            ViewModel = new PlayListViewModel();
+        }
+
         [TestMethod]
         public void RefreshSongWhenAddToPlayListEventIsCatched()
         {
             Song song1 = Create.Song();
             Song song2 = Create.Song();
             ObservableCollection<Song> songs= new ObservableCollection<Song> {song1};
-            PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song> { song2 } };
+            ViewModel.SongList = new ObservableCollection<Song> { song2 } ;
 
             EventsManager.InvokeAddToPlayList(songs);
-            
-            Assert.AreEqual(2, viewModel.SongList.Count);
-            CollectionAssert.Contains(viewModel.SongList, song1);
-            CollectionAssert.Contains(viewModel.SongList, song2);
+
+            Assert.AreEqual(2, ViewModel.SongList.Count);
+            CollectionAssert.Contains(ViewModel.SongList, song1);
+            CollectionAssert.Contains(ViewModel.SongList, song2);
         }
 
         [TestMethod]
@@ -30,9 +39,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             EventCatcher eventCatcher = new EventCatcher();
             Song song = Create.Song();
-            PlayListViewModel viewModel = new PlayListViewModel {SongList = new ObservableCollection<Song>{song}};
-            
-            viewModel.PlaySongCommand.Execute(song);
+            ViewModel.SongList = new ObservableCollection<Song>{song};
+
+            ViewModel.PlaySongCommand.Execute(song);
 
             Assert.IsTrue(eventCatcher.PlaySongInvoked);
             Assert.AreEqual(song,  eventCatcher.SongToPlay);
@@ -42,9 +51,8 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void DoNotRaiseTheEventIfTheListIsEmpty()
         {
             EventCatcher eventCatcher = new EventCatcher();
-            PlayListViewModel viewModel = new PlayListViewModel();
 
-            viewModel.PlaySongCommand.Execute(null);
+            ViewModel.PlaySongCommand.Execute(null);
 
             Assert.IsFalse(eventCatcher.PlaySongInvoked);
         }
@@ -55,13 +63,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song song1 = Create.Song();
             Song song2 = Create.Song();
             EventCatcher eventCatcher = new EventCatcher();
-            PlayListViewModel viewModel = new PlayListViewModel {SongList = new ObservableCollection<Song> {song1, song2}};
+            ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
 
-            viewModel.PlaySongCommand.Execute(null);
+            ViewModel.PlaySongCommand.Execute(null);
 
             Assert.IsTrue(eventCatcher.PlaySongInvoked);
             Assert.AreEqual(song1, eventCatcher.SongToPlay);
-            Assert.AreEqual(song1, viewModel.ActualPlayedSong);
+            Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
         }
 
         [TestMethod]
@@ -70,10 +78,10 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song song1 = Create.Song();
             Song song2 = Create.Song();
 
-            PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song> { song1, song2 } };
-            viewModel.PlaySongCommand.Execute(song2);
+            ViewModel.SongList = new ObservableCollection<Song> { song1, song2 } ;
+            ViewModel.PlaySongCommand.Execute(song2);
 
-            Assert.AreEqual(song2, viewModel.ActualPlayedSong);
+            Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
         }
 
         [TestMethod]
@@ -124,21 +132,28 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             }
 
             [TestMethod]
+            public void ADoNothingIfThereIsNoActualSongOnSongFinished()
+            {
+                EventCatcher eventCatcher = new EventCatcher();
+                
+                EventsManager.InvokeCurrentSongFinished();
+
+                Assert.IsFalse(eventCatcher.PlaySongInvoked);
+            }
+
+            [TestMethod]
             public void DoNothingIfTheActualSOngIsTheFirstOfTheList()
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<Song> { song1, song2 },
-                    ActualPlayedSong = song1
-                };
+                ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
+                ViewModel.ActualPlayedSong = song1;
 
-                viewModel.PreviousSongCommand.Execute(null);
+                ViewModel.PreviousSongCommand.Execute(null);
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1, viewModel.ActualPlayedSong);
+                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
             }
         #endregion
 
@@ -150,17 +165,14 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<Song> { song1, song2 },
-                    ActualPlayedSong = song1
-                };
+                ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
+                ViewModel.ActualPlayedSong = song1;
 
-                viewModel.NextSongCommand.Execute(null);
+                ViewModel.NextSongCommand.Execute(null);
 
                 Assert.IsTrue(eventCatcher.PlaySongInvoked);
                 Assert.AreEqual(song2, eventCatcher.SongToPlay);
-                Assert.AreEqual(song2, viewModel.ActualPlayedSong);
+                Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
             }
 
             [TestMethod]
@@ -169,56 +181,39 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<Song> { song1, song2 },
-                    ActualPlayedSong = song1
-                };
+                ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
+                ViewModel.ActualPlayedSong = song1;
 
                 EventsManager.InvokeCurrentSongFinished();
 
                 Assert.IsTrue(eventCatcher.PlaySongInvoked);
                 Assert.AreEqual(song2, eventCatcher.SongToPlay);
-                Assert.AreEqual(song2, viewModel.ActualPlayedSong);
+                Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
             }
 
             [TestMethod]
             public void DoNothingIfThereIsNoActualSongOnNextSongCommand()
             {
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song>() };
+                ViewModel.SongList = new ObservableCollection<Song>();
 
-                viewModel.NextSongCommand.Execute(null);
-
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-            }
-
-            [TestMethod]
-            public void DoNothingIfThereIsNoActualSongOnSongFinished()
-            {
-                EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song>() };
-
-                EventsManager.InvokeCurrentSongFinished();
+                ViewModel.NextSongCommand.Execute(null);
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
             }
-
+        
             [TestMethod]
             public void DoNothingIfThereIsTheEndOfPlayListOnNextSongDemand()
             {
                 Song song1 = Create.Song();
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<Song> { song1 },
-                    ActualPlayedSong = song1
-                };
+                ViewModel.SongList = new ObservableCollection<Song> {song1};
+                ViewModel.ActualPlayedSong = song1;
 
-                viewModel.NextSongCommand.Execute(null);
+                ViewModel.NextSongCommand.Execute(null);
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1, viewModel.ActualPlayedSong);
+                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
             }
 
             [TestMethod]
@@ -226,18 +221,14 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 EventCatcher eventCatcher = new EventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<Song> { song1 },
-                    ActualPlayedSong = song1
-                };
+                ViewModel.SongList = new ObservableCollection<Song> {song1};
+                ViewModel.ActualPlayedSong = song1;
 
                 EventsManager.InvokeCurrentSongFinished();
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.IsNull(viewModel.ActualPlayedSong);
+                Assert.IsNull(ViewModel.ActualPlayedSong);
             }
-
         #endregion
     }
 }

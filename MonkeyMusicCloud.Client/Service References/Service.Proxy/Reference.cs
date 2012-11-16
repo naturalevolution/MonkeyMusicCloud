@@ -18,6 +18,9 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetAllSongs", ReplyAction="http://tempuri.org/IMusicService/GetAllSongsResponse")]
         System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetAllSongs();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/SearchSongs", ReplyAction="http://tempuri.org/IMusicService/SearchSongsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> SearchSongs(string filter);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/AddASong", ReplyAction="http://tempuri.org/IMusicService/AddASongResponse")]
         void AddASong(MonkeyMusicCloud.Domain.Model.Song song);
     }
@@ -51,6 +54,10 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
         
         public System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetAllSongs() {
             return base.Channel.GetAllSongs();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> SearchSongs(string filter) {
+            return base.Channel.SearchSongs(filter);
         }
         
         public void AddASong(MonkeyMusicCloud.Domain.Model.Song song) {

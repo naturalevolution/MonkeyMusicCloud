@@ -36,7 +36,7 @@
                   SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Length}" />
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}" />
                 </GridView>
             </ListView.View>
         </ListView>

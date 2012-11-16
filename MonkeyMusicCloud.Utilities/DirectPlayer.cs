@@ -33,7 +33,6 @@ namespace MonkeyMusicCloud.Utilities
         {
             Stop();
             string path = ConfigurationManager.AppSettings["MediaCache"] + file.Length +".mp3";
-            File.WriteAllBytes(path, file);
             objFilterGraph = new FilgraphManager();
             objFilterGraph.RenderFile(path);
             objMediaPosition = objFilterGraph as IMediaPosition;
@@ -49,6 +48,7 @@ namespace MonkeyMusicCloud.Utilities
             if (objFilterGraph != null)
             {
                 objFilterGraph.Stop();
+                
                 objMediaPosition.CurrentPosition = 0;
             }
             objFilterGraph = null;

@@ -10,7 +10,11 @@
   <xs:complexType name="Song">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Media">
-        <xs:sequence />
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Album" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Artist" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

@@ -60,6 +60,7 @@
     <Compile Include="Client\ViewModels\PlayListViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SongListViewModelShould.cs" />
     <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SubViewModels\MenuItemShould.cs" />
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />
     <Compile Include="Domain\Model\SongShould.cs" />
@@ -94,6 +95,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Helper\TestFiles\mp3\erreur.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helper\TestFiles\mp3\erreur.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helper\TestFiles\mp3\test1.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Helper\TestFiles\test2.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

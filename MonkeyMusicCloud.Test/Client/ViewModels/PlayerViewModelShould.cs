@@ -15,11 +15,24 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void CallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
             Song songToPlay = Create.Song();
-            PlayerViewModel viewModel = new PlayerViewModel();
+            new PlayerViewModel();
 
             EventsManager.InvokePlaySong(songToPlay);
 
             MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
+        }
+
+        [TestMethod]
+        public void RaiseNewSongFinishedEventWhenASongIsFinished()
+        {
+            EventCatcher catcher = new EventCatcher();
+            new PlayerViewModel();
+
+            MusicPlayer.Raise(mp => mp.SongFinished += null);
+
+            Assert.IsTrue(catcher.SongFinishedInvoked);
+
+            
         }
 
         [TestMethod]

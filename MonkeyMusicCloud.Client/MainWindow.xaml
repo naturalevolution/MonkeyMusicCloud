@@ -10,12 +10,11 @@
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="600" />
             <RowDefinition Height="200" />
         </Grid.RowDefinitions>
-        <Views:MenuView Grid.Column="0" Grid.Row="1" />
-        <Views:ContentBodyView Grid.Column="1" Grid.Row="1" />
+        <Views:ContentBodyView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
         <Views:PlayListView Grid.Column="2" Grid.RowSpan="2" />
     </Grid>
 </Window>

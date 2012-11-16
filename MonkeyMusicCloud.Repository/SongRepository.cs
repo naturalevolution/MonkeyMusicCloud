@@ -1,0 +1,17 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using MonkeyMusicCloud.Domain.Model;
+
+namespace MonkeyMusicCloud.Repository
+{
+    public class SongRepository : Repository<Song>
+    {
+        public virtual IList<Song> GetByFilter(string filter)
+        {
+            IMongoQuery query = Query<Song>.Where(s => s.Title == filter || s.Album == filter || s.Artist == filter);
+            return Collection.FindAs<Song>(query).ToList();
+        }
+    }
+}

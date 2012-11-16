@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using MonkeyMusicCloud.Client.Events;
-using MonkeyMusicCloud.Client.Views.BodyViews;
+﻿using System.Windows.Controls;
 
 namespace MonkeyMusicCloud.Client.Views
 {
@@ -13,12 +10,6 @@ namespace MonkeyMusicCloud.Client.Views
         public ContentBodyView()
         {
             InitializeComponent();
-            EventsManager.ChangeContentView += delegate(IBodyView view)
-                                                   {
-                                                       gContent.Children.Clear();
-                                                       gContent.Children.Add((UIElement) view);
-                                                   };
         }
-        
     }
 }

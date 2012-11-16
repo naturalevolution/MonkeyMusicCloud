@@ -18,7 +18,7 @@ namespace MonkeyMusicCloud.Test.Helper
         public static Song Song()
         {
             compteurSong += 1;
-            return new Song(File());
+            return new Song(File(), "title" + compteurSong, "album"+compteurSong , "artist"+compteurSong);
         }
     }
 }
