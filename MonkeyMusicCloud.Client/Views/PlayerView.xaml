@@ -19,7 +19,19 @@
         <Label Grid.Row="1" Grid.Column="0" Content="{Binding PlayingSong.Title, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="/" />
+            <Label Content="/" >
+                <Label.Style>                    
+                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding TotalTime}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+
             <Label Content="{Binding TotalTime, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>

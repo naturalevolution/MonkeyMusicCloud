@@ -45,7 +45,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         }
 
         [TestMethod]
-        public void RaiseNewSongFinishedEventWhenASongIsFinished()
+        public void RaiseNewSongFinishedEventWhenASongIsFinishedAndCleanAllValue()
         {
             EventCatcher catcher = new EventCatcher();
             new PlayerViewModel();
