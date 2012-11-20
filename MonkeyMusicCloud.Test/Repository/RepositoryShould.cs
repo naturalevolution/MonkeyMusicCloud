@@ -55,26 +55,7 @@ namespace MonkeyMusicCloud.Test.Repository
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic3.Title);
         }
 
-        //TODO : a déplacer
-        [TestMethod]
-        public void GetMusicByFilter()
-        {
-            Song expectedMusic1 =new Song(Create.File(), "filter", "fail1", "fail1");
-            Song expectedMusic2 =new Song(Create.File(), "fail2", "fail2", "filter");
-            Song expectedMusic3 =new Song(Create.File(), "fail3", "filter", "fail3");
-            Song expectedMusic4 =new Song(Create.File(), "fail4", "fail4", "fail4");
-
-            songRepository.Add(expectedMusic1);
-            songRepository.Add(expectedMusic2);
-            songRepository.Add(expectedMusic3);
-            IList<Song> gettedMusics = songRepository.GetByFilter("filter");
-
-            Assert.AreEqual(3, gettedMusics.Count);
-            CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic1.Title);
-            CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic2.Title);
-            CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic3.Title);
-            CollectionAssert.DoesNotContain(gettedMusics.Select(g => g.Title).ToList(), expectedMusic4.Title);
-        }
+       
     }
 }
 

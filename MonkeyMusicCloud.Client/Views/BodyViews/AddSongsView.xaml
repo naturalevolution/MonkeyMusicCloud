@@ -6,29 +6,23 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
             <RowDefinition Height="570" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800" />
+            <ColumnDefinition Width="650" />
+            <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="570" />
-                <ColumnDefinition Width="200" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="..." Click="OpenSongFolderDialog" />
-            <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Name="lblRootPath" Content="{Binding RootPath, Mode=TwoWay}" />
-            <Button Grid.Column="2"  Content="Add Checked Musics" Command="{Binding AddSongCommand}" />
-        </Grid>
-        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}">
+        
+        <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}"  >
+                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="Parcourir" />
+                    </GridViewColumn>
                     <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Song.Title}" />
                     <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Path=Song.Album}" />
                     <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Song.Artist}" />
-                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding Path=Path}" />
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -38,6 +32,8 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-        </ListView>        
+        </ListView>
+        <Button Grid.Column="1" Grid.Row="1" Content="Upload songs" Command="{Binding AddSongCommand}" />
+        <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Name="lblRootPath" Content="{Binding RootPath, Mode=TwoWay}" Visibility="Collapsed" />
     </Grid>
 </UserControl>

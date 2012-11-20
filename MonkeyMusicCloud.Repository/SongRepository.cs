@@ -10,7 +10,9 @@ namespace MonkeyMusicCloud.Repository
     {
         public virtual IList<Song> GetByFilter(string filter)
         {
-            IMongoQuery query = Query<Song>.Where(s => s.Title == filter || s.Album == filter || s.Artist == filter);
+            IMongoQuery query = Query<Song>.Where(s => s.Title.ToUpper().Contains(filter.ToUpper()) ||
+                                                       s.Album.ToUpper().Contains(filter.ToUpper()) ||
+                                                       s.Artist.ToUpper().Contains(filter.ToUpper()));
             return Collection.FindAs<Song>(query).ToList();
         }
     }
