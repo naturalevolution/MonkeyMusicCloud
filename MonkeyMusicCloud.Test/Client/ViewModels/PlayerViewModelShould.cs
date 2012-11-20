@@ -20,7 +20,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             MusicPlayer.Verify(mp => mp.Stop(), Times.Once());
             MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
-            Assert.AreEqual(songToPlay, viewModel.PlayingSong);
+            Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 
 
@@ -55,6 +55,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.IsTrue(catcher.SongFinishedInvoked);
             Assert.IsNull(viewModel.ElapsedTime);
             Assert.IsNull(viewModel.TotalTime);
+            Assert.IsNull(viewModel.CurrentSong);
             Assert.AreEqual(0, viewModel.PurcentagePlayed);
         }
 

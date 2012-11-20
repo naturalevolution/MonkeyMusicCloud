@@ -23,17 +23,17 @@ namespace MonkeyMusicCloud.Client.ViewModels
             }
         }
 
-        private Song playingSong;
+        private Song currentSong;
         private string elapsedTime;
         private string totalTime;
 
-        public Song PlayingSong
+        public Song CurrentSong
         {
-            get { return playingSong; }
+            get { return currentSong; }
             set
             {
-                playingSong = value;
-                RaisePropertyChanged("PlayingSong");
+                currentSong = value;
+                RaisePropertyChanged("CurrentSong");
             }
         }
 
@@ -84,7 +84,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             MusicPlayer.Stop();
             MusicPlayer.Play(song.File.Content);
-            PlayingSong = song;
+            CurrentSong = song;
         }
     }
 }
