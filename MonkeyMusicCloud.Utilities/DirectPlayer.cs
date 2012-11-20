@@ -56,7 +56,7 @@ namespace MonkeyMusicCloud.Utilities
             int total = (int) objMediaPosition.Duration;
             int current = (int) objMediaPosition.CurrentPosition;
             int purcentage = 100*current/total;
-            PurcentagePlayed.Invoke(purcentage);
+            PurcentagePlayed.Invoke(current, total);
             if (purcentage == 100)
             {
                 SongFinished.Invoke();

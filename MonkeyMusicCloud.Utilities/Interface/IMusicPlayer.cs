@@ -11,6 +11,5 @@
     }
 
     public delegate void SongFinishedHandler();
-
-    public delegate void PurcentagePlayedHandler(int purcentage);
+    public delegate void PurcentagePlayedHandler(int elapsedTime, int totalTime);
 }

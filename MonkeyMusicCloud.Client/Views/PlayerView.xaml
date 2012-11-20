@@ -11,6 +11,16 @@
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
         </Grid.RowDefinitions>
-        <Slider Grid.Row="0" VerticalAlignment="Center" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding PurcentagePlayed}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="150" />            
+        </Grid.ColumnDefinitions>
+        <Slider Grid.Row="0" Grid.ColumnSpan="2"  VerticalAlignment="Center" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding PurcentagePlayed}" />
+        <Label Grid.Row="1" Grid.Column="0" Content="{Binding PlayingSong.Title, UpdateSourceTrigger=PropertyChanged}" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="/" />
+            <Label Content="{Binding TotalTime, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
     </Grid>
 </UserControl>

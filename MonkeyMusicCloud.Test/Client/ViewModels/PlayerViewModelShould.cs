@@ -14,13 +14,15 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void ACallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
             Song songToPlay = Create.Song();
-            new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel();
 
             EventsManager.InvokePlayNewSong(songToPlay);
 
             MusicPlayer.Verify(mp => mp.Stop(), Times.Once());
             MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
+            Assert.AreEqual(songToPlay, viewModel.PlayingSong);
         }
+
 
         [TestMethod]
         public void CallMusicPlayerResumeWhenAResumeSongEventIsCatched()
@@ -58,12 +60,16 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void RefreshTimePlayed()
         {
-            const int purcentage = 50;
+            const int elapsedTime = 10;
+            const int totalTime = 3690;
+
             PlayerViewModel viewModel = new PlayerViewModel();
 
-            MusicPlayer.Raise(mp => mp.PurcentagePlayed += null, purcentage);
+            MusicPlayer.Raise(mp => mp.PurcentagePlayed += null, elapsedTime, totalTime );
 
-            Assert.AreEqual(purcentage, viewModel.PurcentagePlayed);
+            Assert.AreEqual(1000/20000 * 100, viewModel.PurcentagePlayed);
+            Assert.AreEqual("00:00:10", viewModel.ElapsedTime);
+            Assert.AreEqual("01:01:30", viewModel.TotalTime);
         }
     }
 }
