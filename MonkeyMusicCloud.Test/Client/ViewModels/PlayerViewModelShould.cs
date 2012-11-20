@@ -48,13 +48,14 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void RaiseNewSongFinishedEventWhenASongIsFinishedAndCleanAllValue()
         {
             EventCatcher catcher = new EventCatcher();
-            new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel();
 
             MusicPlayer.Raise(mp => mp.SongFinished += null);
 
             Assert.IsTrue(catcher.SongFinishedInvoked);
-
-            
+            Assert.IsNull(viewModel.ElapsedTime);
+            Assert.IsNull(viewModel.TotalTime);
+            Assert.AreEqual(0, viewModel.PurcentagePlayed);
         }
 
         [TestMethod]

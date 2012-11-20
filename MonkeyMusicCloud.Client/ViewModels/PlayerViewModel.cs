@@ -71,7 +71,13 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                                     TotalTime = TimeSpan.FromSeconds(totalTime).ToString("T", DateTimeFormatInfo.InvariantInfo);
                                                 };
 
-            MusicPlayer.SongFinished += EventsManager.InvokeCurrentSongFinished;
+            MusicPlayer.SongFinished += delegate
+                                            {
+                                                TotalTime = null;
+                                                ElapsedTime = null;
+                                                PurcentagePlayed = 0;
+                                                EventsManager.InvokeCurrentSongFinished();
+                                            };
         }
 
         private void PlayNewSong(Song song)
