@@ -31,6 +31,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                                          }
                                                          RaiseNewNextSongDemand();
                                                      };
+            PlayerState = State.Stop;
         }
         
         private ObservableCollection<Song> songList;
@@ -67,8 +68,18 @@ namespace MonkeyMusicCloud.Client.ViewModels
             if (SongList.Count > 0)
             {
                 Song songToPlay = song ?? SongList.First();
-                EventsManager.InvokePlaySong(songToPlay);
+                EventsManager.InvokePlayNewSong(songToPlay);
                 ActualPlayedSong = songToPlay;
+                PlayerState = State.Play;
+            }
+        }
+
+        private void RaiseNewPauseSongDemand()
+        {
+            if (PlayerState == State.Play)
+            {
+                EventsManager.InvokePauseSong();
+                PlayerState = State.Pause;
             }
         }
 
@@ -93,5 +104,33 @@ namespace MonkeyMusicCloud.Client.ViewModels
         public ICommand PlaySongCommand { get { return new RelayCommand<Song>(RaiseNewPlaySongDemand); } }
         public ICommand NextSongCommand { get { return new RelayCommand(RaiseNewNextSongDemand); } }
         public ICommand PreviousSongCommand { get { return new RelayCommand(RaiseNewPreviousSongDemand); } }
+        public ICommand PauseSongCommand { get { return new RelayCommand(RaiseNewPauseSongDemand); } }
+        public ICommand ResumeSongCommand { get { return new RelayCommand(RaiseNewResumeSongDemand); } }
+
+        private void RaiseNewResumeSongDemand()
+        {
+            if (PlayerState == State.Pause)
+            {
+                EventsManager.InvokeResumeSong();
+                PlayerState = State.Play;
+            }
+        }
+
+        private State playerState;
+        public State PlayerState
+        {
+            get { return playerState; }
+            set { 
+                playerState = value;
+                RaisePropertyChanged("PlayerState");
+            }
+        }
+    }
+
+    public enum State
+    {
+        Play, 
+        Pause, 
+        Stop
     }
 }

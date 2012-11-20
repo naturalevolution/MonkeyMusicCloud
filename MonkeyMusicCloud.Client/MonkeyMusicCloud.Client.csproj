@@ -218,9 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\add.png" />
-    <Resource Include="Themes\Images\drive.png" />
-    <Resource Include="Themes\Images\Play.png" />
-    <Resource Include="Themes\Images\Refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service.Proxy\" />
@@ -240,11 +237,21 @@
   <ItemGroup>
     <Resource Include="Themes\Images\PlayerPause.png" />
     <Resource Include="Themes\Images\PlayerPlay.png" />
-    <Resource Include="Themes\Images\PlayerPrecedente.png" />
     <Resource Include="Themes\Images\PlayerStop.png" />
     <Resource Include="Themes\Images\PlayerSuivante.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Themes\Images\avant-medias-cherchent-icone-8923-48.png" />
+    <Resource Include="Themes\Images\effacer-locationbar-icone-4656-48.png" />
+    <Resource Include="Themes\Images\fleche-vers-bas-icone-6331-48.png" />
+    <Resource Include="Themes\Images\les-medias-mettre-en-pause-lecture-icone-8969-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\PlayerPrecedente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Browse.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

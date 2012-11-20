@@ -6,6 +6,8 @@
         void Stop();
         event PurcentagePlayedHandler PurcentagePlayed;
         event SongFinishedHandler SongFinished;
+        void Pause();
+        void Resume();
     }
 
     public delegate void SongFinishedHandler();

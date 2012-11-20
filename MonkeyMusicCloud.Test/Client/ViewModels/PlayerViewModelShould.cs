@@ -10,16 +10,36 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     [TestClass]
     public class PlayerViewModelShould : ViewModelsBaseTest
     {
-
         [TestMethod]
-        public void CallMusicPlayerPlayWhenAPlaySongEventIsCatched()
+        public void ACallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
             Song songToPlay = Create.Song();
             new PlayerViewModel();
 
-            EventsManager.InvokePlaySong(songToPlay);
+            EventsManager.InvokePlayNewSong(songToPlay);
 
+            MusicPlayer.Verify(mp => mp.Stop(), Times.Once());
             MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
+        }
+
+        [TestMethod]
+        public void CallMusicPlayerResumeWhenAResumeSongEventIsCatched()
+        {
+            new PlayerViewModel();
+
+            EventsManager.InvokeResumeSong();
+
+            MusicPlayer.Verify(mp => mp.Resume(), Times.Once());
+        }
+
+        [TestMethod]
+        public void CallMusicPlayerPauseWhenAPauseSongEventIsCatched()
+        {
+            new PlayerViewModel();
+
+            EventsManager.InvokePauseSong();
+
+            MusicPlayer.Verify(mp => mp.Pause(), Times.Once());
         }
 
         [TestMethod]

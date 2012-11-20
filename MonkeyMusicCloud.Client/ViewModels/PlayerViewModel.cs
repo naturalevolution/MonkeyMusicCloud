@@ -23,7 +23,9 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         public PlayerViewModel()
         {
-            EventsManager.PlaySong += PlaySong;
+            EventsManager.PlaySong += PlayNewSong;
+            EventsManager.PauseSong += MusicPlayer.Pause;
+            EventsManager.ResumeSong += MusicPlayer.Resume;
             MusicPlayer.PurcentagePlayed += delegate(int purcentage)
                                                 {
                                                     PurcentagePlayed = purcentage;
@@ -32,8 +34,9 @@ namespace MonkeyMusicCloud.Client.ViewModels
             MusicPlayer.SongFinished += EventsManager.InvokeCurrentSongFinished;
         }
 
-        private void PlaySong(Song song)
+        private void PlayNewSong(Song song)
         {
+            MusicPlayer.Stop();
             MusicPlayer.Play(song.File.Content);
         }
     }

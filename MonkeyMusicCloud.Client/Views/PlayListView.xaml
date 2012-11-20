@@ -22,9 +22,64 @@
             <Button Width="48" Height="48" Command="{Binding PreviousSongCommand}">
                 <Image Source="../Themes/Images/PlayerPrecedente.png" />
             </Button>
-            <Button Width="48" Height="48" Command="{Binding PlaySongCommand}" CommandParameter="{Binding ElementName=lvSongList, Path=SelectedItem }">
-                <Image Source="../Themes/Images/PlayerPlay.png" />
+            <Button Width="48" Height="48">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PlayerState}">
+                                <DataTrigger.Value>
+                                    <ViewModels:State>Stop</ViewModels:State>
+                                </DataTrigger.Value>
+                                <Setter Property="Command" Value="{Binding PlaySongCommand }" />
+                                <Setter Property="CommandParameter" Value="{Binding ElementName=lvSongList, Path=SelectedItem }" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding PlayerState}">
+                                <DataTrigger.Value>
+                                    <ViewModels:State>Pause</ViewModels:State>
+                                </DataTrigger.Value>
+                                <Setter Property="Command" Value="{Binding ResumeSongCommand }" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding PlayerState}">
+                                <DataTrigger.Value>
+                                    <ViewModels:State>Play</ViewModels:State>
+                                </DataTrigger.Value>
+                                <Setter Property="Command" Value="{Binding PauseSongCommand }" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PlayerState}">
+                                    <DataTrigger.Value>
+                                        <ViewModels:State>Stop</ViewModels:State>
+                                    </DataTrigger.Value>
+                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding PlayerState}">
+                                    <DataTrigger.Value>
+                                        <ViewModels:State>Pause</ViewModels:State>
+                                    </DataTrigger.Value>
+                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding PlayerState}">
+                                    <DataTrigger.Value>
+                                        <ViewModels:State>Play</ViewModels:State>
+                                    </DataTrigger.Value>
+                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPause.png" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </Button>
+            
             <Button Width="48" Height="48" Command="{Binding NextSongCommand}">
                 <Image Source="../Themes/Images/PlayerSuivante.png"/>
             </Button>

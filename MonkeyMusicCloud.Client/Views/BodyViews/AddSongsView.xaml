@@ -17,8 +17,8 @@
         <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}"  >
-                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="Parcourir" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" >
+                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="Parcourir..." />
                     </GridViewColumn>
                     <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Song.Title}" />
                     <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Path=Song.Album}" />

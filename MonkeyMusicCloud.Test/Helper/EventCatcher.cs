@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using MonkeyMusicCloud.Client.Events;
 using MonkeyMusicCloud.Domain.Model;
 
@@ -23,12 +24,26 @@ namespace MonkeyMusicCloud.Test.Helper
             {
                 SongFinishedInvoked = true;
             };
+
+
+            EventsManager.PauseSong += delegate()
+            {
+                PauseSongInvoked = true;
+            };
+
+
+            EventsManager.ResumeSong += delegate()
+            {
+                ResumeSongInvoked = true;
+            };
         }
 
         public ObservableCollection<Song> AddToPlayListSongs { get; set; }
         public Song SongToPlay { get; set; }
         public bool AddToPlayListInvoked;
         public bool PlaySongInvoked;
+        public bool ResumeSongInvoked;
         public bool SongFinishedInvoked;
+        public bool PauseSongInvoked;
     }
 }

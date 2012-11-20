@@ -31,7 +31,6 @@ namespace MonkeyMusicCloud.Utilities
         //TODO Fichier déjà utilisé.... surement par Quartz. Essayer de libérer les ressources de la librairie
         public void Play(byte[] file)
         {
-            Stop();
             string path = ConfigurationManager.AppSettings["MediaCache"] + file.Length +".mp3";
             objFilterGraph = new FilgraphManager();
             objFilterGraph.RenderFile(path);
@@ -42,7 +41,6 @@ namespace MonkeyMusicCloud.Utilities
             Timer tmProgressionFlux = new Timer(1000) {Enabled = true}; 
             tmProgressionFlux.Elapsed += TmProgressionFluxTick;
         }
-
         public void Stop()
         {
             if (objFilterGraph != null)
@@ -53,7 +51,6 @@ namespace MonkeyMusicCloud.Utilities
             }
             objFilterGraph = null;
         }
-
         private void TmProgressionFluxTick(object sender, EventArgs e)
         {
             int total = (int) objMediaPosition.Duration;
@@ -67,5 +64,13 @@ namespace MonkeyMusicCloud.Utilities
         }
         public event PurcentagePlayedHandler PurcentagePlayed;
         public event SongFinishedHandler SongFinished;
+        public void Pause()
+        {
+            objFilterGraph.Pause();
+        }
+        public void Resume()
+        {
+            objFilterGraph.Run();
+        }
     }
 }

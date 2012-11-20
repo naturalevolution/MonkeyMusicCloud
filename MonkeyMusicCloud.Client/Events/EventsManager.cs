@@ -14,6 +14,7 @@ namespace MonkeyMusicCloud.Client.Events
     {
         public static event AddToPlayListHandler AddToPlayList;
 
+       
 
         public static void InvokeAddToPlayList(ObservableCollection<Song> songs)
         {
@@ -29,12 +30,18 @@ namespace MonkeyMusicCloud.Client.Events
         }
 
         public static event PlaySongHandler PlaySong;
-        public static void InvokePlaySong(Song song)
+        public static void InvokePlayNewSong(Song song)
         {
             PlaySongHandler handler = PlaySong;
             if (handler != null) handler(song);
         }
 
+        public static event PauseSongHandler PauseSong;
+        public static void InvokePauseSong()
+        {
+            PauseSongHandler handler = PauseSong;
+            if (handler != null) handler();
+        }
 
         public static event CurrentSongFinishedHandler CurrentSongFinished;
         public static void InvokeCurrentSongFinished()
@@ -42,10 +49,20 @@ namespace MonkeyMusicCloud.Client.Events
             CurrentSongFinishedHandler handler = CurrentSongFinished;
             if (handler != null) handler();
         }
+
+
+        public static event ResumeSongHandler ResumeSong;
+        public static void InvokeResumeSong()
+        {
+            ResumeSongHandler handler = ResumeSong;
+            if (handler != null) handler();
+        }
     }
 
     public delegate void CurrentSongFinishedHandler();
     public delegate void PlaySongHandler(Song song);
+    public delegate void PauseSongHandler();
+    public delegate void ResumeSongHandler();
     public delegate void ChangeContentViewHandler(IBodyView view);
     public delegate void AddToPlayListHandler(ObservableCollection<Song> songs);
 }
