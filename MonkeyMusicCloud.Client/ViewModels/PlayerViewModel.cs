@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using MonkeyMusicCloud.Client.Events;
+using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Utilities.Interface;
@@ -61,9 +61,9 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         public PlayerViewModel()
         {
-            EventsManager.PlaySong += PlayNewSong;
-            EventsManager.PauseSong += MusicPlayer.Pause;
-            EventsManager.ResumeSong += MusicPlayer.Resume;
+            PlayerObserver.PlaySong += PlayNewSong;
+            PlayerObserver.PauseSong += MusicPlayer.Pause;
+            PlayerObserver.ResumeSong += MusicPlayer.Resume;
             MusicPlayer.PurcentagePlayed += delegate(int elapsedTime, int totalTime)
                                                 {
                                                     PurcentagePlayed = (elapsedTime*100/totalTime );
@@ -76,7 +76,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                                 TotalTime = null;
                                                 ElapsedTime = null;
                                                 PurcentagePlayed = 0;
-                                                EventsManager.InvokeCurrentSongFinished();
+                                                PlayerObserver.NotifyCurrentSongFinished();
                                             };
         }
 

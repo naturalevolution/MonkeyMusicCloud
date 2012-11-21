@@ -75,5 +75,19 @@ namespace MonkeyMusicCloud.Test.Service
 
             Repository.Verify(r => r.Add(song), Times.Once());
         }
+
+        [TestMethod]
+        public void GetSongsByAlbum()
+        {
+            const string album = "album";
+            ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
+            Repository.Setup(r => r.GetByAlbum(album)).Returns(expectedSongs);
+            MusicService service = new MusicService(Repository.Object);
+
+            IList<Song> findMusics = service.GetByAlbum(album);
+
+            Repository.Verify(r => r.GetByAlbum(album), Times.Once());
+            Assert.AreEqual(expectedSongs, findMusics);
+        }
     }
 }

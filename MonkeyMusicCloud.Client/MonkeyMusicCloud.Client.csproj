@@ -77,7 +77,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Events\EventsManager.cs" />
+    <Compile Include="Observers\ContentBodyObserver.cs" />
+    <Compile Include="Observers\PlayerObserver.cs" />
     <Compile Include="Service References\Service.Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,20 +87,20 @@
     <Compile Include="Utilities\MusicPlayerInstance.cs" />
     <Compile Include="Utilities\ServiceInstance.cs" />
     <Compile Include="Utilities\StreamInstance.cs" />
-    <Compile Include="ViewModels\BodyViewModels\AddSongsViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\UploadSongsViewModel.cs" />
     <Compile Include="ViewModels\ContentBodyViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\PlayListViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SongListViewModel.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\MenuItem.cs" />
     <Compile Include="ViewModels\SubViewModels\SongToAdd.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\BodyViews\AddSongsView.xaml.cs">
-      <DependentUpon>AddSongsView.xaml</DependentUpon>
+    <Compile Include="Views\BodyViews\AlbumDetailView.xaml.cs">
+      <DependentUpon>AlbumDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BodyViews\SongDetailView.xaml.cs">
-      <DependentUpon>SongDetailView.xaml</DependentUpon>
+    <Compile Include="Views\BodyViews\UploadSongsView.xaml.cs">
+      <DependentUpon>UploadSongsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BodyViews\IBodyView.cs" />
     <Compile Include="Views\BodyViews\SongListView.xaml.cs">
@@ -109,9 +110,6 @@
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomControls\Behaviours.cs" />
-    <Compile Include="Views\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PlayListView.xaml.cs">
       <DependentUpon>PlayListView.xaml</DependentUpon>
     </Compile>
@@ -134,11 +132,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\BodyViews\AddSongsView.xaml">
+    <Page Include="Views\BodyViews\AlbumDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BodyViews\SongDetailView.xaml">
+    <Page Include="Views\BodyViews\UploadSongsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,10 +147,6 @@
     <Page Include="Views\ContentBodyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayListView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -243,7 +237,6 @@
   <ItemGroup>
     <Resource Include="Themes\Images\avant-medias-cherchent-icone-8923-48.png" />
     <Resource Include="Themes\Images\effacer-locationbar-icone-4656-48.png" />
-    <Resource Include="Themes\Images\fleche-vers-bas-icone-6331-48.png" />
     <Resource Include="Themes\Images\les-medias-mettre-en-pause-lecture-icone-8969-48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +244,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\Browse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\MusiqueFolder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

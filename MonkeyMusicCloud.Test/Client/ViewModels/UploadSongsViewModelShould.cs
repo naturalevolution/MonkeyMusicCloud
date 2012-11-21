@@ -11,36 +11,36 @@ using Moq;
 namespace MonkeyMusicCloud.Test.Client.ViewModels
 {
     [TestClass]
-    public class AddSongsViewModelShould : ViewModelsBaseTest
+    public class UploadSongsViewModelShould : ViewModelsBaseTest
     {
         [TestMethod]
         public void CallServiceWhenAddSongMethodIsHandled()
         {
-            Song songToAdd1 = Create.Song();
-            Song songToAdd2 = Create.Song();
-            Song songToAdd3 = Create.Song();
-            AddSongsViewModel viewModel = new AddSongsViewModel
+            SongToAdd songToAdd1 = new SongToAdd() {IsSelected = true, Song = Create.Song()};
+            SongToAdd songToAdd2 = new SongToAdd() {IsSelected = false,Song = Create.Song()};
+            SongToAdd songToAdd3 = new SongToAdd() {IsSelected = true, Song = Create.Song()};
+            UploadSongsViewModel viewModel = new UploadSongsViewModel
                                               {
                                                   SongsToAdd = new ObservableCollection<SongToAdd>
                                                                    {
-                                                                       new SongToAdd {IsSelected = true, Song = songToAdd1},
-                                                                       new SongToAdd {IsSelected = false, Song = songToAdd2},
-                                                                       new SongToAdd {IsSelected = true, Song = songToAdd3},
+                                                                      songToAdd1,
+                                                                      songToAdd2,
+                                                                      songToAdd3,
                                                                    }
                                               };
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(songToAdd1), Times.Once());
-            Service.Verify(s => s.AddASong(songToAdd2), Times.Never());
-            Service.Verify(s => s.AddASong(songToAdd3), Times.Once());
+            Service.Verify(s => s.AddASong(songToAdd1.Song), Times.Once());
+            Service.Verify(s => s.AddASong(songToAdd2.Song), Times.Never());
+            Service.Verify(s => s.AddASong(songToAdd3.Song), Times.Once());
         }
 
         [TestMethod]
         public void DoNothingIfThereIsMusicToAddAreNotSelected()
         {
             Song songToAdd = Create.Song();
-            AddSongsViewModel viewModel = new AddSongsViewModel { SongsToAdd = new ObservableCollection<SongToAdd> { new SongToAdd { IsSelected = false, Song = songToAdd } } };
+            UploadSongsViewModel viewModel = new UploadSongsViewModel { SongsToAdd = new ObservableCollection<SongToAdd> { new SongToAdd { IsSelected = false, Song = songToAdd } } };
 
             viewModel.AddSongCommand.Execute(null);
 
@@ -50,7 +50,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void DoNothingIfThereIsNoMusicToAdd()
         {
-            AddSongsViewModel viewModel = new AddSongsViewModel { SongsToAdd = new ObservableCollection<SongToAdd>() };
+            UploadSongsViewModel viewModel = new UploadSongsViewModel { SongsToAdd = new ObservableCollection<SongToAdd>() };
 
             viewModel.AddSongCommand.Execute(null);
 
@@ -60,7 +60,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void DoNothingIfTheSongsAddListIsNull()
         {
-            AddSongsViewModel viewModel = new AddSongsViewModel();
+            UploadSongsViewModel viewModel = new UploadSongsViewModel();
 
             viewModel.AddSongCommand.Execute(null);
 
@@ -76,7 +76,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void GetAllLocalMusicFromARootNodeAndGetTheRealNameOfTheseOne()
         {
             string rootPath = AppDomain.CurrentDomain.BaseDirectory + "\\Helper\\TestFiles";
-            AddSongsViewModel viewModel = new AddSongsViewModel
+            UploadSongsViewModel viewModel = new UploadSongsViewModel
                                               {
                                                   RootPath = rootPath
                                               };
@@ -96,7 +96,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void DoNothingIfRootPathDoesNotExist()
         {
-            AddSongsViewModel viewModel = new AddSongsViewModel
+            UploadSongsViewModel viewModel = new UploadSongsViewModel
             {
                 RootPath = AppDomain.CurrentDomain.BaseDirectory + "\\unknown"
             };

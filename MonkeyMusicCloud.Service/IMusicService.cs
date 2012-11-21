@@ -16,5 +16,8 @@ namespace MonkeyMusicCloud.Service
 
         [OperationContract]
         void AddASong(Song song);
+
+        [OperationContract]
+        IList<Song> GetByAlbum(string album);
     }
 }

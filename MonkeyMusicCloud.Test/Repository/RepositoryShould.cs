@@ -26,6 +26,7 @@ namespace MonkeyMusicCloud.Test.Repository
             Assert.AreEqual(expectedFile.Content.Length, gettedFile.Content.Length);
         }
 
+
         [TestMethod]
         public void InsertAndGetComplexeObject()
         {
@@ -54,8 +55,6 @@ namespace MonkeyMusicCloud.Test.Repository
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic2.Title);
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic3.Title);
         }
-
-       
     }
 }
 

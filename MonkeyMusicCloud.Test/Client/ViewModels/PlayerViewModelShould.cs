@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonkeyMusicCloud.Client.Events;
+using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
@@ -16,7 +16,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song songToPlay = Create.Song();
             PlayerViewModel viewModel = new PlayerViewModel();
 
-            EventsManager.InvokePlayNewSong(songToPlay);
+            PlayerObserver.NotifyPlayNewSong(songToPlay);
 
             MusicPlayer.Verify(mp => mp.Stop(), Times.Once());
             MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
@@ -29,7 +29,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             new PlayerViewModel();
 
-            EventsManager.InvokeResumeSong();
+            PlayerObserver.NotifyResumeSong();
 
             MusicPlayer.Verify(mp => mp.Resume(), Times.Once());
         }
@@ -39,7 +39,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             new PlayerViewModel();
 
-            EventsManager.InvokePauseSong();
+            PlayerObserver.NotifyPauseSong();
 
             MusicPlayer.Verify(mp => mp.Pause(), Times.Once());
         }

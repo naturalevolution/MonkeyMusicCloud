@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
+using System.Threading;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Utilities;
@@ -14,7 +14,7 @@ using File = TagLib.File;
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
-    public class AddSongsViewModel : ViewModelBase
+    public class UploadSongsViewModel : ViewModelBase
     {
         private string rootPath;
         private ObservableCollection<SongToAdd> songsToAdd;

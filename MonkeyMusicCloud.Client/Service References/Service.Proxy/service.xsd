@@ -39,4 +39,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetByAlbum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="album" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetByAlbumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MonkeyMusicCloud.Domain.Model" minOccurs="0" name="GetByAlbumResult" nillable="true" type="q4:ArrayOfSong" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

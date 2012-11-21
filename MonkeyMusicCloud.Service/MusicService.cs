@@ -33,5 +33,10 @@ namespace MonkeyMusicCloud.Service
         {
             Repository.Add(song);
         }
+
+        public IList<Song> GetByAlbum(string album)
+        {
+            return Repository.GetByAlbum(album);
+        }
     }
 }

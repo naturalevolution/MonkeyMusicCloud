@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using MicroMvvm;
-using MonkeyMusicCloud.Client.Events;
+using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels
@@ -13,17 +13,14 @@ namespace MonkeyMusicCloud.Client.ViewModels
         public PlayListViewModel()
         {
             SongList = new ObservableCollection<Song>();
-            EventsManager.AddToPlayList += delegate(ObservableCollection<Song> songs)
+            PlayerObserver.AddToPlayList += delegate(Song song)
                                                {
-                                                   foreach (Song song in songs)
-                                                   {
                                                        if (!SongList.Contains(song))
                                                        {
                                                            SongList.Add(song);
                                                        }
-                                                   }
                                                };
-            EventsManager.CurrentSongFinished += delegate
+            PlayerObserver.CurrentSongFinished += delegate
                                                      {
                                                          if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
                                                          {
@@ -68,7 +65,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
             if (SongList.Count > 0)
             {
                 Song songToPlay = song ?? SongList.First();
-                EventsManager.InvokePlayNewSong(songToPlay);
+                PlayerObserver.NotifyPlayNewSong(songToPlay);
                 ActualPlayedSong = songToPlay;
                 PlayerState = State.Play;
             }
@@ -78,7 +75,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             if (PlayerState == State.Play)
             {
-                EventsManager.InvokePauseSong();
+                PlayerObserver.NotifyPauseSong();
                 PlayerState = State.Pause;
             }
         }
@@ -111,7 +108,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             if (PlayerState == State.Pause)
             {
-                EventsManager.InvokeResumeSong();
+                PlayerObserver.NotifyResumeSong();
                 PlayerState = State.Play;
             }
         }

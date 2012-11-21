@@ -33,6 +33,12 @@
   <wsdl:message name="IMusicService_AddASong_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddASongResponse" />
   </wsdl:message>
+  <wsdl:message name="IMusicService_GetByAlbum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByAlbum" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetByAlbum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByAlbumResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMusicService">
     <wsdl:operation name="GetAllSongs">
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetAllSongs" message="tns:IMusicService_GetAllSongs_InputMessage" />
@@ -45,6 +51,10 @@
     <wsdl:operation name="AddASong">
       <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/AddASong" message="tns:IMusicService_AddASong_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/AddASongResponse" message="tns:IMusicService_AddASong_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByAlbum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetByAlbum" message="tns:IMusicService_GetByAlbum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetByAlbumResponse" message="tns:IMusicService_GetByAlbum_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IMusicService" type="tns:IMusicService">
@@ -70,6 +80,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddASong">
       <soap12:operation soapAction="http://tempuri.org/IMusicService/AddASong" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByAlbum">
+      <soap12:operation soapAction="http://tempuri.org/IMusicService/GetByAlbum" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

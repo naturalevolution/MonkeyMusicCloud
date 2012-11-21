@@ -44,9 +44,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -54,12 +51,12 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ViewModels\AddSongsViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\AlbumDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\UploadSongsViewModelShould.cs" />
     <Compile Include="Client\ViewModels\ContentBodyViewModelShould.cs" />
     <Compile Include="Client\ViewModels\PlayerViewModelShould.cs" />
     <Compile Include="Client\ViewModels\PlayListViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SongListViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\MenuItemShould.cs" />
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />

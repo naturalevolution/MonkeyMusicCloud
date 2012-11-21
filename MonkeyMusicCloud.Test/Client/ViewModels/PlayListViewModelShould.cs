@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonkeyMusicCloud.Client.Events;
+using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
@@ -24,31 +24,25 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void RefreshSongWhenAddToPlayListEventIsCatched()
         {
             Song song1 = Create.Song();
-            Song song2 = Create.Song();
-            ObservableCollection<Song> songs= new ObservableCollection<Song> {song1};
-            ViewModel.SongList = new ObservableCollection<Song> { song2 } ;
+            ViewModel.SongList = new ObservableCollection<Song>() ;
 
-            EventsManager.InvokeAddToPlayList(songs);
+            PlayerObserver.NotifyAddToPlayList(song1);
 
-            Assert.AreEqual(2, ViewModel.SongList.Count);
+            Assert.AreEqual(1, ViewModel.SongList.Count);
             CollectionAssert.Contains(ViewModel.SongList, song1);
-            CollectionAssert.Contains(ViewModel.SongList, song2);
         }
         
         [TestMethod]
         public void DoNotDuplicateSongIntoSongListWhenAddToPlayListEventIsCatched()
         {
             Song song1 = Create.Song();
-            Song song2 = Create.Song();
-            ObservableCollection<Song> songs = new ObservableCollection<Song> { song1 };
-            PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song> { song2 } };
+            PlayListViewModel viewModel = new PlayListViewModel();
 
-            EventsManager.InvokeAddToPlayList(songs);
-            EventsManager.InvokeAddToPlayList(songs);
+            PlayerObserver.NotifyAddToPlayList(song1);
+            PlayerObserver.NotifyAddToPlayList(song1);
 
-            Assert.AreEqual(2, viewModel.SongList.Count);
+            Assert.AreEqual(1, viewModel.SongList.Count);
             CollectionAssert.Contains(viewModel.SongList, song1);
-            CollectionAssert.Contains(viewModel.SongList, song2);
         }
 
         #region PlayCommands
@@ -211,7 +205,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 EventCatcher eventCatcher = new EventCatcher();
                 
-                EventsManager.InvokeCurrentSongFinished();
+                PlayerObserver.NotifyCurrentSongFinished();
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
             }
@@ -259,7 +253,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
                 ViewModel.ActualPlayedSong = song1;
 
-                EventsManager.InvokeCurrentSongFinished();
+                PlayerObserver.NotifyCurrentSongFinished();
 
                 Assert.IsTrue(eventCatcher.PlaySongInvoked);
                 Assert.AreEqual(song2, eventCatcher.SongToPlay);
@@ -299,7 +293,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 ViewModel.SongList = new ObservableCollection<Song> {song1};
                 ViewModel.ActualPlayedSong = song1;
 
-                EventsManager.InvokeCurrentSongFinished();
+                PlayerObserver.NotifyCurrentSongFinished();
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
                 Assert.IsNull(ViewModel.ActualPlayedSong);

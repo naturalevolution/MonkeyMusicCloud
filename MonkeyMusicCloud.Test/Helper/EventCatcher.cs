@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MonkeyMusicCloud.Client.Events;
+﻿using System.Collections.ObjectModel;
+using MonkeyMusicCloud.Client.Observers;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Test.Helper
@@ -9,41 +9,49 @@ namespace MonkeyMusicCloud.Test.Helper
     {
         public EventCatcher()
         {
-            EventsManager.AddToPlayList += delegate(ObservableCollection<Song> songs) { 
+            PlayerObserver.AddToPlayList += delegate(Song song) { 
                 AddToPlayListInvoked = true;
-                AddToPlayListSongs = songs;
+                AddToPlayListSong = song;
             };
 
-            EventsManager.PlaySong += delegate(Song song)
+            PlayerObserver.PlaySong += delegate(Song song)
             {
                 PlaySongInvoked = true;
                 SongToPlay = song;
             };
 
-            EventsManager.CurrentSongFinished += delegate()
+            PlayerObserver.CurrentSongFinished += delegate()
             {
                 SongFinishedInvoked = true;
             };
 
 
-            EventsManager.PauseSong += delegate()
+            PlayerObserver.PauseSong += delegate()
             {
                 PauseSongInvoked = true;
             };
 
 
-            EventsManager.ResumeSong += delegate()
+            PlayerObserver.ResumeSong += delegate()
             {
                 ResumeSongInvoked = true;
             };
+
+            ContentBodyObserver.ChangeContentView += delegate(MenuItem view)
+            {
+                ChangeContentViewInvoked = true;
+                Item = view;
+            };
         }
 
-        public ObservableCollection<Song> AddToPlayListSongs { get; set; }
+        public MenuItem Item { get; set; }
+        public Song AddToPlayListSong { get; set; }
         public Song SongToPlay { get; set; }
         public bool AddToPlayListInvoked;
         public bool PlaySongInvoked;
         public bool ResumeSongInvoked;
         public bool SongFinishedInvoked;
         public bool PauseSongInvoked;
+        public bool ChangeContentViewInvoked;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using MonkeyMusicCloud.Domain.Model;
+﻿using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 {
@@ -7,16 +6,8 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
     {
         public Song Song { get; set; }
 
-        private bool isSelected;
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set { 
-                isSelected = value;
-                RaisePropertyChanged("IsSelected");
-            }
-        }
-
+        public bool IsSelected { get; set; }
+        
         public string Path { get; set; }
     }
 }
