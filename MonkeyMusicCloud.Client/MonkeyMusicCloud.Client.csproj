@@ -251,6 +251,12 @@
   <ItemGroup>
     <Resource Include="Themes\Images\MusiqueFolder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\fleche.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\close.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

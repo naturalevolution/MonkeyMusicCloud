@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:BodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
-             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" 
+             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels"
              mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
         <BodyViewModels:SongListViewModel />
@@ -19,10 +18,23 @@
                     <GridViewColumn Header="Album" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Path=Album}" Command="{Binding  DataContext.OpenAlbumCommand,
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button Command="{Binding  DataContext.OpenAlbumCommand,
                                                                                   RelativeSource={RelativeSource FindAncestor,
                                                                                                                  AncestorType={x:Type BodyViews:SongListView}}}"                                        
-                                                                       CommandParameter="{Binding Path=Album}" />
+                                                                       CommandParameter="{Binding Path=Album}">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Label Content="{Binding Path=Album}" />
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
