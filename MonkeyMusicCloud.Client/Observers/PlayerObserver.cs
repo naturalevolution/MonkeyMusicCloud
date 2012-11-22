@@ -11,10 +11,10 @@ namespace MonkeyMusicCloud.Client.Observers
     public class PlayerObserver
     {
         public static event AddToPlayListHandler AddToPlayList;
-        public static void NotifyAddToPlayList(Song song)
+        public static void NotifyAddToPlayList(ObservableCollection<Song> songs)
         {
             AddToPlayListHandler handler = AddToPlayList;
-            if (handler != null) handler(song);
+            if (handler != null) handler(songs);
         }
 
         public static event PlaySongHandler PlaySong;
@@ -51,5 +51,5 @@ namespace MonkeyMusicCloud.Client.Observers
     public delegate void PlaySongHandler(Song song);
     public delegate void PauseSongHandler();
     public delegate void ResumeSongHandler();
-    public delegate void AddToPlayListHandler(Song songs);
+    public delegate void AddToPlayListHandler(ObservableCollection<Song> songs);
 }

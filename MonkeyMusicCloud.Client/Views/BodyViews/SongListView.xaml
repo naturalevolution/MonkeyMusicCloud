@@ -10,24 +10,14 @@
         <BodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="700" />
-        </Grid.ColumnDefinitions>
-        <Button Content="Play All" /> <!-- A Implementer -->
-        <ListView HorizontalAlignment="Stretch" Grid.Row="1" Grid.ColumnSpan="2"
-          Name="lvSongList" VerticalAlignment="Top" Width="800" Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}">
+        <ListView  Name="lvSongList" VerticalAlignment="Top" Width="800" 
+                   Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
                     <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}"  />
                     <GridViewColumn Header="Album">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" >
                                     <Button Command="{Binding  DataContext.OpenAlbumCommand,
                                                                                   RelativeSource={RelativeSource FindAncestor,
                                                                                                                  AncestorType={x:Type BodyViews:SongListView}}}"                                        
@@ -43,34 +33,23 @@
                                             </Style>
                                         </Button.Style>
                                     </Button>
-                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artist}" />
-                    <GridViewColumn>
+                    <GridViewColumn Width="200">
+                        <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
+                                                                                              AncestorType={x:Type BodyViews:SongListView}}}"
+                                              CommandParameter="{Binding ElementName=lvSongList, Path=ItemsSource}" Content="Play All" />                            
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Width="24" Height="24" Command="{Binding  DataContext.AddSongToPlayListCommand,
-                                                                                  RelativeSource={RelativeSource FindAncestor,
-                                                                                                                 AncestorType={x:Type BodyViews:SongListView}}}"  
+                                <Button HorizontalAlignment="Center" Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
+                                                                                                                        AncestorType={x:Type BodyViews:SongListView}}}"  
                                                                CommandParameter="{Binding}">
                                     <Image Source="../../Themes/Images/add.png" />
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                        
-                        <!-- <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Width="24" Height="24" Command="{Binding  DataContext.AddSongToPlayListCommand,
-                                                                                  RelativeSource={RelativeSource FindAncestor,
-                                                                                                                 AncestorType={x:Type BodyViews:SongListView}}}"  
-                                                               CommandParameter="{Binding ElementName=lvSongList, Path=SelectedItems}">
-                                    <Image Source="../../Themes/Images/add.png" />
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                        -->
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

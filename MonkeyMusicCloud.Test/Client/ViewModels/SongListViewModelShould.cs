@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.ObjectModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
@@ -15,10 +16,41 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             EventCatcher eventCatcher = new EventCatcher();
             SongListViewModel viewModel = new SongListViewModel();
 
-            viewModel.AddSongToPlayListCommand.Execute(expectedSong);
+            viewModel.AddOneSongToPlayListCommand.Execute(expectedSong);
 
             Assert.IsTrue(eventCatcher.AddToPlayListInvoked);
-            Assert.AreEqual(expectedSong,eventCatcher.AddToPlayListSong);
+            Assert.AreEqual(1, eventCatcher.AddToPlayListSong.Count);
+            CollectionAssert.Contains(eventCatcher.AddToPlayListSong, expectedSong);
+
+        }  
+        
+        [TestMethod]
+        public void RaiseAddToPlayListEventWithSeveralSong()
+        {
+            Song expectedSong1 = Create.Song();
+            Song expectedSong2 = Create.Song();
+            ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>(){expectedSong1, expectedSong2};
+
+            EventCatcher eventCatcher = new EventCatcher();
+            SongListViewModel viewModel = new SongListViewModel();
+
+            viewModel.AddSongsToPlayListCommand.Execute(expectedSongs);
+
+            Assert.IsTrue(eventCatcher.AddToPlayListInvoked);
+            Assert.AreEqual(2, eventCatcher.AddToPlayListSong.Count);
+            CollectionAssert.Contains(eventCatcher.AddToPlayListSong, expectedSong1);
+            CollectionAssert.Contains(eventCatcher.AddToPlayListSong, expectedSong1);
+        }
+
+        [TestMethod]
+        public void DoNothingIfParameterIsNull()
+        {
+            EventCatcher eventCatcher = new EventCatcher();
+            SongListViewModel viewModel = new SongListViewModel();
+
+            viewModel.AddSongsToPlayListCommand.Execute(null);
+
+            Assert.IsFalse(eventCatcher.AddToPlayListInvoked);
         }
 
         [TestMethod]

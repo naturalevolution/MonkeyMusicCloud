@@ -9,7 +9,7 @@ namespace MonkeyMusicCloud.Test.Helper
     {
         public EventCatcher()
         {
-            PlayerObserver.AddToPlayList += delegate(Song song) { 
+            PlayerObserver.AddToPlayList += delegate(ObservableCollection<Song> song) { 
                 AddToPlayListInvoked = true;
                 AddToPlayListSong = song;
             };
@@ -45,7 +45,7 @@ namespace MonkeyMusicCloud.Test.Helper
         }
 
         public MenuItem Item { get; set; }
-        public Song AddToPlayListSong { get; set; }
+        public ObservableCollection<Song> AddToPlayListSong { get; set; }
         public Song SongToPlay { get; set; }
         public bool AddToPlayListInvoked;
         public bool PlaySongInvoked;

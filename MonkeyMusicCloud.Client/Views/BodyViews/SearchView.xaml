@@ -8,20 +8,16 @@
         <BodyViewModels:SearchViewModel />
     </UserControl.DataContext>
     <Grid>        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="575"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbSearch" Width="200">
+        <TextBox Grid.Row="0" x:Name="tbSearch" Width="200">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding  SearchSongsListCommand}" CommandParameter="{Binding ElementName=tbSearch, Path=Text}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <BodyViews:SongListView Grid.RowSpan="2" Grid.ColumnSpan="2"  
+        <BodyViews:SongListView Grid.Row="1" 
               SongList="{Binding DataContext.SongList, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type BodyViews:SearchView}}
                                                      , UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>

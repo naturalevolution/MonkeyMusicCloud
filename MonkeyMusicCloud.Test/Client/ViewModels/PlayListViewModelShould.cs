@@ -26,7 +26,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song song1 = Create.Song();
             ViewModel.SongList = new ObservableCollection<Song>() ;
 
-            PlayerObserver.NotifyAddToPlayList(song1);
+            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
 
             Assert.AreEqual(1, ViewModel.SongList.Count);
             CollectionAssert.Contains(ViewModel.SongList, song1);
@@ -38,8 +38,8 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song song1 = Create.Song();
             PlayListViewModel viewModel = new PlayListViewModel();
 
-            PlayerObserver.NotifyAddToPlayList(song1);
-            PlayerObserver.NotifyAddToPlayList(song1);
+            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
+            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
 
             Assert.AreEqual(1, viewModel.SongList.Count);
             CollectionAssert.Contains(viewModel.SongList, song1);

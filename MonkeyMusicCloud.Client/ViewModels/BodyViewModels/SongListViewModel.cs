@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
@@ -22,9 +25,22 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             }
         }
         
-        public ICommand AddSongToPlayListCommand
+        public ICommand AddOneSongToPlayListCommand
         {
-            get { return new RelayCommand<Song>(AddSongToPlayListExecute); }
+            get { return new RelayCommand<Song>(AddOneSongToPlayListExecute); }
+        }
+
+        public ICommand AddSongsToPlayListCommand
+        {
+            get { return new RelayCommand<IList>(AddSongsToPlayListExecute); }
+        }
+
+        private void AddSongsToPlayListExecute(IList songs)
+        {
+            if (songs != null)
+            {
+                PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>(songs.Cast<Song>()));    
+            }
         }
 
         public ICommand OpenAlbumCommand
@@ -37,10 +53,10 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             ContentBodyObserver.NotifyChangeContentView(new MenuItem {Label = album, View = new AlbumDetailView(album)});
         }
         
-        private void AddSongToPlayListExecute(Song song)
+        private void AddOneSongToPlayListExecute(Song song)
         {
-            
-            PlayerObserver.NotifyAddToPlayList(song);
+
+            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song> { song });
         }
 
     }

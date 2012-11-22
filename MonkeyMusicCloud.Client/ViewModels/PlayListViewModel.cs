@@ -13,12 +13,15 @@ namespace MonkeyMusicCloud.Client.ViewModels
         public PlayListViewModel()
         {
             SongList = new ObservableCollection<Song>();
-            PlayerObserver.AddToPlayList += delegate(Song song)
+            PlayerObserver.AddToPlayList += delegate(ObservableCollection<Song> songs)
                                                {
+                                                   foreach (Song song in songs)
+                                                   {
                                                        if (!SongList.Contains(song))
                                                        {
                                                            SongList.Add(song);
-                                                       }
+                                                       } 
+                                                   }
                                                };
             PlayerObserver.CurrentSongFinished += delegate
                                                      {
