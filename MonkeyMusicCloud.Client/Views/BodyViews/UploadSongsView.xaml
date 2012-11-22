@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.BodyViews.AddSongsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels">
+             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls">
     <UserControl.DataContext>
         <BodyViewModels:UploadSongsViewModel />
     </UserControl.DataContext>
@@ -15,16 +15,17 @@
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
         
-        <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0">
+        <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0"
+                   HorizontalAlignment="Stretch" Behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" >
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" Behaviours:GridViewColumnResize.Width="2*">
                         <GridViewColumnHeader Click="OpenSongFolderDialog" Content="Parcourir..." />
                     </GridViewColumn>
-                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Song.Title}" />
-                    <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Path=Song.Album}" />
-                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Song.Artist}" />
-                    <GridViewColumn>
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Song.Title}" Behaviours:GridViewColumnResize.Width="2*" />
+                    <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Path=Song.Album}" Behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Song.Artist}" Behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />

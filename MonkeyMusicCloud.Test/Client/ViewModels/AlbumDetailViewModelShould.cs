@@ -22,5 +22,19 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Service.Verify(s => s.GetByAlbum(album), Times.Once());
             Assert.AreEqual(expectedSongs, viewModel.SongList);
         }
+
+        [TestMethod]
+        public void LoadImagePath()
+        {
+            const string album = "album";
+            const string path = "path";
+            AlbumDetailViewModel viewModel = new AlbumDetailViewModel();
+            ImageSearch.Setup(i => i.GetImagePath(album)).Returns(path);
+
+            viewModel.Album = album;
+
+            ImageSearch.Verify(i => i.GetImagePath(album), Times.Once());
+            Assert.AreEqual(path, viewModel.AlbumImagePath );
+        }
     }
 }

@@ -2,32 +2,30 @@
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Client.Views.BodyViews;
-using MonkeyMusicCloud.Resource;
+using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class ContentBodyViewModel : ViewModelBase
     {
-        
-
         public ContentBodyViewModel ()
         {
-            Items = new ObservableCollection<MenuItem>()
-                        {
-                            new MenuItem {Label = MusicResource.MenuSongList, View = new SearchView()},
-                            new MenuItem {Label = MusicResource.MenuAddMusics, View = new AddSongsView()}
-                        };
-
+            Items = new ObservableCollection<MenuItem>();
+                      
             ContentBodyObserver.ChangeContentView += delegate(MenuItem item)
                                                          {
                                                              Items.Add(item);
                                                              SelectedItem = item;
                                                          };
-
-
+            ContentBodyObserver.NewSearch += delegate(ObservableCollection<Song> songs, string search)
+            {
+                SongListView songListView = new SongListView { SongList = songs };
+                MenuItem item = new MenuItem {Label = "Search : " + search, View = songListView};
+                Items.Add(item);
+                SelectedItem = item;
+            };
         }
 
         public ObservableCollection<MenuItem> Items { get; set; }

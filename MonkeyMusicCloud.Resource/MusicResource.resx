@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MenuAddMusics" xml:space="preserve">
-    <value>Add Musics</value>
+    <value>Upload</value>
   </data>
   <data name="MenuSongList" xml:space="preserve">
-    <value>Music List</value>
+    <value>Search</value>
   </data>
 </root>

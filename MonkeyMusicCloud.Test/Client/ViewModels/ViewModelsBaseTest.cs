@@ -10,6 +10,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     public class ViewModelsBaseTest
     {
         protected Mock<IMusicService> Service { get; set; }
+        protected Mock<IImageSearch> ImageSearch { get; set; }
         protected Mock<IStreamHelper> StreamHelper { get; set; }
         protected Mock<IMusicPlayer> MusicPlayer { get; set; }
 
@@ -24,6 +25,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             MusicPlayer = new Mock<IMusicPlayer>();
             new MusicPlayerInstance(MusicPlayer.Object);
+
+            ImageSearch = new Mock<IImageSearch>();
+            new ImageSearchInstance(ImageSearch.Object);
         }
     }
 }

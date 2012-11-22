@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" xmlns:Views="clr-namespace:MonkeyMusicCloud.Client.Views" mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="200">
+    
+    <UserControl.DataContext>
+        <ViewModels:MenuViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <DataTemplate x:Key="UserDataTemplate">
+            <StackPanel>
+                <Button Height="50" Content="{Binding Path=Label}" Command="{Binding DataContext.OpenItemCommand, 
+                                                                                     RelativeSource={RelativeSource FindAncestor, AncestorType=Views:MenuView}}"
+                                                                   CommandParameter="{Binding}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}"  ItemTemplate="{StaticResource ResourceKey=UserDataTemplate}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

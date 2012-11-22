@@ -4,18 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:BodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels"
-             mc:Ignorable="d" d:DesignWidth="800">
+             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" mc:Ignorable="d" d:DesignWidth="800">
     <UserControl.DataContext>
         <BodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid>
-        <ListView  Name="lvSongList" VerticalAlignment="Top" Width="800" 
-                   Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+        <ListView Name="lvSongList" VerticalAlignment="Top" Width="800" 
+                  Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  HorizontalAlignment="Stretch" Behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}"  />
-                    <GridViewColumn Header="Album">
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}" Behaviours:GridViewColumnResize.Width="2*"   />
+                    <GridViewColumn Header="Album" Behaviours:GridViewColumnResize.Width="2*" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                     <Button Command="{Binding  DataContext.OpenAlbumCommand,
@@ -36,14 +36,14 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artist}" />
-                    <GridViewColumn Width="200">
+                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artist}" Behaviours:GridViewColumnResize.Width="2*" />
+                    <GridViewColumn Behaviours:GridViewColumnResize.Width="1*"  >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                               AncestorType={x:Type BodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=lvSongList, Path=ItemsSource}" Content="Play All" />                            
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button HorizontalAlignment="Center" Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
+                                <Button Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                                                         AncestorType={x:Type BodyViews:SongListView}}}"  
                                                                CommandParameter="{Binding}">
                                     <Image Source="../../Themes/Images/add.png" />

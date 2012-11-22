@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ilan.Google.API">
+      <HintPath>..\Solution Items\Librairies\GoogleSearchImage\Ilan.Google.API.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.QuartzTypeLib">
       <HintPath>..\Solution Items\Librairies\Interop.QuartzTypeLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -48,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageGoogleSearch.cs" />
     <Compile Include="DirectPlayer.cs" />
+    <Compile Include="Interface\IImageSearch.cs" />
     <Compile Include="Interface\IMusicPlayer.cs" />
     <Compile Include="Interface\IStreamHelper.cs" />
     <Compile Include="KlangPlayer.cs" />

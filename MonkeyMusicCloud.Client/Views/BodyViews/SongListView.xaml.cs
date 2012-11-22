@@ -13,7 +13,6 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
         public SongListView()
         {
             InitializeComponent();
-            
         }
 
         static PropertyMetadata Propertymetadata = new PropertyMetadata(new ObservableCollection<Song>(), SongListPropertyChanged);

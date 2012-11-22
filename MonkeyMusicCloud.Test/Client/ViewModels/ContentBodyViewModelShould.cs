@@ -4,6 +4,7 @@ using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Client.Views.BodyViews;
+using MonkeyMusicCloud.Domain.Model;
 using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
@@ -16,10 +17,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             ContentBodyViewModel viewModel = new ContentBodyViewModel();
 
-            Assert.AreEqual(2, viewModel.Items.Count );
+            Assert.AreEqual(0, viewModel.Items.Count );
             Assert.IsNull(viewModel.SelectedItem);
         }
-
 
         [TestMethod]
         public void RefreshItemsWhenAnChangeContentViewEventIsCatched()
@@ -31,8 +31,8 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             ContentBodyObserver.NotifyChangeContentView(item);
 
-            Assert.AreEqual(3, viewModel.Items.Count);
-            Assert.AreEqual(item, viewModel.Items[2]);
+            Assert.AreEqual(1, viewModel.Items.Count);
+            Assert.AreEqual(item, viewModel.Items[0]);
             Assert.AreEqual(item, viewModel.SelectedItem);
         }
 
@@ -49,5 +49,17 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.AreEqual(0, viewModel.Items.Count);
         }
 
+        [TestMethod]
+        public void OpenNewSongListViewWhenNewSearchEventIsCatched()
+        {
+            const string search = "label";
+            ContentBodyViewModel viewModel = new ContentBodyViewModel();
+
+            ContentBodyObserver.NotifyNewSeach(new ObservableCollection<Song>(), search);
+
+            Assert.AreEqual(1, viewModel.Items.Count);
+            Assert.AreEqual("Search : " + search, viewModel.Items[0].Label);
+            Assert.AreEqual(viewModel.Items[0], viewModel.SelectedItem);
+        }
     }
 }

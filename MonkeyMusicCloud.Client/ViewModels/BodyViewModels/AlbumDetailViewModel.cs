@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
-using MicroMvvm;
-using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
-using MonkeyMusicCloud.Client.Views.BodyViews;
+﻿using System.Collections.ObjectModel;
+using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Utilities.Interface;
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
     public class AlbumDetailViewModel : ViewModelBase
     {
+        protected IImageSearch ImageSearch { get { return ImageSearchInstance.GetInstance().ImageSearch; } }
         private ObservableCollection<Song> songList;
         private string album;
+        private string albumImagePath;
+
         public string Album
         {
             get { return album; }
             set { 
                 album = value;
                 SongList = Service.GetByAlbum(album);
+                AlbumImagePath = ImageSearch.GetImagePath(album);
             }
         }
 
@@ -32,6 +30,17 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             set {
                 songList = value;
                 RaisePropertyChanged("SongList");
+            }
+        }
+
+        public string AlbumImagePath
+        {
+            get {
+                return albumImagePath;
+            }
+            set {
+                albumImagePath = value;
+                RaisePropertyChanged("AlbumImagePath");
             }
         }
     }

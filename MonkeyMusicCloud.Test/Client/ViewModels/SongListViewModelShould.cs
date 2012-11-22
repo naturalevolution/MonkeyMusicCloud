@@ -63,7 +63,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             viewModel.OpenAlbumCommand.Execute(album);
             
             Assert.IsTrue(catcher.ChangeContentViewInvoked);
-            Assert.AreEqual(album, catcher.Item.Label);
+            Assert.AreEqual(album, catcher.MenuItem.Label);
         }
     }
 }

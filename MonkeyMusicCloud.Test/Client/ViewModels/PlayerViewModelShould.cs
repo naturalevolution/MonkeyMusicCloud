@@ -23,7 +23,6 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 
-
         [TestMethod]
         public void CallMusicPlayerResumeWhenAResumeSongEventIsCatched()
         {

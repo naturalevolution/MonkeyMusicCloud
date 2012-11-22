@@ -61,7 +61,7 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add Musics.
+        ///   Recherche une chaîne localisée semblable à Upload.
         /// </summary>
         public static string MenuAddMusics {
             get {
@@ -70,7 +70,7 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Music List.
+        ///   Recherche une chaîne localisée semblable à Search.
         /// </summary>
         public static string MenuSongList {
             get {

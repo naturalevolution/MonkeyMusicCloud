@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
@@ -40,18 +41,30 @@ namespace MonkeyMusicCloud.Test.Helper
             ContentBodyObserver.ChangeContentView += delegate(MenuItem view)
             {
                 ChangeContentViewInvoked = true;
-                Item = view;
+                MenuItem = view;
+            };
+
+            ContentBodyObserver.NewSearch += delegate(ObservableCollection<Song> songs, string search)
+            {
+                NewSearchInvoked = true;
+                SearchSongList = songs;
+                SearchFilter = search;
             };
         }
 
-        public MenuItem Item { get; set; }
+        public MenuItem MenuItem { get; set; }
         public ObservableCollection<Song> AddToPlayListSong { get; set; }
+        public ObservableCollection<Song> SearchSongList { get; set; }
         public Song SongToPlay { get; set; }
+
+        public string SearchFilter;
+
         public bool AddToPlayListInvoked;
         public bool PlaySongInvoked;
         public bool ResumeSongInvoked;
         public bool SongFinishedInvoked;
         public bool PauseSongInvoked;
         public bool ChangeContentViewInvoked;
+        public bool NewSearchInvoked;
     }
 }

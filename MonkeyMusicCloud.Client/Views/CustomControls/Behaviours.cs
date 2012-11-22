@@ -179,7 +179,11 @@ namespace MonkeyMusicCloud.Client.Views.CustomControls
                 else
                 {
                     double width = allowedSpace * (Percentage / totalPercentage);
-                    _element.Width = width;
+                    if (width>0)
+                    {
+                        _element.Width = width;    
+                    }
+                    
                 }
             }
         }
