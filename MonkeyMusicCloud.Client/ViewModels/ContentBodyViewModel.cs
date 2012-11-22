@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
+using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Client.Views.BodyViews;
 using MonkeyMusicCloud.Resource;
@@ -16,7 +17,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             Items = new ObservableCollection<MenuItem>()
                         {
-                            new MenuItem {Label = MusicResource.MenuSongList, View = new SongListView()},
+                            new MenuItem {Label = MusicResource.MenuSongList, View = new SearchView()},
                             new MenuItem {Label = MusicResource.MenuAddMusics, View = new AddSongsView()}
                         };
 

@@ -88,6 +88,10 @@
     <Compile Include="Utilities\ServiceInstance.cs" />
     <Compile Include="Utilities\StreamInstance.cs" />
     <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
+    <Compile Include="Views\BodyViews\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BodyViewModels\UploadSongsViewModel.cs" />
     <Compile Include="ViewModels\ContentBodyViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
@@ -131,6 +135,10 @@
     <Page Include="Themes\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BodyViews\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BodyViews\AlbumDetailView.xaml">
       <SubType>Designer</SubType>

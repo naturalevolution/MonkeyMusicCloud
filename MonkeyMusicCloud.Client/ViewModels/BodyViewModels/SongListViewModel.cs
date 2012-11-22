@@ -21,20 +21,10 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                 RaisePropertyChanged("SongList");
             }
         }
-
-        public ICommand RefreshSongListCommand
-        {
-            get { return new RelayCommand(RefreshSongListExecute); }
-        }
-
+        
         public ICommand AddSongToPlayListCommand
         {
             get { return new RelayCommand<Song>(AddSongToPlayListExecute); }
-        }
-
-        public ICommand SearchSongsListCommand
-        {
-            get { return new RelayCommand<string>(SearchSongsExecute); }
         }
 
         public ICommand OpenAlbumCommand
@@ -46,21 +36,12 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
         {
             ContentBodyObserver.NotifyChangeContentView(new MenuItem {Label = album, View = new AlbumDetailView(album)});
         }
-
-        private void SearchSongsExecute(string filter)
-        {
-            SongList = Service.SearchSongs(filter);
-        }
-
+        
         private void AddSongToPlayListExecute(Song song)
         {
             
             PlayerObserver.NotifyAddToPlayList(song);
         }
 
-        private void RefreshSongListExecute()
-        {
-            SongList = Service.GetAllSongs();
-        }
     }
 }

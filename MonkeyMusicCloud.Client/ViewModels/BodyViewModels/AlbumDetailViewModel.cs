@@ -13,25 +13,25 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
     public class AlbumDetailViewModel : ViewModelBase
     {
-        private ObservableCollection<Song> songs;
+        private ObservableCollection<Song> songList;
         private string album;
         public string Album
         {
             get { return album; }
             set { 
                 album = value;
-                Songs = Service.GetByAlbum(album);
+                SongList = Service.GetByAlbum(album);
             }
         }
 
-        public ObservableCollection<Song> Songs
+        public ObservableCollection<Song> SongList
         {
             get {
-                return songs;
+                return songList;
             }
             set {
-                songs = value;
-                RaisePropertyChanged("Songs");
+                songList = value;
+                RaisePropertyChanged("SongList");
             }
         }
     }
