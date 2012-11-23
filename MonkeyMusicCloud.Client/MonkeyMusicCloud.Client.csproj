@@ -277,6 +277,9 @@
   <ItemGroup>
     <Resource Include="Themes\Images\Search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Trashcan.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

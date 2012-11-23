@@ -92,7 +92,24 @@
                   Behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}"  Behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}"  Behaviours:GridViewColumnResize.Width="5*" />
+                    <GridViewColumn Behaviours:GridViewColumnResize.Width="1*">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Button Height="22" Command="{Binding DataContext.ClearPlayListCommand, 
+                                                                        RelativeSource={RelativeSource FindAncestor, AncestorType=Views:PlayListView}}">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../../Themes/Images/Trashcan.png" Style="{StaticResource ResourceKey=ImageClickable}" />
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate></DataTemplate>
+                        </GridViewColumn.CellTemplate>>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
