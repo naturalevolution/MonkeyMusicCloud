@@ -11,15 +11,15 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     public class PlayerViewModelShould : ViewModelsBaseTest
     {
         [TestMethod]
-        public void ACallMusicPlayerPlayWhenAPlaySongEventIsCatched()
+        public void CallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
             Song songToPlay = Create.Song();
             PlayerViewModel viewModel = new PlayerViewModel();
 
             PlayerObserver.NotifyPlayNewSong(songToPlay);
 
-            MusicPlayer.Verify(mp => mp.Stop(), Times.Once());
-            MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content), Times.Once());
+            MusicPlayer.Verify(mp => mp.Stop());
+            MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content));
             Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 
@@ -41,6 +41,20 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             PlayerObserver.NotifyPauseSong();
 
             MusicPlayer.Verify(mp => mp.Pause(), Times.Once());
+        }
+        
+        [TestMethod]
+        public void CallMusicPlayerStopWhenAStopSongEventIsCatched()
+        {
+            PlayerViewModel viewModel = new PlayerViewModel();
+
+            PlayerObserver.NotifyStopSong();
+
+            MusicPlayer.Verify(mp => mp.Stop());
+            Assert.IsNull(viewModel.ElapsedTime);
+            Assert.IsNull(viewModel.TotalTime);
+            Assert.IsNull(viewModel.CurrentSong);
+            Assert.AreEqual(0, viewModel.PurcentagePlayed);
         }
 
         [TestMethod]

@@ -7,8 +7,8 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="570" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="550" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="650" />
@@ -35,7 +35,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="1" Grid.Row="1" Content="Upload songs" Command="{Binding AddSongCommand}" />
+        <Button Grid.Column="1" Grid.Row="1" Margin="2" Content="Upload songs" Command="{Binding AddSongCommand}" />
         <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Name="lblRootPath" Content="{Binding RootPath, Mode=TwoWay}" Visibility="Collapsed" />
     </Grid>
 </UserControl>

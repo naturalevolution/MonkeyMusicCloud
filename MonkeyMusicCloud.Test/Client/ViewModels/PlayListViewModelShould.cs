@@ -31,6 +31,21 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.AreEqual(1, ViewModel.SongList.Count);
             CollectionAssert.Contains(ViewModel.SongList, song1);
         }
+
+        [TestMethod]
+        public void ClearPlayListAndRaiseStopEvent()
+        {
+            EventCatcher eventCatcher = new EventCatcher();
+            Song song1 = Create.Song();
+            ViewModel.PlayerState = State.Play;
+            ViewModel.SongList = new ObservableCollection<Song>(){song1};
+
+            ViewModel.ClearPlayListCommand.Execute(null);
+
+            Assert.AreEqual(0, ViewModel.SongList.Count);
+            Assert.IsTrue(eventCatcher.StopSongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+        }
         
         [TestMethod]
         public void DoNotDuplicateSongIntoSongListWhenAddToPlayListEventIsCatched()

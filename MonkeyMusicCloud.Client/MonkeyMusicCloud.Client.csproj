@@ -274,6 +274,9 @@
   <ItemGroup>
     <Resource Include="Themes\Images\close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Search.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -19,10 +19,10 @@
             <RowDefinition Height="600"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Width="48" Height="48" Command="{Binding PreviousSongCommand}">
-                <Image Source="../Themes/Images/PlayerPrecedente.png" />
+            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding PreviousSongCommand}">
+                <Image Width="38" Height="38" Source="../Themes/Images/PlayerPrecedente.png" />
             </Button>
-            <Button Width="48" Height="48">
+            <Button Margin="5,0,5,0" Width="48" Height="48">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">                        
                         <Style.Triggers>
@@ -50,7 +50,7 @@
                         </Style.Triggers>
                     </Style>
                 </Button.Style>
-                <Image>
+                <Image Width="38" Height="38" >
                     <Image.Style>
                         <Style TargetType="Image">
                             <Style.Triggers>
@@ -79,9 +79,9 @@
                     </Image.Style>
                 </Image>
             </Button>
-            
-            <Button Width="48" Height="48" Command="{Binding NextSongCommand}">
-                <Image Source="../Themes/Images/PlayerSuivante.png"/>
+
+            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding NextSongCommand}">
+                <Image Width="38" Height="38" Source="../Themes/Images/PlayerSuivante.png"/>
             </Button>
         </StackPanel>
         <Views:PlayerView  Grid.Row="1" />

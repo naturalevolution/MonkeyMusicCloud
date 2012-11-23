@@ -16,10 +16,14 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" />
-                        <Button Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource FindAncestor,
-                                                                                                                 AncestorType={x:Type Views:ContentBodyView}}}" 
-                                CommandParameter="{Binding}" Width="20" Height="20">                            
-                            <Image Source="../Themes/Images/close.png" />
+                        <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, 
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Views:ContentBodyView}}}" 
+                                CommandParameter="{Binding}" Width="20" Height="20">           
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Themes/Images/close.png" Style="{StaticResource ResourceKey=ImageClickable}" />
+                                </ControlTemplate>
+                            </Button.Template>
                         </Button>
                     </StackPanel>                    
                 </DataTemplate>

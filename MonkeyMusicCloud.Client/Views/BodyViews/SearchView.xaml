@@ -3,19 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
-             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200" >
+             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" xmlns:Wpf="clr-namespace:PixelLab.Wpf;assembly=PixelLab.Wpf" mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200">
+    
     <UserControl.DataContext>
         <BodyViewModels:SearchViewModel />
     </UserControl.DataContext>
-    <Grid>        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" x:Name="tbSearch" Height="35" Width="200">
+    <Grid Grid.Row="0" Margin="2">
+        <TextBox x:Name="tbSearch" Grid.Column="0">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding  SearchSongsListCommand}" CommandParameter="{Binding ElementName=tbSearch, Path=Text}" Key="Enter" />
             </TextBox.InputBindings>
-        </TextBox>
+        </TextBox >
+        <Button HorizontalAlignment="Right" Margin="5"  Command="{Binding SearchSongsListCommand}" CommandParameter="{Binding ElementName=tbSearch, Path=Text}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="../../Themes/Images/Search.png" 
+                            Style="{StaticResource ResourceKey=ImageClickable}" />
+                </ControlTemplate>
+            </Button.Template>    
+        </Button>
+        <Image HorizontalAlignment="Right" Width="25" Grid.Column="1" />
     </Grid>
 </UserControl>

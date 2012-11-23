@@ -99,8 +99,16 @@ namespace MonkeyMusicCloud.Client.ViewModels
                 RaiseNewPlaySongDemand(SongList[indexOfActualSong - 1]);
             }
         }
+        
+        private void RaiseClearPlayListDemand()
+        {
+            SongList.Clear();
+            PlayerState = State.Stop;
+            PlayerObserver.NotifyStopSong();
+        }
 
         public ICommand PlaySongCommand { get { return new RelayCommand<Song>(RaiseNewPlaySongDemand); } }
+        public ICommand ClearPlayListCommand { get { return new RelayCommand(RaiseClearPlayListDemand); } }
         public ICommand NextSongCommand { get { return new RelayCommand(RaiseNewNextSongDemand); } }
         public ICommand PreviousSongCommand { get { return new RelayCommand(RaiseNewPreviousSongDemand); } }
         public ICommand PauseSongCommand { get { return new RelayCommand(RaiseNewPauseSongDemand); } }
@@ -116,6 +124,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         }
 
         private State playerState;
+
         public State PlayerState
         {
             get { return playerState; }

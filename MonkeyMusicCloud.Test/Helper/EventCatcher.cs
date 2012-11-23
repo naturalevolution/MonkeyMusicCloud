@@ -21,6 +21,11 @@ namespace MonkeyMusicCloud.Test.Helper
                 SongToPlay = song;
             };
 
+            PlayerObserver.StopSong += delegate()
+            {
+                StopSongInvoked = true;
+            };
+
             PlayerObserver.CurrentSongFinished += delegate()
             {
                 SongFinishedInvoked = true;
@@ -66,5 +71,6 @@ namespace MonkeyMusicCloud.Test.Helper
         public bool PauseSongInvoked;
         public bool ChangeContentViewInvoked;
         public bool NewSearchInvoked;
+        public bool StopSongInvoked;
     }
 }

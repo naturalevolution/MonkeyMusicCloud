@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="UserDataTemplate">
             <StackPanel>
-                <Button Height="50" Content="{Binding Path=Label}" Command="{Binding DataContext.OpenItemCommand, 
+                <Button Height="50" Margin="10" Content="{Binding Path=Label}" Command="{Binding DataContext.OpenItemCommand, 
                                                                                      RelativeSource={RelativeSource FindAncestor, AncestorType=Views:MenuView}}"
                                                                    CommandParameter="{Binding}"/>
             </StackPanel>

@@ -64,6 +64,12 @@ namespace MonkeyMusicCloud.Client.ViewModels
             PlayerObserver.PlaySong += PlayNewSong;
             PlayerObserver.PauseSong += MusicPlayer.Pause;
             PlayerObserver.ResumeSong += MusicPlayer.Resume;
+            PlayerObserver.StopSong += delegate
+                                           {
+                                               ClearPlayer();
+                                               MusicPlayer.Stop();
+                                           };
+
             MusicPlayer.PurcentagePlayed += delegate(int elapsedTime, int totalTime)
                                                 {
                                                     PurcentagePlayed = (elapsedTime*100/totalTime );
@@ -73,11 +79,16 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
             MusicPlayer.SongFinished += delegate
                                             {
-                                                TotalTime = null;
-                                                ElapsedTime = null;
-                                                PurcentagePlayed = 0;
+                                                ClearPlayer();
                                                 PlayerObserver.NotifyCurrentSongFinished();
                                             };
+        }
+
+        private void ClearPlayer()
+        {
+            TotalTime = null;
+            ElapsedTime = null;
+            PurcentagePlayed = 0;
         }
 
         private void PlayNewSong(Song song)
