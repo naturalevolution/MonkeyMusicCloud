@@ -60,6 +60,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private void ClearPlayer()
         {
             ActualPlayedSong = null;
+            PlayerState = State.Stop;
         }
 
         private void RaiseNewPlaySongDemand(Song song)

@@ -11,6 +11,7 @@ namespace MonkeyMusicCloud.Utilities
     {
         private FilgraphManager objFilterGraph;
         private IMediaPosition objMediaPosition;
+        private Timer tmProgressionFlux = new Timer(1000);
         
         private static DirectPlayer instance;
         static readonly object InstanceLock = new object();
@@ -31,14 +32,16 @@ namespace MonkeyMusicCloud.Utilities
         //TODO Fichier déjà utilisé.... surement par Quartz. Essayer de libérer les ressources de la librairie
         public void Play(byte[] file)
         {
+            //pb d'accès concurrenciel
             string path = ConfigurationManager.AppSettings["MediaCache"] + file.Length +".mp3";
+            File.WriteAllBytes(path, file);
             objFilterGraph = new FilgraphManager();
             objFilterGraph.RenderFile(path);
             objMediaPosition = objFilterGraph as IMediaPosition;
 
             objFilterGraph.Run();
 
-            Timer tmProgressionFlux = new Timer(1000) {Enabled = true}; 
+            tmProgressionFlux = new Timer(1000) { Enabled = true }; 
             tmProgressionFlux.Elapsed += TmProgressionFluxTick;
         }
         public void Stop()
@@ -50,6 +53,7 @@ namespace MonkeyMusicCloud.Utilities
                 objMediaPosition.CurrentPosition = 0;
             }
             objFilterGraph = null;
+            tmProgressionFlux.Stop();
         }
         private void TmProgressionFluxTick(object sender, EventArgs e)
         {

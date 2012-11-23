@@ -46,7 +46,12 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void CallMusicPlayerStopWhenAStopSongEventIsCatched()
         {
-            PlayerViewModel viewModel = new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel
+                                            {
+                                                CurrentSong = Create.Song(), 
+                                                ElapsedTime = "0",
+                                                PurcentagePlayed = 0,TotalTime = "0"
+                                            };
 
             PlayerObserver.NotifyStopSong();
 
@@ -61,7 +66,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void RaiseNewSongFinishedEventWhenASongIsFinishedAndCleanAllValue()
         {
             EventCatcher catcher = new EventCatcher();
-            PlayerViewModel viewModel = new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel
+                                            {
+                                                CurrentSong = Create.Song(),
+                                                ElapsedTime = "0",
+                                                PurcentagePlayed = 0,
+                                                TotalTime = "0"
+                                            };  
 
             MusicPlayer.Raise(mp => mp.SongFinished += null);
 

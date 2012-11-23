@@ -192,7 +192,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\MonkeyMusicCloud.Domain.Model.Song.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -272,13 +274,13 @@
     <Resource Include="Themes\Images\fleche.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\close.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Themes\Images\Search.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\Trashcan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:BodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" mc:Ignorable="d" d:DesignWidth="800">
+             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
+             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" mc:Ignorable="d" d:DesignWidth="800">
     <UserControl.DataContext>
         <BodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid>
-        <ListView Name="lvSongList" VerticalAlignment="Top" Width="800" 
+        <ListView Name="lvSongList" VerticalAlignment="Top" 
                   Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" Behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>

@@ -64,13 +64,13 @@ namespace MonkeyMusicCloud.Test.Helper
 
         public string SearchFilter;
 
-        public bool AddToPlayListInvoked;
-        public bool PlaySongInvoked;
-        public bool ResumeSongInvoked;
-        public bool SongFinishedInvoked;
-        public bool PauseSongInvoked;
-        public bool ChangeContentViewInvoked;
-        public bool NewSearchInvoked;
-        public bool StopSongInvoked;
+        public bool AddToPlayListInvoked = false;
+        public bool PlaySongInvoked = false;
+        public bool ResumeSongInvoked = false;
+        public bool SongFinishedInvoked = false;
+        public bool PauseSongInvoked = false;
+        public bool ChangeContentViewInvoked = false;
+        public bool NewSearchInvoked = false;
+        public bool StopSongInvoked = false;
     }
 }

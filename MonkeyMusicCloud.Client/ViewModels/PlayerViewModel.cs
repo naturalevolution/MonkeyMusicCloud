@@ -86,6 +86,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         private void ClearPlayer()
         {
+            CurrentSong = null;
             TotalTime = null;
             ElapsedTime = null;
             PurcentagePlayed = 0;

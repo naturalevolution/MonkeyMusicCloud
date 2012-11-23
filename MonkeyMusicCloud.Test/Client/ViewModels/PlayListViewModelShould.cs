@@ -216,10 +216,10 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             }
 
             [TestMethod]
-            public void ADoNothingIfThereIsNoActualSongOnSongFinished()
+            public void DoNothingIfThereIsNoActualSongOnSongFinished()
             {
                 EventCatcher eventCatcher = new EventCatcher();
-                
+
                 PlayerObserver.NotifyCurrentSongFinished();
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
@@ -307,11 +307,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 EventCatcher eventCatcher = new EventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1};
                 ViewModel.ActualPlayedSong = song1;
+                ViewModel.PlayerState = State.Play;
 
                 PlayerObserver.NotifyCurrentSongFinished();
 
                 Assert.IsFalse(eventCatcher.PlaySongInvoked);
                 Assert.IsNull(ViewModel.ActualPlayedSong);
+                Assert.AreEqual(State.Stop, ViewModel.PlayerState);
             }
         #endregion
     }
