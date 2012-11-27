@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\ViewModels\AlbumDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\ArtistDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SearchViewModelShould.cs" />
     <Compile Include="Client\ViewModels\UploadSongsViewModelShould.cs" />

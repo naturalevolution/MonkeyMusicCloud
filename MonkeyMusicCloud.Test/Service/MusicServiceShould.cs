@@ -111,5 +111,34 @@ namespace MonkeyMusicCloud.Test.Service
             MediaFileRepository.Verify(mfr => mfr.GetById(id), Times.Once());
             Assert.AreEqual(expectedFile, gettedFile);
         }
+
+
+        [TestMethod]
+        public void GetSongsByArtist()
+        {
+            const string artist = "artist";
+            ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
+            SongRepository.Setup(r => r.GetByArtist(artist)).Returns(expectedSongs);
+            MusicService service = new MusicService(SongRepository.Object, MediaFileRepository.Object);
+
+            IList<Song> findMusics = service.GetByArtist(artist);
+
+            SongRepository.Verify(r => r.GetByArtist(artist), Times.Once());
+            Assert.AreEqual(expectedSongs, findMusics);
+        }
+
+        [TestMethod]
+        public void GetAlbumsByArtist()
+        {
+            const string artist = "artist";
+            ObservableCollection<string> expectedAlbums = new ObservableCollection<string>();
+            SongRepository.Setup(r => r.GetAlbumsByArtist(artist)).Returns(expectedAlbums);
+            MusicService service = new MusicService(SongRepository.Object, MediaFileRepository.Object);
+
+            IList<string> findAlbums = service.GetAlbumsByArtist(artist);
+
+            SongRepository.Verify(r => r.GetAlbumsByArtist(artist), Times.Once());
+            Assert.AreEqual(expectedAlbums, findAlbums);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Documents;
@@ -28,6 +29,16 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
         public ICommand AddOneSongToPlayListCommand
         {
             get { return new RelayCommand<Song>(AddOneSongToPlayListExecute); }
+        }
+
+        public ICommand OpenArtistCommand
+        {
+            get { return new RelayCommand<string>(OpenArtistExecute); }
+        }
+
+        private void OpenArtistExecute(string artist)
+        {
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = artist, View = new ArtistDetailView(artist) });
         }
 
         public ICommand AddSongsToPlayListCommand

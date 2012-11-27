@@ -45,5 +45,15 @@ namespace MonkeyMusicCloud.Service
         {
             return MediaFileRepository.GetById(mediaFileId);
         }
+
+        public IList<string> GetAlbumsByArtist(string artist)
+        {
+            return SongRepository.GetAlbumsByArtist(artist);
+        }
+
+        public IList<Song> GetByArtist(string artist)
+        {
+            return SongRepository.GetByArtist(artist);
+        }
     }
 }

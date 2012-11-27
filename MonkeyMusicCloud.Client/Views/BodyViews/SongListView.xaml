@@ -37,7 +37,27 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Artist}" Behaviours:GridViewColumnResize.Width="2*" />
+                    <GridViewColumn Header="Artist" Behaviours:GridViewColumnResize.Width="2*" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding  DataContext.OpenArtistCommand,
+                                                                                  RelativeSource={RelativeSource FindAncestor,
+                                                                                                                 AncestorType={x:Type BodyViews:SongListView}}}"                                        
+                                                                       CommandParameter="{Binding Path=Artist}">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Label Content="{Binding Path=Artist}" />
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Cursor" Value="Hand" />
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Behaviours:GridViewColumnResize.Width="1*"  >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                               AncestorType={x:Type BodyViews:SongListView}}}"

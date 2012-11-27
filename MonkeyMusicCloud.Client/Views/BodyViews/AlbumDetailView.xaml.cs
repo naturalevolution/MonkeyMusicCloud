@@ -24,6 +24,5 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             InitializeComponent();
             Album.Content = album;
         }
-
     }
 }

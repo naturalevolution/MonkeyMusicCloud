@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
@@ -20,6 +21,17 @@ namespace MonkeyMusicCloud.Repository
         {
             IMongoQuery query = Query<Song>.Where(s => s.Album == album);
             return Collection.FindAs<Song>(query).ToList();
+        }
+
+        public virtual IList<Song> GetByArtist(string artist)
+        {
+            IMongoQuery query = Query<Song>.Where(s => s.Artist == artist);
+            return Collection.FindAs<Song>(query).ToList();
+        }
+
+        public virtual IList<string> GetAlbumsByArtist(string artist)
+        {
+            return GetByArtist(artist).Select(s => s.Album).Distinct().ToList();
         }
     }
 }

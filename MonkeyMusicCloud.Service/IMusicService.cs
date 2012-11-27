@@ -22,5 +22,11 @@ namespace MonkeyMusicCloud.Service
 
         [OperationContract]
         MediaFile GetMediaFileById(Guid mediaFileId);
+
+        [OperationContract]
+        IList<string> GetAlbumsByArtist(string artist);
+
+        [OperationContract]
+        IList<Song> GetByArtist(string artist);
     }
 }

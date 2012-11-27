@@ -29,6 +29,12 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetMediaFileById", ReplyAction="http://tempuri.org/IMusicService/GetMediaFileByIdResponse")]
         MonkeyMusicCloud.Domain.Model.MediaFile GetMediaFileById(System.Guid mediaFileId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetAlbumsByArtist", ReplyAction="http://tempuri.org/IMusicService/GetAlbumsByArtistResponse")]
+        System.Collections.ObjectModel.ObservableCollection<string> GetAlbumsByArtist(string artist);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetByArtist", ReplyAction="http://tempuri.org/IMusicService/GetByArtistResponse")]
+        System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetByArtist(string artist);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -76,6 +82,14 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
         
         public MonkeyMusicCloud.Domain.Model.MediaFile GetMediaFileById(System.Guid mediaFileId) {
             return base.Channel.GetMediaFileById(mediaFileId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<string> GetAlbumsByArtist(string artist) {
+            return base.Channel.GetAlbumsByArtist(artist);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetByArtist(string artist) {
+            return base.Channel.GetByArtist(artist);
         }
     }
 }

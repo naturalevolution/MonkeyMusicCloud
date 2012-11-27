@@ -53,6 +53,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.IsFalse(eventCatcher.AddToPlayListInvoked);
         }
 
+        //TODO : Tester l'appel à la vue ??
         [TestMethod]
         public void RaiseOpenNewAlbumView()
         {
@@ -64,6 +65,20 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             
             Assert.IsTrue(catcher.ChangeContentViewInvoked);
             Assert.AreEqual(album, catcher.MenuItem.Label);
+        }
+
+        //TODO : Tester l'appel à la vue ??
+        [TestMethod]
+        public void RaiseOpenNewArtistView()
+        {
+            const string artist = "artist";
+            SongListViewModel viewModel = new SongListViewModel();
+            EventCatcher catcher = new EventCatcher();
+
+            viewModel.OpenArtistCommand.Execute(artist);
+            
+            Assert.IsTrue(catcher.ChangeContentViewInvoked);
+            Assert.AreEqual(artist, catcher.MenuItem.Label);
         }
     }
 }

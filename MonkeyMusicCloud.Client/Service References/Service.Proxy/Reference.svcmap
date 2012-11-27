@@ -27,6 +27,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c83c8d8e-d8ef-4c49-9761-c352ecda0cd5" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MonkeyMusicCloud.Service/MusicService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f0bcec05-dba1-4f4b-aa70-8d272f913d5c" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MonkeyMusicCloud.Service/MusicService/mex" />
     <MetadataFile FileName="MonkeyMusicCloud.Domain.Model.xsd" MetadataType="Schema" ID="557becde-2266-498c-b453-72ebdeac98f3" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MonkeyMusicCloud.Service/MusicService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="e047c6db-a6fa-4c09-ad3f-4a5371100762" SourceId="1" SourceUrl="http://localhost:8732/Design_Time_Addresses/MonkeyMusicCloud.Service/MusicService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -89,8 +89,12 @@
     <Compile Include="Utilities\ServiceInstance.cs" />
     <Compile Include="Utilities\StreamInstance.cs" />
     <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\ArtistDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="Views\BodyViews\ArtistDetailView.xaml.cs">
+      <DependentUpon>ArtistDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BodyViews\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
@@ -140,6 +144,10 @@
     <Page Include="Themes\Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BodyViews\ArtistDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BodyViews\SearchView.xaml">
       <SubType>Designer</SubType>
@@ -203,6 +211,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\Service.Proxy\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\Service.Proxy\MonkeyMusicCloud.Domain.Model.xsd">
       <SubType>Designer</SubType>
     </None>
