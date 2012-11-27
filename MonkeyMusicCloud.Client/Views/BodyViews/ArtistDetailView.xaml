@@ -14,7 +14,7 @@
             <RowDefinition Height="6*" />
         </Grid.RowDefinitions>
         <Label Name="Artist" HorizontalAlignment="Center" Content="{Binding Artist, Mode=TwoWay}" />
-        
+        <ListBox Grid.Row="1" ItemsSource="{Binding AlbumList, UpdateSourceTrigger=PropertyChanged}" />
         
         
         <BodyViews:SongListView Grid.Row="2" SongList="{Binding DataContext.SongList, UpdateSourceTrigger=PropertyChanged
