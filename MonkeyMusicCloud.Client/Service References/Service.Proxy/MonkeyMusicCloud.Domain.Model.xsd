@@ -23,7 +23,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Entity">
         <xs:sequence>
-          <xs:element minOccurs="0" name="File" nillable="true" type="tns:File" />
+          <xs:element minOccurs="0" name="MediaFileId" type="ser:guid" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -35,7 +35,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Entity" nillable="true" type="tns:Entity" />
-  <xs:complexType name="File">
+  <xs:complexType name="MediaFile">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Entity">
         <xs:sequence>
@@ -44,5 +44,5 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="File" nillable="true" type="tns:File" />
+  <xs:element name="MediaFile" nillable="true" type="tns:MediaFile" />
 </xs:schema>

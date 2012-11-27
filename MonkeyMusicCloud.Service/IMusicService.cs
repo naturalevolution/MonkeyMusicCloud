@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using MonkeyMusicCloud.Domain.Model;
 
@@ -10,14 +11,16 @@ namespace MonkeyMusicCloud.Service
         [OperationContract]
         IList<Song> GetAllSongs();
 
-
         [OperationContract]
         IList<Song> SearchSongs(string filter);
 
         [OperationContract]
-        void AddASong(Song song);
+        void AddASong(Song song, MediaFile mediaFile);
 
         [OperationContract]
         IList<Song> GetByAlbum(string album);
+
+        [OperationContract]
+        MediaFile GetMediaFileById(Guid mediaFileId);
     }
 }

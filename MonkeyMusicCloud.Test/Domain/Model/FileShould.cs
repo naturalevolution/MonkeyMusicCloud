@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Domain.Model;
-using MonkeyMusicCloud.Test.Helper;
 
 namespace MonkeyMusicCloud.Test.Domain.Model
 {
@@ -11,19 +11,10 @@ namespace MonkeyMusicCloud.Test.Domain.Model
         public void InstantiateCorrectly()
         {
             byte[] content = new byte[5];
-            File file = new File(content);
-            Assert.AreEqual(content, file.Content);
-        }
-
-        [TestMethod]
-        public void GetSetProperties()
-        {
-            File file = Create.File();
-            byte[] content = new byte[5];
-
-            file.Content = content;
-
-            Assert.AreEqual(content, file.Content);
+            Guid id = new Guid();
+            MediaFile mediaFile = new MediaFile { Content = content, Id = id };
+            Assert.AreEqual(content, mediaFile.Content);
+            Assert.AreEqual(id, mediaFile.Id);
         }
     }
 }

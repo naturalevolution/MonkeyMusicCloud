@@ -19,13 +19,15 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                                              Items.Add(item);
                                                              SelectedItem = item;
                                                          };
-            ContentBodyObserver.NewSearch += delegate(ObservableCollection<Song> songs, string search)
-            {
-                SongListView songListView = new SongListView { SongList = songs };
-                MenuItem item = new MenuItem {Label = "Search : " + search, View = songListView};
-                Items.Add(item);
-                SelectedItem = item;
-            };
+            ContentBodyObserver.NewSearch += OnContentBodyObserverOnNewSearch   ;
+        }
+
+        private void OnContentBodyObserverOnNewSearch(ObservableCollection<Song> songs, string search)
+        {
+            SongListView songListView = new SongListView {SongList = songs};
+            MenuItem item = new MenuItem {Label = "Search : " + search, View = songListView};
+            Items.Add(item);
+            SelectedItem = item;
         }
 
         public ObservableCollection<MenuItem> Items { get; set; }

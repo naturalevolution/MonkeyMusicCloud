@@ -195,6 +195,8 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\MonkeyMusicCloud.Domain.Model.MediaFile.datasource" />
     <None Include="Properties\DataSources\MonkeyMusicCloud.Domain.Model.Song.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

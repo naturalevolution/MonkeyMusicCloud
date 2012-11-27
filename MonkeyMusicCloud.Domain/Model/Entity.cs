@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace MonkeyMusicCloud.Domain.Model
 {
@@ -9,27 +8,60 @@ namespace MonkeyMusicCloud.Domain.Model
     public class Entity
     {
         [DataMember]
-        [BsonId(IdGenerator = typeof(CombGuidGenerator))]
+        [BsonId]
         public virtual Guid Id { get; set; }
 
         public override bool Equals(Object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Media)) return false;
-            return Equals((Media)obj);
+            if (obj == null)
+            {
+                return false;
+            }
+            var p = obj as Entity;
+            if ((Object) p == null)
+            {
+                return false;
+            }
+            return (Id == p.Id);
         }
 
-        public bool Equals(Media p)
+        public bool Equals(Entity p)
         {
-            if (ReferenceEquals(null, p)) return false;
-            if (ReferenceEquals(this, p)) return true;
-            return Equals(p.Id, Id);
+            if ((object) p == null)
+            {
+                return false;
+            }
+            return (Id == p.Id) ;
+        }
+
+
+
+        public static bool operator ==(Entity a, Entity b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object) a == null) || ((object) b == null))
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return a.Id == b.Id;
+        }
+
+        public static bool operator !=(Entity a, Entity b)
+        {
+            return !(a == b);
         }
 
         public override int GetHashCode()
         {
-            return (Id != null ? Id.GetHashCode() : 0);
+            return Id.GetHashCode();
         }
     }
 }

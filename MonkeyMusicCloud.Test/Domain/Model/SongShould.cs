@@ -10,14 +10,14 @@ namespace MonkeyMusicCloud.Test.Domain.Model
         [TestMethod]
         public void InstantiateCorrectly()
         {
-            File file = Create.File();
+            MediaFile mediaFile = Create.MediaFile();
             const string title = "title";
             const string album = "album";
             const string artist = "artist";
 
-            Song song = new Song(file, title, album, artist);
+            Song song = new Song {Title = title, Album = album, Artist = artist, MediaFileId = mediaFile.Id};
 
-            Assert.AreEqual(file.Content.Length, song.File.Content.Length);
+            Assert.AreEqual(mediaFile.Id, song.MediaFileId);
             Assert.AreEqual(title, song.Title);
             Assert.AreEqual(album, song.Album);
             Assert.AreEqual(artist, song.Artist);

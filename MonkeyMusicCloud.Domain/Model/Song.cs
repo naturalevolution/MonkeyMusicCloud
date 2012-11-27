@@ -1,24 +1,23 @@
 ﻿using System.Runtime.Serialization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace MonkeyMusicCloud.Domain.Model
 {
     [DataContract]
     public class Song : Media
     {
-        public Song(File file, string title, string album, string artist) : base(file)
-        {
-            Title = title;
-            Album = album;
-            Artist = artist;
-        }
-
         [DataMember]
+        [BsonRequired]
         public string Title { get; set; }
 
         [DataMember]
+        [BsonRequired]
+        [BsonDefaultValue("UnknownAlbum")]
         public string Album { get; set; }
 
         [DataMember]
+        [BsonRequired]
+        [BsonDefaultValue("UnknownArtist")]
         public string Artist { get; set; }
     }
 }

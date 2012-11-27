@@ -10,16 +10,21 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     [TestClass]
     public class PlayerViewModelShould : ViewModelsBaseTest
     {
+
+        //TODO AFAIRE 
         [TestMethod]
         public void CallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
-            Song songToPlay = Create.Song();
+            MediaFile file = Create.MediaFile();
+            Song songToPlay = Create.Song(file);
             PlayerViewModel viewModel = new PlayerViewModel();
-
+            Service.Setup(s => s.GetMediaFileById(songToPlay.MediaFileId)).Returns(file);
+            
             PlayerObserver.NotifyPlayNewSong(songToPlay);
 
             MusicPlayer.Verify(mp => mp.Stop());
-            MusicPlayer.Verify(mp => mp.Play(songToPlay.File.Content));
+            Service.Verify(s => s.GetMediaFileById(songToPlay.MediaFileId));
+            MusicPlayer.Verify(mp => mp.Play(file.Content));
             Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 

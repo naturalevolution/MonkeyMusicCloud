@@ -25,6 +25,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             Song song1 = Create.Song();
             ViewModel.SongList = new ObservableCollection<Song>() ;
+            
 
             PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
 

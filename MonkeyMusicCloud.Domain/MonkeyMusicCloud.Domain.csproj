@@ -34,6 +34,9 @@
     <Reference Include="MongoDB.Bson">
       <HintPath>..\Solution Items\Librairies\MongoDB.Bson.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\Solution Items\Librairies\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Entity.cs" />
-    <Compile Include="Model\File.cs" />
+    <Compile Include="Model\MediaFile.cs" />
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="Model\Media.cs" />
     <Compile Include="Model\Song.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.Observers

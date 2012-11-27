@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MonkeyMusicCloud.Domain.IRepository;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Repository;
 
@@ -8,35 +7,43 @@ namespace MonkeyMusicCloud.Service
 {
     public class MusicService : IMusicService
     {
-        public SongRepository Repository { get; set; }
-        public MusicService() : this(Repositories.Song) { }
-        public MusicService(SongRepository repository)
+        public SongRepository SongRepository { get; set; }
+        public Repository<MediaFile> MediaFileRepository { get; set; }
+        public MusicService() : this(Repositories.Song, Repositories.MediaFile) { }
+        public MusicService(SongRepository songRepository, Repository<MediaFile> mediaFileRepository)
         {
-            Repository = repository;
+            SongRepository = songRepository;
+            MediaFileRepository = mediaFileRepository;
         }
         
         public IList<Song> GetAllSongs()
         {
-            return Repository.GetAll();
+            return SongRepository.GetAll();
         }
 
         public IList<Song> SearchSongs(string filter)
         {
             if (!string.IsNullOrEmpty(filter))
             {
-                return Repository.GetByFilter(filter);    
+                return SongRepository.GetByFilter(filter);    
             }
             return new List<Song>();
         }
 
-        public void AddASong(Song song)
+        public void AddASong(Song song, MediaFile mediaFile)
         {
-            Repository.Add(song);
+            song.MediaFileId = MediaFileRepository.Add(mediaFile).Id;
+            SongRepository.Add(song);
         }
-
+        
         public IList<Song> GetByAlbum(string album)
         {
-            return Repository.GetByAlbum(album);
+            return SongRepository.GetByAlbum(album);
+        }
+
+        public MediaFile GetMediaFileById(Guid mediaFileId)
+        {
+            return MediaFileRepository.GetById(mediaFileId);
         }
     }
 }

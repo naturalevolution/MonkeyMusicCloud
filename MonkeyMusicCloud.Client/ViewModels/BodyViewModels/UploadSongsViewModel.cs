@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Utilities;
@@ -55,7 +54,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             {
                 foreach (SongToAdd songToAdd in SongsToAdd.Where(s => s.IsSelected))
                 {
-                    Service.AddASong(songToAdd.Song);
+                    Service.AddASong(songToAdd.Song, songToAdd.MediaFile);
                 }
             }
         }
@@ -72,13 +71,13 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                         if (path.EndsWith(".mp3"))
                         {
                             File mp3 = File.Create(path);
-                            Song song = new Song(
-                                new Domain.Model.File(StreamHelper.ReadToEnd(path)),
-                                mp3.Tag.Title, 
-                                mp3.Tag.Album,
-                                mp3.Tag.FirstArtist
-                            );
-                            songs.Add(new SongToAdd {IsSelected = true, Song = song, Path = path});
+                            MediaFile mediaFile = new MediaFile {Content = StreamHelper.ReadToEnd(path)};
+                            Song song = new Song{
+                                           Album = mp3.Tag.Album,
+                                           Title = mp3.Tag.Title,
+                                           Artist = mp3.Tag.FirstArtist
+                                       };
+                            songs.Add(new SongToAdd {IsSelected = true, Song = song, Path = path, MediaFile = mediaFile});
                         }
                     }
                     //TODO Logger le message

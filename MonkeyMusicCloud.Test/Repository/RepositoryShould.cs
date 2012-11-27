@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Domain.Model;
@@ -12,20 +13,19 @@ namespace MonkeyMusicCloud.Test.Repository
     public class RepositoryShould : BaseRepositoryTests
     {
         readonly SongRepository songRepository = new SongRepository();
-        readonly Repository<File> songFileRepository = new Repository<File>();
+        readonly Repository<MediaFile> mediaFileRepository = new Repository<MediaFile>();
 
         [TestMethod]
         public void InsertAndGetAnObject()
         {
             
-            File expectedFile = Create.File();
+            MediaFile expectedMediaFile = Create.MediaFile();
 
-            songFileRepository.Add(expectedFile);
-            File gettedFile = songFileRepository.GetAll().First();
+            mediaFileRepository.Add(expectedMediaFile);
+            MediaFile gettedMediaFile = mediaFileRepository.GetAll().First();
 
-            Assert.AreEqual(expectedFile.Content.Length, gettedFile.Content.Length);
+            Assert.AreEqual(expectedMediaFile.Content.Length, gettedMediaFile.Content.Length);
         }
-
 
         [TestMethod]
         public void InsertAndGetComplexeObject()
@@ -35,7 +35,7 @@ namespace MonkeyMusicCloud.Test.Repository
             songRepository.Add(expectedMusic);
             Song gettedMusic = songRepository.GetAll().First();
 
-            Assert.AreEqual(expectedMusic.File.Content.Length, gettedMusic.File.Content.Length);
+            Assert.AreEqual(expectedMusic.MediaFileId, gettedMusic.MediaFileId);
         }
 
         [TestMethod]
@@ -54,6 +54,17 @@ namespace MonkeyMusicCloud.Test.Repository
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic1.Title);
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic2.Title);
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic3.Title);
+        }
+
+        [TestMethod]
+        public void GetById()
+        {
+            MediaFile expectedMediaFile = Create.MediaFile();
+            mediaFileRepository.Add(expectedMediaFile);
+
+            MediaFile gettedMediaFile = mediaFileRepository.GetById(expectedMediaFile.Id);
+
+            Assert.AreEqual(gettedMediaFile, expectedMediaFile);
         }
     }
 }

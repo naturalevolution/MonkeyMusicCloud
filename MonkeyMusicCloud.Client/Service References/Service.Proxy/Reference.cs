@@ -22,10 +22,13 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
         System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> SearchSongs(string filter);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/AddASong", ReplyAction="http://tempuri.org/IMusicService/AddASongResponse")]
-        void AddASong(MonkeyMusicCloud.Domain.Model.Song song);
+        void AddASong(MonkeyMusicCloud.Domain.Model.Song song, MonkeyMusicCloud.Domain.Model.MediaFile mediaFile);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetByAlbum", ReplyAction="http://tempuri.org/IMusicService/GetByAlbumResponse")]
         System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetByAlbum(string album);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMusicService/GetMediaFileById", ReplyAction="http://tempuri.org/IMusicService/GetMediaFileByIdResponse")]
+        MonkeyMusicCloud.Domain.Model.MediaFile GetMediaFileById(System.Guid mediaFileId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,12 +66,16 @@ namespace MonkeyMusicCloud.Client.Service.Proxy {
             return base.Channel.SearchSongs(filter);
         }
         
-        public void AddASong(MonkeyMusicCloud.Domain.Model.Song song) {
-            base.Channel.AddASong(song);
+        public void AddASong(MonkeyMusicCloud.Domain.Model.Song song, MonkeyMusicCloud.Domain.Model.MediaFile mediaFile) {
+            base.Channel.AddASong(song, mediaFile);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<MonkeyMusicCloud.Domain.Model.Song> GetByAlbum(string album) {
             return base.Channel.GetByAlbum(album);
+        }
+        
+        public MonkeyMusicCloud.Domain.Model.MediaFile GetMediaFileById(System.Guid mediaFileId) {
+            return base.Channel.GetMediaFileById(mediaFileId);
         }
     }
 }

@@ -16,9 +16,15 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void CallServiceWhenAddSongMethodIsHandled()
         {
-            SongToAdd songToAdd1 = new SongToAdd() {IsSelected = true, Song = Create.Song()};
-            SongToAdd songToAdd2 = new SongToAdd() {IsSelected = false,Song = Create.Song()};
-            SongToAdd songToAdd3 = new SongToAdd() {IsSelected = true, Song = Create.Song()};
+            MediaFile mediaFile1 = Create.MediaFile();
+            MediaFile mediaFile2 = Create.MediaFile();
+            MediaFile mediaFile3 = Create.MediaFile();
+            SongToAdd songToAdd1 = new SongToAdd() { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile1 };
+            SongToAdd songToAdd2 = new SongToAdd() { IsSelected = false, Song = Create.Song(), MediaFile = mediaFile2 };
+            SongToAdd songToAdd3 = new SongToAdd() { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile3 };
+            
+
+
             UploadSongsViewModel viewModel = new UploadSongsViewModel
                                               {
                                                   SongsToAdd = new ObservableCollection<SongToAdd>
@@ -31,9 +37,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(songToAdd1.Song), Times.Once());
-            Service.Verify(s => s.AddASong(songToAdd2.Song), Times.Never());
-            Service.Verify(s => s.AddASong(songToAdd3.Song), Times.Once());
+            Service.Verify(s => s.AddASong(songToAdd1.Song, mediaFile1), Times.Once());
+            Service.Verify(s => s.AddASong(songToAdd2.Song, mediaFile2), Times.Never());
+            Service.Verify(s => s.AddASong(songToAdd3.Song, mediaFile3), Times.Once());
         }
 
         [TestMethod]
@@ -44,7 +50,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(It.IsAny<Song>()), Times.Never());
+            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
         }
 
         [TestMethod]
@@ -54,7 +60,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(It.IsAny<Song>()), Times.Never());
+            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
         }
 
         [TestMethod]
@@ -65,7 +71,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             viewModel.AddSongCommand.Execute(null);
 
             StreamHelper.Verify(sh => sh.ReadToEnd(It.IsAny<string>()), Times.Never());
-            Service.Verify(s => s.AddASong(It.IsAny<Song>()), Times.Never());
+            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
         }
 
         /// <summary>

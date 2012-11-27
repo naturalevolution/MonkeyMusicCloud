@@ -1,5 +1,4 @@
-﻿
-
+﻿using System;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Test.Helper
@@ -9,16 +8,27 @@ namespace MonkeyMusicCloud.Test.Helper
         private static int compteurSong;
         private static int compteurFile;
 
-        public static File File()
+        public static MediaFile MediaFile()
         {
-            compteurFile += 1;
-            return new File(new byte[compteurFile]);
+            compteurFile++;
+            return new MediaFile(){Content = new byte[compteurFile], Id = Guid.NewGuid()};
+        }
+
+        public static Song Song(MediaFile file)
+        {
+            compteurSong += 1;
+            return new Song { Album = "album" + compteurSong, Title = "title" + compteurSong, Artist = "artist" + compteurSong, MediaFileId = MediaFile().Id, Id = Guid.NewGuid() };
         }
 
         public static Song Song()
         {
-            compteurSong += 1;
-            return new Song(File(), "title" + compteurSong, "album"+compteurSong , "artist"+compteurSong);
+            return Song(MediaFile());
+        }
+
+        public static MediaFile MediaFile(Guid id)
+        {
+            compteurFile++;
+            return new MediaFile { Content = new byte[compteurFile], Id = id };
         }
     }
 }

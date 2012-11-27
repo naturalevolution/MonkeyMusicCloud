@@ -8,21 +8,38 @@ namespace MonkeyMusicCloud.Repository
 {
     public class Repository<T> : IRepository<T>
     {
-        private MongoDatabase Database{ get { return MongoManager.GetInstance().Database; }}
-        protected MongoCollection<T> Collection { get { return Database.GetCollection<T>("musics"); } }
-
+        protected MongoDatabase Database{get { return MongoManager.GetInstance().Database; }}
+        
         public virtual IList<T> GetAll()
         {
             MongoCursor<T> cursor = Collection.FindAllAs<T>();
             return cursor.ToList();
         }
 
-        public virtual void Add(T obj)
+        public virtual T Add(T obj)
         {
             using (MongoManager.GetInstance().Database.RequestStart())
             {
                 Collection.Save(obj);
+                return obj;
             }
+        }
+
+        public MongoCollection<T> Collection
+        {
+            get
+            {
+                if (!Database.CollectionExists(typeof(T).FullName))
+                {
+                    Database.CreateCollection(typeof(T).FullName);
+                }
+                return Database.GetCollection<T>(typeof(T).FullName);
+            }
+        }
+
+        public virtual T GetById(Guid id)
+        {
+            return Collection.FindOneById(id);
         }
     }
 }

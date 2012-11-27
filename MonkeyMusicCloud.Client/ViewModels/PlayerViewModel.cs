@@ -95,7 +95,8 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private void PlayNewSong(Song song)
         {
             MusicPlayer.Stop();
-            MusicPlayer.Play(song.File.Content);
+            MediaFile fileToPlay = Service.GetMediaFileById(song.MediaFileId);
+            MusicPlayer.Play(fileToPlay.Content);
             CurrentSong = song;
         }
     }
