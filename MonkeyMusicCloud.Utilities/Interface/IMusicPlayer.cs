@@ -1,8 +1,10 @@
-﻿namespace MonkeyMusicCloud.Utilities.Interface
+﻿using System;
+
+namespace MonkeyMusicCloud.Utilities.Interface
 {
     public interface IMusicPlayer
     {
-        void Play(byte[] file);
+        void Play(Guid id, byte[] file);
         void Stop();
         event PurcentagePlayedHandler PurcentagePlayed;
         event SongFinishedHandler SongFinished;

@@ -24,7 +24,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             MusicPlayer.Verify(mp => mp.Stop());
             Service.Verify(s => s.GetMediaFileById(songToPlay.MediaFileId));
-            MusicPlayer.Verify(mp => mp.Play(file.Content));
+            MusicPlayer.Verify(mp => mp.Play(file.Id, file.Content));
             Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 

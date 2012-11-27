@@ -30,10 +30,10 @@ namespace MonkeyMusicCloud.Utilities
         }
 
         //TODO Fichier déjà utilisé.... surement par Quartz. Essayer de libérer les ressources de la librairie
-        public void Play(byte[] file)
+        public void Play(Guid id, byte[] file)
         {
             //pb d'accès concurrenciel
-            string path = ConfigurationManager.AppSettings["MediaCache"] + file.Length +".mp3";
+            string path = ConfigurationManager.AppSettings["MediaCache"] + id + ".mp3";
             File.WriteAllBytes(path, file);
             objFilterGraph = new FilgraphManager();
             objFilterGraph.RenderFile(path);
