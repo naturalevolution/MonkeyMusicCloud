@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.CustomViews.AlbumListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CustomViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.CustomViewModels" 
+             xmlns:Controls="clr-namespace:FluidKit.Controls;assembly=FluidKit" mc:Ignorable="d" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <CustomViewModels:AlbumListViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+
+    <DataTemplate x:Key="CarouselDataTemplate" >
+        <Button Content="{Binding}" FontSize="45" ></Button>
+    </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Controls:ElementFlow x:Name="elementFlow"
+                            ItemTemplate="{DynamicResource CarouselDataTemplate}"                                  
+                            TiltAngle="0"
+                            ItemGap="2"
+                            FrontItemGap="0.25"
+                            PopoutDistance="0">
+            <Controls:ElementFlow.Layout>
+                <Controls:Carousel />
+            </Controls:ElementFlow.Layout>
+            <Controls:ElementFlow.Background>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                        StartPoint="0.5,0">
+                    <GradientStop Color="#FF181818" />
+                    <GradientStop Color="#FF7A7A7A"
+                                    Offset="0.5" />
+                    <GradientStop Color="#FF1A1A1A"
+                                    Offset="1" />
+                </LinearGradientBrush>
+            </Controls:ElementFlow.Background>
+            <Controls:ElementFlow.Camera>
+                <PerspectiveCamera FieldOfView="60"
+                                    Position="0,4,6"
+                                    LookDirection="0,-4,-6" />
+            </Controls:ElementFlow.Camera>
+        </Controls:ElementFlow>       
+    </Grid>
+</UserControl>

@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluidKit">
+      <HintPath>..\Solution Items\Librairies\FluidKit\FluidKit.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution Items\Librairies\Log4Net\log4net.dll</HintPath>
@@ -91,7 +94,9 @@
     <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\ArtistDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\CustomViewModels\AlbumListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
     <Compile Include="Views\BodyViews\ArtistDetailView.xaml.cs">
       <DependentUpon>ArtistDetailView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +125,9 @@
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomControls\Behaviours.cs" />
+    <Compile Include="Views\CustomViews\AlbumListView.xaml.cs">
+      <DependentUpon>AlbumListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +174,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentBodyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomViews\AlbumListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

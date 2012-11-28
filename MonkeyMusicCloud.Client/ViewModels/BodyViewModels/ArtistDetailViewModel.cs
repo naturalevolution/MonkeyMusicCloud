@@ -1,4 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using MicroMvvm;
+using MonkeyMusicCloud.Client.Observers;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.Views.BodyViews;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
@@ -38,6 +44,16 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                 songList = value;
                 RaisePropertyChanged("SongList");
             }
+        }
+
+        public ICommand OpenAlbumCommand
+        {
+            get { return new RelayCommand<string>(OpenAlbumExecute); }
+        }
+
+        private void OpenAlbumExecute(string album)
+        {
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = album, View = new AlbumDetailView(album) });
         }
     }
 }

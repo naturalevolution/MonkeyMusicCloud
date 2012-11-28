@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Test.Helper;
 using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
@@ -25,6 +26,19 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Service.Verify(s => s.GetByArtist(artist), Times.Once());
             Assert.AreEqual(expectedAlbums, viewModel.AlbumList);
             Assert.AreEqual(expectedSongs, viewModel.SongList);
+        }
+
+        [TestMethod]
+        public void RaiseOpenNewArtistView()
+        {
+            const string album = "artist";
+            ArtistDetailViewModel viewModel = new ArtistDetailViewModel();
+            EventCatcher catcher = new EventCatcher();
+
+            viewModel.OpenAlbumCommand.Execute(album);
+
+            Assert.IsTrue(catcher.ChangeContentViewInvoked);
+            Assert.AreEqual(album, catcher.MenuItem.Label);
         }
     }
 }
