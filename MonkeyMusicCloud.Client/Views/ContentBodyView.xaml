@@ -21,7 +21,17 @@
                                 CommandParameter="{Binding}" Width="20" Height="20">           
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Source="../Themes/Images/close.png" Style="{StaticResource ResourceKey=ImageClickable}" />
+                                    <Image Source="../Themes/Images/close.png" >
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ResourceKey=ImageClickable}" >
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="true" >
+                                                        <Setter Property="Source" Value="../Themes/Images/PlayerPause.png" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>                         
+                                    </Image>
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>

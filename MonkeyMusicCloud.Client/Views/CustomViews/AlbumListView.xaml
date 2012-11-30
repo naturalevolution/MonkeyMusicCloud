@@ -18,11 +18,11 @@
         <Controls:ElementFlow x:Name="elementFlow"
                             ItemTemplate="{DynamicResource CarouselDataTemplate}"                                  
                             TiltAngle="0"
-                            ItemGap="2"
+                            ItemGap="0.5"
                             FrontItemGap="0.25"
                             PopoutDistance="0">
             <Controls:ElementFlow.Layout>
-                <Controls:Carousel />
+                <Controls:Wall/>
             </Controls:ElementFlow.Layout>
             <Controls:ElementFlow.Background>
                 <LinearGradientBrush EndPoint="0.5,1"
@@ -35,9 +35,9 @@
                 </LinearGradientBrush>
             </Controls:ElementFlow.Background>
             <Controls:ElementFlow.Camera>
-                <PerspectiveCamera FieldOfView="60"
-                                    Position="0,4,6"
-                                    LookDirection="0,-4,-6" />
+                <PerspectiveCamera  FieldOfView="60"
+                                    Position="0,2,6"
+                                    LookDirection="0,-2,-6" />
             </Controls:ElementFlow.Camera>
         </Controls:ElementFlow>       
     </Grid>
