@@ -6,9 +6,9 @@ using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Test.Helper
 {
-    public class EventCatcher
+    public class PlayerEventCatcher
     {
-        public EventCatcher()
+        public PlayerEventCatcher()
         {
             PlayerObserver.AddToPlayList += delegate(ObservableCollection<Song> song) { 
                 AddToPlayListInvoked = true;
@@ -43,26 +43,11 @@ namespace MonkeyMusicCloud.Test.Helper
                 ResumeSongInvoked = true;
             };
 
-            ContentBodyObserver.ChangeContentView += delegate(MenuItem view)
-            {
-                ChangeContentViewInvoked = true;
-                MenuItem = view;
-            };
-
-            ContentBodyObserver.NewSearch += delegate(ObservableCollection<Song> songs, string search)
-            {
-                NewSearchInvoked = true;
-                SearchSongList = songs;
-                SearchFilter = search;
-            };
+          
         }
 
-        public MenuItem MenuItem { get; set; }
         public ObservableCollection<Song> AddToPlayListSong { get; set; }
-        public ObservableCollection<Song> SearchSongList { get; set; }
         public Song SongToPlay { get; set; }
-
-        public string SearchFilter;
 
         public bool AddToPlayListInvoked = false;
         public bool PlaySongInvoked = false;

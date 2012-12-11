@@ -51,21 +51,25 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ViewModels\AlbumDetailViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\ArtistDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SubViewModels\UploadTaskShould.cs" />
+    <Compile Include="Client\ViewModels\SubViewModels\TaskShould.cs" />
+    <Compile Include="Client\ViewModels\TaskManagerViewModelShould.cs" />
     <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\SearchViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\UploadSongsViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\SearchViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\UploadSongsViewModelShould.cs" />
     <Compile Include="Client\ViewModels\ContentBodyViewModelShould.cs" />
     <Compile Include="Client\ViewModels\PlayerViewModelShould.cs" />
     <Compile Include="Client\ViewModels\PlayListViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\SongListViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\SongListViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\MenuItemShould.cs" />
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />
     <Compile Include="Domain\Model\SongShould.cs" />
+    <Compile Include="Helper\PlayerEventCatcher.cs" />
     <Compile Include="Helper\Create.cs" />
-    <Compile Include="Helper\EventCatcher.cs" />
+    <Compile Include="Helper\ContentBodyEventCatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepositoryTests.cs" />
     <Compile Include="Repository\RepositoryShould.cs" />

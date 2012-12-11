@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Observers\ContentBodyObserver.cs" />
+    <Compile Include="Observers\TaskObserver.cs" />
     <Compile Include="Observers\PlayerObserver.cs" />
     <Compile Include="Service References\Service.Proxy\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +98,9 @@
     <Compile Include="ViewModels\CustomViewModels\AlbumListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
+    <Compile Include="ViewModels\SubViewModels\UploadTask.cs" />
+    <Compile Include="ViewModels\SubViewModels\Task.cs" />
+    <Compile Include="ViewModels\TaskManagerViewModel.cs" />
     <Compile Include="Views\BodyViews\ArtistDetailView.xaml.cs">
       <DependentUpon>ArtistDetailView.xaml</DependentUpon>
     </Compile>

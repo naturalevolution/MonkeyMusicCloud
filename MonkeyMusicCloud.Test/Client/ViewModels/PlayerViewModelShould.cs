@@ -10,8 +10,6 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     [TestClass]
     public class PlayerViewModelShould : ViewModelsBaseTest
     {
-
-        //TODO AFAIRE 
         [TestMethod]
         public void CallMusicPlayerPlayWhenAPlaySongEventIsCatched()
         {
@@ -70,7 +68,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void RaiseNewSongFinishedEventWhenASongIsFinishedAndCleanAllValue()
         {
-            EventCatcher catcher = new EventCatcher();
+            PlayerEventCatcher catcher = new PlayerEventCatcher();
             PlayerViewModel viewModel = new PlayerViewModel
                                             {
                                                 CurrentSong = Create.Song(),

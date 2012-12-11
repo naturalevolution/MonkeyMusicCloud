@@ -36,7 +36,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void ClearPlayListAndRaiseStopEvent()
         {
-            EventCatcher eventCatcher = new EventCatcher();
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
             Song song1 = Create.Song();
             ViewModel.PlayerState = State.Play;
             ViewModel.SongList = new ObservableCollection<Song>(){song1};
@@ -65,7 +65,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void RaiseNewPlayDemandEvent()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 Song song = Create.Song();
                 ViewModel.SongList = new ObservableCollection<Song> { song };
 
@@ -79,7 +79,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNotRaiseTheEventIfTheListIsEmpty()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
                 ViewModel.PlaySongCommand.Execute(null);
 
@@ -92,7 +92,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> { song1, song2 };
 
                 ViewModel.PlaySongCommand.Execute(null);
@@ -122,7 +122,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void RaisePauseDemandEvent()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.PlayerState = State.Play;
 
                 ViewModel.PauseSongCommand.Execute(null);
@@ -134,7 +134,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNothingOnPauseCommandIfPlayerIsNotPlaying()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song>();
 
                 ViewModel.PlayerState = State.Pause;
@@ -153,7 +153,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void RaiseResumeDemandEvent()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song>();
                 ViewModel.PlayerState = State.Pause;
 
@@ -166,7 +166,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNothingOnResumeCommandIfPlayerIsNotOnPause()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song>();
 
                 ViewModel.PlayerState = State.Play;
@@ -191,7 +191,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 PlayListViewModel viewModel = new PlayListViewModel
                 {
                     SongList = new ObservableCollection<Song> { song1, song2 },
@@ -208,7 +208,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNothingIfThereIsNoActualSongOnPreviousSongCommand()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<Song>() };
 
                 viewModel.PreviousSongCommand.Execute(null);
@@ -219,7 +219,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNothingIfThereIsNoActualSongOnSongFinished()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
                 PlayerObserver.NotifyCurrentSongFinished();
 
@@ -231,7 +231,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
                 ViewModel.ActualPlayedSong = song1;
 
@@ -249,7 +249,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
                 ViewModel.ActualPlayedSong = song1;
 
@@ -265,7 +265,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             {
                 Song song1 = Create.Song();
                 Song song2 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1, song2};
                 ViewModel.ActualPlayedSong = song1;
 
@@ -279,7 +279,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             [TestMethod]
             public void DoNothingIfThereIsNoActualSongOnNextSongCommand()
             {
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song>();
 
                 ViewModel.NextSongCommand.Execute(null);
@@ -291,7 +291,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             public void DoNothingIfThereIsTheEndOfPlayListOnNextSongDemand()
             {
                 Song song1 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1};
                 ViewModel.ActualPlayedSong = song1;
 
@@ -305,7 +305,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             public void ClearPlayerIfThereIsTheEndOfPlayListOnSongFinished()
             {
                 Song song1 = Create.Song();
-                EventCatcher eventCatcher = new EventCatcher();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
                 ViewModel.SongList = new ObservableCollection<Song> {song1};
                 ViewModel.ActualPlayedSong = song1;
                 ViewModel.PlayerState = State.Play;

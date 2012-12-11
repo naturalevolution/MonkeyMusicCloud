@@ -14,7 +14,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void CallServiceAndRaiseNewSearchEventWithFilter()
         {
             const string filter = "filter";
-            EventCatcher catcher = new EventCatcher();
+            ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
             Service.Setup(s => s.SearchSongs(filter)).Returns(songs);
             SearchViewModel viewModel = new SearchViewModel();

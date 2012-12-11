@@ -20,7 +20,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void RaiseChangeContentViewEventWhenOpenMenuItemDemand()
         {
             MenuViewModel viewModel = new MenuViewModel();
-            EventCatcher catcher = new EventCatcher();
+            ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
             MenuItem item = new MenuItem();
 
             viewModel.OpenItemCommand.Execute(item);

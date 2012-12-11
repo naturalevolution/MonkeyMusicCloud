@@ -33,7 +33,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             const string album = "artist";
             ArtistDetailViewModel viewModel = new ArtistDetailViewModel();
-            EventCatcher catcher = new EventCatcher();
+            ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
 
             viewModel.OpenAlbumCommand.Execute(album);
 

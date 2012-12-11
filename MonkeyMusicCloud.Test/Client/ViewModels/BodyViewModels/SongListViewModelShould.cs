@@ -13,7 +13,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void RaiseAddToPlayListEvent()
         {
             Song expectedSong = Create.Song();
-            EventCatcher eventCatcher = new EventCatcher();
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
             SongListViewModel viewModel = new SongListViewModel();
 
             viewModel.AddOneSongToPlayListCommand.Execute(expectedSong);
@@ -31,7 +31,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Song expectedSong2 = Create.Song();
             ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>(){expectedSong1, expectedSong2};
 
-            EventCatcher eventCatcher = new EventCatcher();
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
             SongListViewModel viewModel = new SongListViewModel();
 
             viewModel.AddSongsToPlayListCommand.Execute(expectedSongs);
@@ -45,7 +45,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void DoNothingIfParameterIsNull()
         {
-            EventCatcher eventCatcher = new EventCatcher();
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
             SongListViewModel viewModel = new SongListViewModel();
 
             viewModel.AddSongsToPlayListCommand.Execute(null);
@@ -59,7 +59,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             const string album = "album";
             SongListViewModel viewModel = new SongListViewModel();
-            EventCatcher catcher = new EventCatcher();
+            ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
 
             viewModel.OpenAlbumCommand.Execute(album);
             
@@ -73,7 +73,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             const string artist = "artist";
             SongListViewModel viewModel = new SongListViewModel();
-            EventCatcher catcher = new EventCatcher();
+            ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
 
             viewModel.OpenArtistCommand.Execute(artist);
             
