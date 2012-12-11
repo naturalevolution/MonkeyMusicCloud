@@ -1,20 +1,24 @@
-﻿using System.Threading;
+﻿using System.ComponentModel;
+using System.Threading;
 
 namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 {
     public abstract class Task : ViewModelBase
     {
-        public Thread Thread { get; set; }
+        public BackgroundWorker Worker { get; set; }
+
         public Task()
         {
-            Thread = new Thread(DoAction);
+            Worker = new BackgroundWorker();
+            Worker.DoWork += delegate { DoAction(); };
+            Worker.RunWorkerCompleted += delegate { ActionFinished.Invoke(); };
         }
 
         public virtual void DoActionInNewThread()
         {
-            Thread.Start();
+            Worker.RunWorkerAsync();
         }
-
+        
         protected abstract void DoAction();
 
         public event ActionFinishedHandler ActionFinished;

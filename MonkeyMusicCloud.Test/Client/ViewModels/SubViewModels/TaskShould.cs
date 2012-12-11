@@ -14,7 +14,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
 
             fakeTask.DoActionInNewThread();
 
-            while (fakeTask.Thread.IsAlive){}
+            while (fakeTask.Worker.IsBusy){}
             Assert.IsTrue(fakeTask.doActionCalled);
         }
     }

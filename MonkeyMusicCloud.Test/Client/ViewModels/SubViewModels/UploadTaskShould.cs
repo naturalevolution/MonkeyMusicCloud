@@ -35,7 +35,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
 
             UploadTask task = new UploadTask(songToAdd);
             task.DoActionInNewThread();
-            while (task.Thread.IsAlive){}
+            while (task.Worker.IsBusy){}
 
             Service.Verify(s => s.AddASong(songToAdd.Song, songToAdd.MediaFile), Times.Once());
         }
