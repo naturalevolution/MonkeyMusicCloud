@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,20 +9,31 @@ using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
 using Moq;
 
-namespace MonkeyMusicCloud.Test.Client.ViewModels
+namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
 {
     [TestClass]
     public class UploadSongsViewModelShould : ViewModelsBaseTest
     {
+        private TaskEventCatcher TaskEventCatcher { get; set; }
+
+        [TestInitialize]
+        public override void Initialize()
+        {
+            base.Initialize();
+            TaskEventCatcher = new TaskEventCatcher();
+        }
+
         [TestMethod]
-        public void CallServiceWhenAddSongMethodIsHandled()
+        public void AddTaskEventWhenAddSongMethodIsHandled()
         {
             MediaFile mediaFile1 = Create.MediaFile();
             MediaFile mediaFile2 = Create.MediaFile();
             MediaFile mediaFile3 = Create.MediaFile();
-            SongToAdd songToAdd1 = new SongToAdd() { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile1 };
-            SongToAdd songToAdd2 = new SongToAdd() { IsSelected = false, Song = Create.Song(), MediaFile = mediaFile2 };
-            SongToAdd songToAdd3 = new SongToAdd() { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile3 };
+            
+
+            SongToAdd songToAdd1 = new SongToAdd { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile1 };
+            SongToAdd songToAdd2 = new SongToAdd { IsSelected = false, Song = Create.Song(), MediaFile = mediaFile2 };
+            SongToAdd songToAdd3 = new SongToAdd { IsSelected = true, Song = Create.Song(), MediaFile = mediaFile3 };
             
 
 
@@ -37,9 +49,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(songToAdd1.Song, mediaFile1), Times.Once());
-            Service.Verify(s => s.AddASong(songToAdd2.Song, mediaFile2), Times.Never());
-            Service.Verify(s => s.AddASong(songToAdd3.Song, mediaFile3), Times.Once());
+            Assert.IsTrue(TaskEventCatcher.AddTaskInvoked);
+            Assert.AreEqual(2, TaskEventCatcher.TaskListToAdd.Count);
+            List<Song> expectedSongsToAdd = TaskEventCatcher.TaskListToAdd.Cast<UploadTask>().Select(ut => ut.Song).ToList();
+            CollectionAssert.Contains(expectedSongsToAdd, songToAdd1.Song);
+            CollectionAssert.DoesNotContain(expectedSongsToAdd, songToAdd2.Song);
+            CollectionAssert.Contains(expectedSongsToAdd, songToAdd3.Song);
+            Assert.AreEqual(2, TaskEventCatcher.AddTaskTimes);
         }
 
         [TestMethod]
@@ -50,7 +66,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
+
+
+            Assert.IsFalse(TaskEventCatcher.AddTaskInvoked);
         }
 
         [TestMethod]
@@ -60,7 +78,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
+            Assert.IsFalse(TaskEventCatcher.AddTaskInvoked);
         }
 
         [TestMethod]
@@ -71,7 +89,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             viewModel.AddSongCommand.Execute(null);
 
             StreamHelper.Verify(sh => sh.ReadToEnd(It.IsAny<string>()), Times.Never());
-            Service.Verify(s => s.AddASong(It.IsAny<Song>(), It.IsAny<MediaFile>()), Times.Never());
+            Assert.IsFalse(TaskEventCatcher.AddTaskInvoked);
         }
 
         /// <summary>

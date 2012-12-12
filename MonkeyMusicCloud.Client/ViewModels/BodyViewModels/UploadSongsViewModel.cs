@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using MicroMvvm;
+using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
@@ -54,7 +55,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             {
                 foreach (SongToAdd songToAdd in SongsToAdd.Where(s => s.IsSelected))
                 {
-                    Service.AddASong(songToAdd.Song, songToAdd.MediaFile);
+                    TaskObserver.NotifyAddTask(new UploadTask(songToAdd.Song, songToAdd.MediaFile));
                 }
             }
         }

@@ -13,9 +13,10 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
         public void InstantiateCorrectly()
         {
             SongToAdd songToAdd = new SongToAdd();
-            UploadTask uploadTask = new UploadTask(songToAdd);
+            UploadTask uploadTask = new UploadTask(songToAdd.Song, songToAdd.MediaFile);
 
-            Assert.AreEqual(songToAdd, uploadTask.SongToAdd);
+            Assert.AreEqual(songToAdd.Song, uploadTask.Song);
+            Assert.AreEqual(songToAdd.MediaFile, uploadTask.MediaFile);
         }
 
 
@@ -33,9 +34,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
                     Song = song
                 };
 
-            UploadTask task = new UploadTask(songToAdd);
-            task.DoActionInNewThread();
-            while (task.Worker.IsBusy){}
+            UploadTask uploadTask = new UploadTask(songToAdd.Song, songToAdd.MediaFile);
+            uploadTask.DoActionInNewThread();
+            while (uploadTask.Worker.IsBusy) { }
 
             Service.Verify(s => s.AddASong(songToAdd.Song, songToAdd.MediaFile), Times.Once());
         }

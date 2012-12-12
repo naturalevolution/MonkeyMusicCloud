@@ -1,19 +1,22 @@
 ﻿using System.Threading;
+using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 {
     public class UploadTask : Task
     {
-        public SongToAdd SongToAdd { get; set; }
+        public Song Song { get; set; }
+        public MediaFile MediaFile { get; set; }
 
-        public UploadTask(SongToAdd songToAdd)
+        public UploadTask(Song song, MediaFile mediaFile)
         {
-            SongToAdd = songToAdd;
+            Song = song;
+            MediaFile = mediaFile;
         }
 
         protected override void DoAction()
         {
-            Service.AddASong(SongToAdd.Song, SongToAdd.MediaFile);
+            Service.AddASong(Song, MediaFile);
         }
     }
 }

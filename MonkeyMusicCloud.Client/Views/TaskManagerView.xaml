@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.TaskManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="200">
+    <UserControl.DataContext>
+        <viewModels:TaskManagerViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <ListView VerticalAlignment="Top" 
+                  Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged}"
+                  HorizontalAlignment="Stretch" >
+            <ListView.View>
+                <GridView ColumnHeaderToolTip="Tasks">
+                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding }" />
+                    <GridViewColumn Header="Status" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

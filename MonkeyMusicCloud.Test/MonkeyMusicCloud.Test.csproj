@@ -67,6 +67,7 @@
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />
     <Compile Include="Domain\Model\SongShould.cs" />
+    <Compile Include="Helper\TaskEventCatcher.cs" />
     <Compile Include="Helper\PlayerEventCatcher.cs" />
     <Compile Include="Helper\Create.cs" />
     <Compile Include="Helper\ContentBodyEventCatcher.cs" />
