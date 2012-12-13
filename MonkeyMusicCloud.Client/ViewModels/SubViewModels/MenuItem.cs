@@ -6,5 +6,6 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
     {
         public IBodyView View{ get; set; }
         public string Label { get; set; }
+        public string ImagePath { get; set; }
     }
 }

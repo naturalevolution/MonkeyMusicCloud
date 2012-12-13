@@ -13,15 +13,18 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
         {
             Mock<IBodyView> view = new Mock<IBodyView>();
             const string label = "label";
+            const string imagePath = "imagePath";
 
             MenuItem item = new MenuItem
                                 {
                                     Label = label,
-                                    View = view.Object
+                                    View = view.Object,
+                                    ImagePath = imagePath
                                 };
 
             Assert.AreEqual(label, item.Label);
             Assert.AreEqual(view.Object, item.View);
+            Assert.AreEqual(imagePath, item.ImagePath);
         }
     }
 }

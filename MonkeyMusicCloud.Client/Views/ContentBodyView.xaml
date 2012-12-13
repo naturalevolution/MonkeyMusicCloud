@@ -14,8 +14,9 @@
         <TabControl ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <Image Source="{Binding ImagePath}"  Width="15" Height="15"/>
+                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
                         <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, 
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Views:ContentBodyView}}}" 
                                 CommandParameter="{Binding}" Width="20" Height="20">           

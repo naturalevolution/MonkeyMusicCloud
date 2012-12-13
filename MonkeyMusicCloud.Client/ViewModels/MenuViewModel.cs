@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
@@ -16,7 +17,12 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             Items = new ObservableCollection<MenuItem>()
                         {
-                            new MenuItem {Label = MusicResource.UploadMenu, View = new AddSongsView()}
+                            new MenuItem
+                                {
+                                    Label = MusicResource.UploadMenu, 
+                                    View = new AddSongsView(), 
+                                    ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Upload.png"
+                                }
                         };
         }
 

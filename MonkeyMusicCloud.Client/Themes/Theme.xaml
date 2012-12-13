@@ -31,11 +31,6 @@
     <SolidColorBrush x:Key="NormalBorderBrush" Color="#FF333333" />
     <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}" />
     <SolidColorBrush x:Key="GlyphBrush" Color="#FFD1D1D1" />
-    <DataTemplate x:Key="UserDataTemplate">
-        <StackPanel Orientation="Horizontal">
-            <Label HorizontalAlignment="Center" Content="{Binding Path=Label}" />
-        </StackPanel>
-    </DataTemplate>
     <LinearGradientBrush x:Key="PressedBrush" EndPoint="0.5,0.971" StartPoint="0.5,0.042">
         <GradientStop Color="#4C000000" Offset="0" />
         <GradientStop Color="#26FFFFFF" Offset="1" />
@@ -1324,7 +1319,7 @@
     </ControlTemplate>
 
 
-    <Style TargetType="{x:Type Image}"  x:Key="ImageClickable">
+    <Style TargetType="{x:Type Image}" x:Key="ImageClickable">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="20" />
         <Setter Property="Height" Value="20" />
