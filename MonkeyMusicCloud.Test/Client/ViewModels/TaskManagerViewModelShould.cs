@@ -12,7 +12,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     {
 
         [TestMethod]
-        public void CreatedCorrectly()
+        public void InitializeCorrectly()
         {
             TaskManagerViewModel viewModel = new TaskManagerViewModel();
 

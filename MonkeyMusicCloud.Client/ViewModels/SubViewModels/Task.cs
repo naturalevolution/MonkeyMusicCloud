@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Threading;
 
 namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 {
     public abstract class Task : ViewModelBase
     {
-        public BackgroundWorker Worker { get; set; }
-        public TaskState State { get; set; }
+        private TaskState state;
 
         public Task()
         {
@@ -14,7 +12,6 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
             Worker.DoWork += delegate { DoAction(); };
             Worker.RunWorkerCompleted += delegate
             {
-                State = TaskState.Finished;
                 if (ActionFinished != null)
                 {
                     ActionFinished.Invoke();    
@@ -37,15 +34,23 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
             ActionFinishedHandler handler = ActionFinished;
             if (handler != null) handler();
         }
+        public BackgroundWorker Worker { get; set; }
+        public TaskState State
+        {
+            get { return state; }
+            set { 
+                state = value;
+                RaisePropertyChanged("State");
+            }
+        }
 
-
+        public abstract string StringDescription { get; }
     }
 
     public delegate void ActionFinishedHandler();
     public enum TaskState
     {
         Waiting,
-        Running,
-        Finished
+        Running
     }
 }

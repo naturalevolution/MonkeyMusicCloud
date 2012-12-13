@@ -16,11 +16,8 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             Items = new ObservableCollection<MenuItem>()
                         {
-                            new MenuItem {Label = MusicResource.MenuAddMusics, View = new AddSongsView()}
+                            new MenuItem {Label = MusicResource.UploadMenu, View = new AddSongsView()}
                         };
-
-
-
         }
 
         private ObservableCollection<MenuItem> items;

@@ -9,6 +9,7 @@ using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Client.Views.BodyViews;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Resource;
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
@@ -38,7 +39,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         private void OpenArtistExecute(string artist)
         {
-            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = artist, View = new ArtistDetailView(artist) });
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = string.Format(MusicResource.ArtistTab, artist), View = new ArtistDetailView(artist) });
         }
 
         public ICommand AddSongsToPlayListCommand
@@ -61,7 +62,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         private void OpenAlbumExecute(string album)
         {
-            ContentBodyObserver.NotifyChangeContentView(new MenuItem {Label = album, View = new AlbumDetailView(album)});
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = string.Format(MusicResource.AlbumTab, album), View = new AlbumDetailView(album) });
         }
         
         private void AddOneSongToPlayListExecute(Song song)
@@ -69,6 +70,5 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
             PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song> { song });
         }
-
     }
 }

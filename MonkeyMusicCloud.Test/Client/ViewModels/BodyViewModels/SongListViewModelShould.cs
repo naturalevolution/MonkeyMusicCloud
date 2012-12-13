@@ -2,9 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Resource;
 using MonkeyMusicCloud.Test.Helper;
 
-namespace MonkeyMusicCloud.Test.Client.ViewModels
+namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
 {
     [TestClass]
     public class SongListViewModelShould : ViewModelsBaseTest
@@ -53,7 +54,6 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             Assert.IsFalse(eventCatcher.AddToPlayListInvoked);
         }
 
-        //TODO : Tester l'appel à la vue ??
         [TestMethod]
         public void RaiseOpenNewAlbumView()
         {
@@ -64,10 +64,9 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             viewModel.OpenAlbumCommand.Execute(album);
             
             Assert.IsTrue(catcher.ChangeContentViewInvoked);
-            Assert.AreEqual(album, catcher.MenuItem.Label);
+            Assert.AreEqual(string.Format(MusicResource.AlbumTab, album), catcher.MenuItem.Label);
         }
 
-        //TODO : Tester l'appel à la vue ??
         [TestMethod]
         public void RaiseOpenNewArtistView()
         {
@@ -78,7 +77,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             viewModel.OpenArtistCommand.Execute(artist);
             
             Assert.IsTrue(catcher.ChangeContentViewInvoked);
-            Assert.AreEqual(artist, catcher.MenuItem.Label);
+            Assert.AreEqual(string.Format(MusicResource.ArtistTab, artist), catcher.MenuItem.Label);
         }
     }
 }

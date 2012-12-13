@@ -16,7 +16,13 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 
         protected override void DoAction()
         {
+            Thread.Sleep(1000);
             Service.AddASong(Song, MediaFile);
+        }
+
+        public override string StringDescription
+        {
+            get { return string.Format("Upload de la musique :{0}", Song.Title); }
         }
     }
 }

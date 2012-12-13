@@ -1,9 +1,11 @@
 ﻿<UserControl x:Class="MonkeyMusicCloud.Client.Views.BodyViews.AddSongsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls">
+             xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
+             xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource">
     <UserControl.DataContext>
-        <BodyViewModels:UploadSongsViewModel />
+        <bodyViewModels:UploadSongsViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,15 +18,15 @@
         </Grid.ColumnDefinitions>
         
         <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0"
-                   HorizontalAlignment="Stretch" Behaviours:GridViewColumnResize.Enabled="True">
+                   HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
-                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" Behaviours:GridViewColumnResize.Width="2*">
-                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="Parcourir..." />
+                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="{x:Static resource:MusicResource.SongToolTip}">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" behaviours:GridViewColumnResize.Width="2*">
+                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="{x:Static resource:MusicResource.BrowseHeader}" />
                     </GridViewColumn>
-                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Path=Song.Title}" Behaviours:GridViewColumnResize.Width="2*" />
-                    <GridViewColumn Header="Album" DisplayMemberBinding="{Binding Path=Song.Album}" Behaviours:GridViewColumnResize.Width="1*" />
-                    <GridViewColumn Header="Artist" DisplayMemberBinding="{Binding Path=Song.Artist}" Behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Song.Title}" behaviours:GridViewColumnResize.Width="2*" />
+                    <GridViewColumn Header="{x:Static resource:MusicResource.AlbumHeader}" DisplayMemberBinding="{Binding Path=Song.Album}" behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn Header="{x:Static resource:MusicResource.ArtistHeader}" DisplayMemberBinding="{Binding Path=Song.Artist}" behaviours:GridViewColumnResize.Width="1*" />
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -35,7 +37,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="1" Grid.Row="1" Margin="2" Content="Upload songs" Command="{Binding AddSongCommand}" />
-        <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Name="lblRootPath" Content="{Binding RootPath, Mode=TwoWay}" Visibility="Collapsed" />
+        <Button Grid.Column="1" Grid.Row="1" Margin="2" Content="{x:Static resource:MusicResource.UploadButton}" Command="{Binding AddSongCommand}" />
+        <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Name="LblRootPath" Content="{Binding RootPath, Mode=TwoWay}" Visibility="Collapsed" />
     </Grid>
 </UserControl>

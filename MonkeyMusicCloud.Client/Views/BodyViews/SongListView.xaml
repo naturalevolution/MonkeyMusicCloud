@@ -3,25 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:BodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
-             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" mc:Ignorable="d" d:DesignWidth="800">
+             xmlns:bodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
+             xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
+             xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             xmlns:const="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource" mc:Ignorable="d" d:DesignWidth="800">
     <UserControl.DataContext>
-        <BodyViewModels:SongListViewModel />
+        <bodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid>
-        <ListView Name="lvSongList" VerticalAlignment="Top" 
+        <ListView Name="LvSongList" VerticalAlignment="Top" 
                   Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" Behaviours:GridViewColumnResize.Enabled="True">
+                  HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
-                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}" Behaviours:GridViewColumnResize.Width="2*"   />
-                    <GridViewColumn Header="Album" Behaviours:GridViewColumnResize.Width="2*" >
+                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="{DynamicResource MusicResource.SongToolTip}">
+                    <GridViewColumn Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" behaviours:GridViewColumnResize.Width="2*"   />
+                    <GridViewColumn Header="{x:Static const:MusicResource.AlbumHeader}" behaviours:GridViewColumnResize.Width="2*" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                     <Button Command="{Binding  DataContext.OpenAlbumCommand,
                                                                                   RelativeSource={RelativeSource FindAncestor,
-                                                                                                                 AncestorType={x:Type BodyViews:SongListView}}}"                                        
+                                                                                                                 AncestorType={x:Type bodyViews:SongListView}}}"                                        
                                                                        CommandParameter="{Binding Path=Album}">
                                         <Button.Template>
                                             <ControlTemplate>
@@ -37,12 +38,12 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Artist" Behaviours:GridViewColumnResize.Width="2*" >
+                    <GridViewColumn Header="{x:Static const:MusicResource.ArtistHeader}" behaviours:GridViewColumnResize.Width="2*" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Command="{Binding  DataContext.OpenArtistCommand,
                                                                                   RelativeSource={RelativeSource FindAncestor,
-                                                                                                                 AncestorType={x:Type BodyViews:SongListView}}}"                                        
+                                                                                                                 AncestorType={x:Type bodyViews:SongListView}}}"                                        
                                                                        CommandParameter="{Binding Path=Artist}">
                                     <Button.Template>
                                         <ControlTemplate>
@@ -58,14 +59,14 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Behaviours:GridViewColumnResize.Width="1*"  >
+                    <GridViewColumn behaviours:GridViewColumnResize.Width="1*"  >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
-                                                                                              AncestorType={x:Type BodyViews:SongListView}}}"
-                                              CommandParameter="{Binding ElementName=lvSongList, Path=ItemsSource}" Content="Play All" />                            
+                                                                                              AncestorType={x:Type bodyViews:SongListView}}}"
+                                              CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}" Content="{x:Static const:MusicResource.PlayAllHeader}" />                            
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
-                                                                                                                        AncestorType={x:Type BodyViews:SongListView}}}"  
+                                                                                                                        AncestorType={x:Type bodyViews:SongListView}}}"  
                                                                CommandParameter="{Binding}">
                                     <Image Source="../../Themes/Images/add.png" />
                                 </Button>

@@ -5,22 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" 
              xmlns:Views="clr-namespace:MonkeyMusicCloud.Client.Views" 
-             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls" 
+             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="300">
+             d:DesignHeight="350" d:DesignWidth="300">
     <UserControl.DataContext>
         <ViewModels:PlayListViewModel />
     </UserControl.DataContext>
-    <Grid HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center" Width="300">
         <Grid.Resources>
             <Style TargetType="StackPanel">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"></RowDefinition>
-            <RowDefinition Height="52"></RowDefinition>
-            <RowDefinition Height="600"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding PreviousSongCommand}">
@@ -90,13 +91,12 @@
         </StackPanel>
         <Views:PlayerView  Grid.Row="1" />
         <ListView Grid.Row="2" Name="lvSongList" 
-                  VerticalAlignment="Top" Height="600"
-                  ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
+                  VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}"
-                  Behaviours:GridViewColumnResize.Enabled="True">
+                  Behaviours:GridViewColumnResize.Enabled="True" Height="250">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="Titre" DisplayMemberBinding="{Binding Title}"  Behaviours:GridViewColumnResize.Width="5*" />
+                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}"  Behaviours:GridViewColumnResize.Width="5*" />
                     <GridViewColumn Behaviours:GridViewColumnResize.Width="1*">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>

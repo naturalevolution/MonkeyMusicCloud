@@ -38,6 +38,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
             uploadTask.DoActionInNewThread();
             while (uploadTask.Worker.IsBusy) { }
 
+            Assert.AreEqual(string.Format("Upload de la musique :{0}", songToAdd.Song.Title), uploadTask.StringDescription);
             Service.Verify(s => s.AddASong(songToAdd.Song, songToAdd.MediaFile), Times.Once());
         }
     }

@@ -90,6 +90,10 @@
       <Project>{43D4CCD6-03EF-4564-A820-B847EA9F7036}</Project>
       <Name>MonkeyMusicCloud.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MonkeyMusicCloud.Resource\MonkeyMusicCloud.Resource.csproj">
+      <Project>{C2878D75-28A9-45B5-AF39-D737AA2C0743}</Project>
+      <Name>MonkeyMusicCloud.Resource</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonkeyMusicCloud.Service\MonkeyMusicCloud.Service.csproj">
       <Project>{1B7455CF-E77F-4170-8E7A-541D980DF6D8}</Project>
       <Name>MonkeyMusicCloud.Service</Name>

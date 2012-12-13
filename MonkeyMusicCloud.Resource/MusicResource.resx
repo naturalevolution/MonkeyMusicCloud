@@ -117,10 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MenuAddMusics" xml:space="preserve">
+  <data name="AlbumHeader" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="AlbumTab" xml:space="preserve">
+    <value>Album : {0}</value>
+  </data>
+  <data name="ArtistHeader" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="ArtistTab" xml:space="preserve">
+    <value>Artist : {0}</value>
+  </data>
+  <data name="BrowseHeader" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="PathHeader" xml:space="preserve">
+    <value>Path</value>
+  </data>
+  <data name="PlayAllHeader" xml:space="preserve">
+    <value>Play all !</value>
+  </data>
+  <data name="SearchTab" xml:space="preserve">
+    <value>Search : {0}</value>
+  </data>
+  <data name="SongToolTip" xml:space="preserve">
+    <value>Songs</value>
+  </data>
+  <data name="StateHeader" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="TaskHeader" xml:space="preserve">
+    <value>Task</value>
+  </data>
+  <data name="TitleHeader" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="UploadButton" xml:space="preserve">
     <value>Upload</value>
   </data>
-  <data name="MenuSongList" xml:space="preserve">
-    <value>Search</value>
+  <data name="UploadMenu" xml:space="preserve">
+    <value>Upload To Server</value>
   </data>
 </root>

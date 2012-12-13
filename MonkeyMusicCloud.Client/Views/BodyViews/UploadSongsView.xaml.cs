@@ -1,11 +1,5 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
-using MicroMvvm;
-using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Resource;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace MonkeyMusicCloud.Client.Views.BodyViews
@@ -26,7 +20,7 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             DialogResult result = folderDialog.ShowDialog();
             if(result == DialogResult.OK)
             {
-                lblRootPath.Content = folderDialog.SelectedPath;
+                LblRootPath.Content = folderDialog.SelectedPath;
             }
         }
     }

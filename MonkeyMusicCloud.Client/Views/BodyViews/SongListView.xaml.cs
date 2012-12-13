@@ -19,7 +19,7 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
 
         private static void SongListPropertyChanged(DependencyObject dobj, DependencyPropertyChangedEventArgs e)
         {
-            ((SongListView) dobj).lvSongList.ItemsSource = (ObservableCollection<Song>) e.NewValue;
+            ((SongListView) dobj).LvSongList.ItemsSource = (ObservableCollection<Song>) e.NewValue;
         }
 
         private static bool SongListValidate(object Value)

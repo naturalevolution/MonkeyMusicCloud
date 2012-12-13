@@ -5,18 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="25" d:DesignWidth="200">
+             d:DesignHeight="250" d:DesignWidth="300">
     <UserControl.DataContext>
         <viewModels:TaskManagerViewModel />
     </UserControl.DataContext>
     <Grid>
         <ListView VerticalAlignment="Top" 
-                  Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" >
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Tasks">
-                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding }" />
-                    <GridViewColumn Header="Status" />
+                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding StringDescription}" />
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}"  />
                 </GridView>
             </ListView.View>
         </ListView>

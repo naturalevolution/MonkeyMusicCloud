@@ -9,13 +9,15 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="600" />
-            <RowDefinition Height="25" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="7*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <BodyViews:SearchView Grid.Column="0" Grid.Row="0" />
-        <Views:MenuView Grid.Column="0" Grid.Row="1 "/>
-        <Views:ContentBodyView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
-        <Views:PlayListView Grid.Column="2" Grid.RowSpan="2" />
+        <BodyViews:SearchView Grid.Column="0" Grid.Row="0" Padding="5" />
+        <Views:MenuView Grid.Column="0" Grid.Row="1" Padding="5" />
+        <Views:ContentBodyView Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Padding="5" />
+        <Views:PlayListView Grid.Column="2" Grid.RowSpan="2" Padding="5" />
+        <Views:TaskManagerView Grid.Column="2" Grid.Row="2" Padding="5" />
     </Grid>
 </Window>
