@@ -19,20 +19,15 @@
                         <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
                         <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, 
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Views:ContentBodyView}}}" 
-                                CommandParameter="{Binding}" Width="20" Height="20">           
+                                CommandParameter="{Binding}" Width="15" Height="15">           
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Source="../Themes/Images/close.png" >
-                                        <Image.Style>
-                                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ResourceKey=ImageClickable}" >
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="true" >
-                                                        <Setter Property="Source" Value="../Themes/Images/PlayerPause.png" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>                         
-                                    </Image>
+                                    <Image Name="ImageClose"  Source="../Themes/Images/close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
+                                    <ControlTemplate.Triggers>
+				                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/close_hover.png" />
+                                        </Trigger>
+			                        </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>

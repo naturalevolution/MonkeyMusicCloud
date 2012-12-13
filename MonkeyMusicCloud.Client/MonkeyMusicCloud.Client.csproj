@@ -326,6 +326,9 @@
   <ItemGroup>
     <Resource Include="Themes\Images\Upload.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\close_hover.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
