@@ -17,13 +17,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             ObservableCollection<string> expectedAlbums = new ObservableCollection<string>();
             ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
             ArtistDetailViewModel viewModel = new ArtistDetailViewModel();
-            Service.Setup(s => s.GetAlbumsByArtist(artist)).Returns(expectedAlbums);
-            Service.Setup(s => s.GetByArtist(artist)).Returns(expectedSongs);
+            MockService.Setup(s => s.GetAlbumsByArtist(artist)).Returns(expectedAlbums);
+            MockService.Setup(s => s.GetByArtist(artist)).Returns(expectedSongs);
 
             viewModel.Artist = artist;
 
-            Service.Verify(s => s.GetAlbumsByArtist(artist), Times.Once());
-            Service.Verify(s => s.GetByArtist(artist), Times.Once());
+            MockService.Verify(s => s.GetAlbumsByArtist(artist), Times.Once());
+            MockService.Verify(s => s.GetByArtist(artist), Times.Once());
             Assert.AreEqual(expectedAlbums, viewModel.AlbumList);
             Assert.AreEqual(expectedSongs, viewModel.SongList);
         }

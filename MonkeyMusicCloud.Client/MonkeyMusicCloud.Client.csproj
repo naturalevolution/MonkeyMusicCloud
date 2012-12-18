@@ -39,33 +39,15 @@
     <Reference Include="FluidKit">
       <HintPath>..\Solution Items\Librairies\FluidKit\FluidKit.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Solution Items\Librairies\Log4Net\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Common">
-      <HintPath>..\Solution Items\Librairies\PixelLab.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Core">
-      <HintPath>..\Solution Items\Librairies\PixelLab.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Wpf">
-      <HintPath>..\Solution Items\Librairies\PixelLab.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -89,8 +71,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\ImageSearchInstance.cs" />
     <Compile Include="Utilities\MusicPlayerInstance.cs" />
+    <Compile Include="Utilities\ImageSearchInstance.cs" />
     <Compile Include="Utilities\ServiceInstance.cs" />
     <Compile Include="Utilities\StreamInstance.cs" />
     <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
@@ -130,6 +112,7 @@
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomControls\Behaviours.cs" />
+    <Compile Include="Views\CustomControls\SliderWithDraggingEvents.cs" />
     <Compile Include="Views\CustomViews\AlbumListView.xaml.cs">
       <DependentUpon>AlbumListView.xaml</DependentUpon>
     </Compile>

@@ -31,32 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoogleSearchAPI.Net20">
-      <HintPath>..\Solution Items\Librairies\GoogleSearchImage\GoogleSearchAPI.Net20.dll</HintPath>
-    </Reference>
-    <Reference Include="Ilan.Google.API">
-      <HintPath>..\Solution Items\Librairies\GoogleSearchImage\Ilan.Google.API.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.QuartzTypeLib">
       <HintPath>..\Solution Items\Librairies\Interop.QuartzTypeLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="irrKlang.NET4">
-      <HintPath>..\Solution Items\Librairies\irrKlang.NET4.dll</HintPath>
-    </Reference>
-    <Reference Include="MusicBrainz">
-      <HintPath>..\Solution Items\Librairies\MusicBrainz\MusicBrainz.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -67,12 +48,6 @@
     <Compile Include="Interface\IStreamHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MonkeyMusicCloud.Domain\MonkeyMusicCloud.Domain.csproj">
-      <Project>{91F7E391-578F-4B91-9D7D-492582A824CD}</Project>
-      <Name>MonkeyMusicCloud.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

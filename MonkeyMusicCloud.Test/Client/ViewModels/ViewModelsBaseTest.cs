@@ -12,26 +12,26 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
     [TestClass]
     public class ViewModelsBaseTest
     {
-        protected Mock<IMusicService> Service { get; set; }
-        protected Mock<IImageSearch> ImageSearch { get; set; }
-        protected Mock<IStreamHelper> StreamHelper { get; set; }
-        protected Mock<IMusicPlayer> MusicPlayer { get; set; }
+        protected Mock<IMusicService> MockService { get; set; }
+        protected Mock<IImageSearch> MockImageSearch { get; set; }
+        protected Mock<IStreamHelper> MockStreamHelper { get; set; }
+        protected Mock<IMusicPlayer> MockMusicPlayer { get; set; }
 
         [TestInitialize]
         public virtual void Initialize()
         {
-            Service = new Mock<IMusicService>();
-            new ServiceInstance(Service.Object);
-            Service.Setup(s => s.GetMediaFileById(It.IsAny<Guid>())).Returns(Create.MediaFile);
+            MockService = new Mock<IMusicService>();
+            new ServiceInstance(MockService.Object);
+            MockService.Setup(s => s.GetMediaFileById(It.IsAny<Guid>())).Returns(Create.MediaFile);
 
-            StreamHelper = new Mock<IStreamHelper>();
-            new StreamInstance(StreamHelper.Object);
+            MockStreamHelper = new Mock<IStreamHelper>();
+            new StreamInstance(MockStreamHelper.Object);
 
-            MusicPlayer = new Mock<IMusicPlayer>();
-            new MusicPlayerInstance(MusicPlayer.Object);
+            MockMusicPlayer = new Mock<IMusicPlayer>();
+            new MusicPlayerInstance(MockMusicPlayer.Object);
 
-            ImageSearch = new Mock<IImageSearch>();
-            new ImageSearchInstance(ImageSearch.Object);
+            MockImageSearch = new Mock<IImageSearch>();
+            new ImageSearchInstance(MockImageSearch.Object);
         }
     }
 }

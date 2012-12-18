@@ -76,7 +76,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                             Song song = new Song{
                                            Album = mp3.Tag.Album,
                                            Title = mp3.Tag.Title,
-                                           Artist = mp3.Tag.FirstArtist
+                                           Artist = mp3.Tag.FirstAlbumArtist
                                        };
                             songs.Add(new SongToAdd {IsSelected = true, Song = song, Path = path, MediaFile = mediaFile});
                         }

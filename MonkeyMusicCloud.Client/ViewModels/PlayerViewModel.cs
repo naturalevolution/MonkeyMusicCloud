@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows.Input;
+using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Domain.Model;
@@ -26,6 +28,9 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private Song currentSong;
         private string elapsedTime;
         private string totalTime;
+
+
+        public bool SliderIsOnDrag { get; set; }
 
         public Song CurrentSong
         {
@@ -62,8 +67,14 @@ namespace MonkeyMusicCloud.Client.ViewModels
         public PlayerViewModel()
         {
             PlayerObserver.PlaySong += PlayNewSong;
-            PlayerObserver.PauseSong += MusicPlayer.Pause;
-            PlayerObserver.ResumeSong += MusicPlayer.Resume;
+            PlayerObserver.PauseSong += delegate
+                {
+                    MusicPlayer.Pause();
+                };
+            PlayerObserver.ResumeSong += delegate
+                {
+                    MusicPlayer.Resume();
+                };
             PlayerObserver.StopSong += delegate
                                            {
                                                ClearPlayer();
@@ -72,7 +83,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
             MusicPlayer.PurcentagePlayed += delegate(int elapsedTime, int totalTime)
                                                 {
-                                                    PurcentagePlayed = (elapsedTime*100/totalTime );
+                                                    PurcentagePlayed = !SliderIsOnDrag?(100 * elapsedTime / totalTime ) : PurcentagePlayed;
                                                     ElapsedTime = TimeSpan.FromSeconds(elapsedTime).ToString("T", DateTimeFormatInfo.InvariantInfo);
                                                     TotalTime = TimeSpan.FromSeconds(totalTime).ToString("T", DateTimeFormatInfo.InvariantInfo);
                                                 };
@@ -98,6 +109,24 @@ namespace MonkeyMusicCloud.Client.ViewModels
             MediaFile fileToPlay = Service.GetMediaFileById(song.MediaFileId);
             MusicPlayer.Play(fileToPlay.Id, fileToPlay.Content);
             CurrentSong = song;
+        }
+
+
+        public ICommand StartDragCommand { get { return new RelayCommand(() => { SliderIsOnDrag = true; }); } }
+
+        public ICommand StopDragCommand { get { return new RelayCommand<double>(StopDragExecute); } }
+
+        private void StopDragExecute(double value)
+        {
+            if (CurrentSong != null)
+            {
+                SliderIsOnDrag = false;
+                MusicPlayer.PlayAt(value);
+            }
+            else
+            {
+                PurcentagePlayed = 0;
+            }
         }
     }
 }

@@ -88,7 +88,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
 
             viewModel.AddSongCommand.Execute(null);
 
-            StreamHelper.Verify(sh => sh.ReadToEnd(It.IsAny<string>()), Times.Never());
+            MockStreamHelper.Verify(sh => sh.ReadToEnd(It.IsAny<string>()), Times.Never());
             Assert.IsFalse(TaskEventCatcher.AddTaskInvoked);
         }
 

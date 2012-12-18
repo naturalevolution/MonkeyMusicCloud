@@ -2,11 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:ViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" mc:Ignorable="d" d:DesignHeight="52" d:DesignWidth="300">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
+             xmlns:customControls="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             mc:Ignorable="d" d:DesignHeight="52" d:DesignWidth="300">
     <UserControl.DataContext>
-        <ViewModels:PlayerViewModel />        
+        <viewModels:PlayerViewModel />        
     </UserControl.DataContext>
-    <Grid>
+    <Grid AllowDrop="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
@@ -15,7 +18,17 @@
             <ColumnDefinition Width="175" />
             <ColumnDefinition Width="125" />            
         </Grid.ColumnDefinitions>
-        <Slider Grid.Row="0" Grid.ColumnSpan="2"  VerticalAlignment="Center" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding PurcentagePlayed}" />
+        <customControls:SliderWithDraggingEvents x:Name="Slider"
+            Grid.Row="0" Grid.ColumnSpan="2"  
+            VerticalAlignment="Center" Minimum="0" Maximum="100" 
+            IsSnapToTickEnabled="True" TickFrequency="1"  IsMoveToPointEnabled="True"
+            Value="{Binding PurcentagePlayed}"   ThumbDragStarted="Slider_OnThumbDragStarted"
+                                                 ThumbDragCompleted="Slider_OnThumbDragCompleted"
+                                                 MouseUp="Slider_OnMouseUp"
+                                                 MouseDown="Slider_OnMouseDown"
+                                                >
+        </customControls:SliderWithDraggingEvents>
+       
         <Label Grid.Row="1" Grid.Column="0" Content="{Binding CurrentSong.Title, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}" />
@@ -35,3 +48,4 @@
         </StackPanel>
     </Grid>
 </UserControl>
+

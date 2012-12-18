@@ -16,12 +16,12 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             const string filter = "filter";
             ContentBodyEventCatcher catcher = new ContentBodyEventCatcher();
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            Service.Setup(s => s.SearchSongs(filter)).Returns(songs);
+            MockService.Setup(s => s.SearchSongs(filter)).Returns(songs);
             SearchViewModel viewModel = new SearchViewModel();
 
             viewModel.SearchSongsListCommand.Execute(filter);
 
-            Service.Verify(s => s.SearchSongs(filter), Times.Once());
+            MockService.Verify(s => s.SearchSongs(filter), Times.Once());
             Assert.IsTrue(catcher.NewSearchInvoked);
             Assert.AreEqual(songs, catcher.SearchSongList);
             Assert.AreEqual(filter, catcher.SearchFilter);

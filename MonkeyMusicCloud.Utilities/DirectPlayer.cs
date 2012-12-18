@@ -43,6 +43,7 @@ namespace MonkeyMusicCloud.Utilities
 
             tmProgressionFlux = new Timer(1000) { Enabled = true }; 
             tmProgressionFlux.Elapsed += TmProgressionFluxTick;
+            TimerResume();
         }
         public void Stop()
         {
@@ -53,8 +54,10 @@ namespace MonkeyMusicCloud.Utilities
                 objMediaPosition.CurrentPosition = 0;
             }
             objFilterGraph = null;
-            tmProgressionFlux.Stop();
+            TimerPause();
         }
+
+
         private void TmProgressionFluxTick(object sender, EventArgs e)
         {
             int total = (int) objMediaPosition.Duration;
@@ -66,15 +69,39 @@ namespace MonkeyMusicCloud.Utilities
                 SongFinished.Invoke();
             }
         }
-        public event PurcentagePlayedHandler PurcentagePlayed;
-        public event SongFinishedHandler SongFinished;
+
         public void Pause()
         {
             objFilterGraph.Pause();
+            TimerPause();
         }
+
+        private void TimerPause()
+        {
+            tmProgressionFlux.Stop();
+        }
+
         public void Resume()
         {
             objFilterGraph.Run();
+            TimerResume();
         }
+
+        private void TimerResume()
+        {
+            tmProgressionFlux.Start();
+        }
+
+        public void PlayAt(double purcentage)
+        {
+            Pause();
+            int totalTime = (int) objMediaPosition.Duration;
+            objMediaPosition.CurrentPosition =  totalTime * purcentage / 100;
+            Resume();
+        }
+
+        public event PurcentagePlayedHandler PurcentagePlayed;
+        public event SongFinishedHandler SongFinished;
+        
     }
 }

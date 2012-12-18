@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" 
-             xmlns:Views="clr-namespace:MonkeyMusicCloud.Client.Views" 
-             xmlns:Behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" 
+             xmlns:views="clr-namespace:MonkeyMusicCloud.Client.Views" 
+             xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
              xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
-             mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="300">
+             mc:Ignorable="d" >
     <UserControl.DataContext>
-        <ViewModels:PlayListViewModel />
+        <viewModels:PlayListViewModel />
     </UserControl.DataContext>
     <Grid HorizontalAlignment="Center" Width="300">
         <Grid.Resources>
@@ -33,7 +32,7 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding PlayerState}">
                                 <DataTrigger.Value>
-                                    <ViewModels:State>Stop</ViewModels:State>
+                                    <viewModels:State>Stop</viewModels:State>
                                 </DataTrigger.Value>
                                 <Setter Property="Command" Value="{Binding PlaySongCommand }" />
                                 <Setter Property="CommandParameter" Value="{Binding ElementName=lvSongList, Path=SelectedItem }" />
@@ -41,14 +40,14 @@
 
                             <DataTrigger Binding="{Binding PlayerState}">
                                 <DataTrigger.Value>
-                                    <ViewModels:State>Pause</ViewModels:State>
+                                    <viewModels:State>Pause</viewModels:State>
                                 </DataTrigger.Value>
                                 <Setter Property="Command" Value="{Binding ResumeSongCommand }" />
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding PlayerState}">
                                 <DataTrigger.Value>
-                                    <ViewModels:State>Play</ViewModels:State>
+                                    <viewModels:State>Play</viewModels:State>
                                 </DataTrigger.Value>
                                 <Setter Property="Command" Value="{Binding PauseSongCommand }" />
                             </DataTrigger>
@@ -61,21 +60,21 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding PlayerState}">
                                     <DataTrigger.Value>
-                                        <ViewModels:State>Stop</ViewModels:State>
+                                        <viewModels:State>Stop</viewModels:State>
                                     </DataTrigger.Value>
                                     <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding PlayerState}">
                                     <DataTrigger.Value>
-                                        <ViewModels:State>Pause</ViewModels:State>
+                                        <viewModels:State>Pause</viewModels:State>
                                     </DataTrigger.Value>
                                     <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding PlayerState}">
                                     <DataTrigger.Value>
-                                        <ViewModels:State>Play</ViewModels:State>
+                                        <viewModels:State>Play</viewModels:State>
                                     </DataTrigger.Value>
                                     <Setter Property="Source" Value="../../Themes/Images/PlayerPause.png" />
                                 </DataTrigger>
@@ -89,19 +88,19 @@
                 <Image Width="38" Height="38" Source="../Themes/Images/PlayerSuivante.png"/>
             </Button>
         </StackPanel>
-        <Views:PlayerView  Grid.Row="1" />
+        <views:PlayerView  Grid.Row="1" />
         <ListView Grid.Row="2" Name="lvSongList" 
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}"
-                  Behaviours:GridViewColumnResize.Enabled="True" Height="250">
+                  behaviours:GridViewColumnResize.Enabled="True" MinHeight="250" MinWidth="200">
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}"  Behaviours:GridViewColumnResize.Width="5*" />
-                    <GridViewColumn Behaviours:GridViewColumnResize.Width="1*">
+                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}"  behaviours:GridViewColumnResize.Width="5*" />
+                    <GridViewColumn behaviours:GridViewColumnResize.Width="1*">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <Button Height="22" Command="{Binding DataContext.ClearPlayListCommand, 
-                                                                        RelativeSource={RelativeSource FindAncestor, AncestorType=Views:PlayListView}}">
+                                                                        RelativeSource={RelativeSource FindAncestor, AncestorType=views:PlayListView}}">
                                     <Button.Template>
                                         <ControlTemplate>
                                             <Image Source="../../Themes/Images/Trashcan.png" Style="{StaticResource ResourceKey=ImageClickable}" />

@@ -15,11 +15,11 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             const string album = "album";
             ObservableCollection<Song> expectedSongs = new ObservableCollection<Song>();
             AlbumDetailViewModel viewModel = new AlbumDetailViewModel();
-            Service.Setup(s => s.GetByAlbum(album)).Returns(expectedSongs);
+            MockService.Setup(s => s.GetByAlbum(album)).Returns(expectedSongs);
 
             viewModel.Album = album;
 
-            Service.Verify(s => s.GetByAlbum(album), Times.Once());
+            MockService.Verify(s => s.GetByAlbum(album), Times.Once());
             Assert.AreEqual(expectedSongs, viewModel.SongList);
         }
 
@@ -29,11 +29,11 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             const string album = "album";
             const string path = "path";
             AlbumDetailViewModel viewModel = new AlbumDetailViewModel();
-            ImageSearch.Setup(i => i.GetImagePath(album)).Returns(path);
+            MockImageSearch.Setup(i => i.GetImagePath(album)).Returns(path);
 
             viewModel.Album = album;
 
-            ImageSearch.Verify(i => i.GetImagePath(album), Times.Once());
+            MockImageSearch.Verify(i => i.GetImagePath(album), Times.Once());
             Assert.AreEqual(path, viewModel.AlbumImagePath );
         }
     }

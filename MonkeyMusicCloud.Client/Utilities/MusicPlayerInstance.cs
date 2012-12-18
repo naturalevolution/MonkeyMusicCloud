@@ -3,23 +3,23 @@ using MonkeyMusicCloud.Utilities.Interface;
 
 namespace MonkeyMusicCloud.Client.Utilities
 {
-    public class ImageSearchInstance
+    public class MusicPlayerInstance
     {
-        private static ImageSearchInstance instance;
-        public IImageSearch ImageSearch { get; set; }
+        private static MusicPlayerInstance instance;
+        public IMusicPlayer Player { get; set; }
         static readonly object InstanceLock = new object();
 
-        public ImageSearchInstance(IImageSearch musicService)
+        public MusicPlayerInstance(IMusicPlayer musicService)
         {
-            ImageSearch = musicService;
+            Player = musicService;
             instance = this;
         }
 
-        public static ImageSearchInstance GetInstance()
+        public static MusicPlayerInstance GetInstance()
         {
             lock (InstanceLock)
             {
-                return instance ?? (instance = new ImageSearchInstance(new ImageGoogleSearch()));
+                return instance ?? (instance = new MusicPlayerInstance(new DirectPlayer()));
             }
         }
     }

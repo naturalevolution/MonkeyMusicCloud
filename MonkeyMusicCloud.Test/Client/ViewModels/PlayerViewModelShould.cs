@@ -16,13 +16,13 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
             MediaFile file = Create.MediaFile();
             Song songToPlay = Create.Song(file);
             PlayerViewModel viewModel = new PlayerViewModel();
-            Service.Setup(s => s.GetMediaFileById(songToPlay.MediaFileId)).Returns(file);
+            MockService.Setup(s => s.GetMediaFileById(songToPlay.MediaFileId)).Returns(file);
             
             PlayerObserver.NotifyPlayNewSong(songToPlay);
 
-            MusicPlayer.Verify(mp => mp.Stop());
-            Service.Verify(s => s.GetMediaFileById(songToPlay.MediaFileId));
-            MusicPlayer.Verify(mp => mp.Play(file.Id, file.Content));
+            MockMusicPlayer.Verify(mp => mp.Stop());
+            MockService.Verify(s => s.GetMediaFileById(songToPlay.MediaFileId));
+            MockMusicPlayer.Verify(mp => mp.Play(file.Id, file.Content));
             Assert.AreEqual(songToPlay, viewModel.CurrentSong);
         }
 
@@ -33,7 +33,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             PlayerObserver.NotifyResumeSong();
 
-            MusicPlayer.Verify(mp => mp.Resume(), Times.Once());
+            MockMusicPlayer.Verify(mp => mp.Resume(), Times.Once());
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             PlayerObserver.NotifyPauseSong();
 
-            MusicPlayer.Verify(mp => mp.Pause(), Times.Once());
+            MockMusicPlayer.Verify(mp => mp.Pause(), Times.Once());
         }
         
         [TestMethod]
@@ -58,7 +58,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             PlayerObserver.NotifyStopSong();
 
-            MusicPlayer.Verify(mp => mp.Stop());
+            MockMusicPlayer.Verify(mp => mp.Stop());
             Assert.IsNull(viewModel.ElapsedTime);
             Assert.IsNull(viewModel.TotalTime);
             Assert.IsNull(viewModel.CurrentSong);
@@ -77,7 +77,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                                                 TotalTime = "0"
                                             };  
 
-            MusicPlayer.Raise(mp => mp.SongFinished += null);
+            MockMusicPlayer.Raise(mp => mp.SongFinished += null);
 
             Assert.IsTrue(catcher.SongFinishedInvoked);
             Assert.IsNull(viewModel.ElapsedTime);
@@ -87,18 +87,73 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         }
 
         [TestMethod]
-        public void RefreshTimePlayed()
+        public void RefreshTimePlayedAndPurcentage()
         {
-            const int elapsedTime = 10;
+            const int elapsedTime = 3010;
             const int totalTime = 3690;
+            PlayerViewModel viewModel = new PlayerViewModel {SliderIsOnDrag = false};
 
-            PlayerViewModel viewModel = new PlayerViewModel();
+            MockMusicPlayer.Raise(mp => mp.PurcentagePlayed += null, elapsedTime, totalTime );
 
-            MusicPlayer.Raise(mp => mp.PurcentagePlayed += null, elapsedTime, totalTime );
-
-            Assert.AreEqual(1000/20000 * 100, viewModel.PurcentagePlayed);
-            Assert.AreEqual("00:00:10", viewModel.ElapsedTime);
+            Assert.AreEqual(elapsedTime * 100 / totalTime, viewModel.PurcentagePlayed);
+            Assert.AreEqual("00:50:10", viewModel.ElapsedTime);
             Assert.AreEqual("01:01:30", viewModel.TotalTime);
+        }
+
+        [TestMethod]
+        public void RefreshTimePlayedWithoutPurcentageIfSliderIsDragging()
+        {
+            const int elapsedTime = 3010;
+            const int totalTime = 3690;
+            PlayerViewModel viewModel = new PlayerViewModel { 
+                SliderIsOnDrag = true,
+                PurcentagePlayed = 5
+            };
+
+            MockMusicPlayer.Raise(mp => mp.PurcentagePlayed += null, elapsedTime, totalTime);
+
+            Assert.AreEqual(5, viewModel.PurcentagePlayed);
+            Assert.AreEqual("00:50:10", viewModel.ElapsedTime);
+            Assert.AreEqual("01:01:30", viewModel.TotalTime);
+        }
+
+        [TestMethod]
+        public void SetSliderIsOnDragOnStartDragCommand()
+        {
+            PlayerViewModel viewModel = new PlayerViewModel() { SliderIsOnDrag = false };
+
+            viewModel.StartDragCommand.Execute(null);
+
+            Assert.IsTrue(viewModel.SliderIsOnDrag);
+        }
+
+        [TestMethod]
+        public void SetSliderIsNotOnDragOnStopDragCommandAndMoveMusicToTheValue()
+        {
+            PlayerViewModel viewModel = new PlayerViewModel { SliderIsOnDrag = true };
+            const double value = 50;
+            
+            viewModel.StopDragCommand.Execute(value);
+
+            Assert.IsFalse(viewModel.SliderIsOnDrag);
+            MockMusicPlayer.Verify(mp => mp.PlayAt(value));
+        }
+
+        [TestMethod]
+        public void SetValueToZeroIfNoActualSongIsPlayed()
+        {
+            PlayerViewModel viewModel = new PlayerViewModel
+                {
+                    SliderIsOnDrag = false,
+                    CurrentSong = null
+                    
+                };
+            const double value = 50;
+
+            viewModel.StopDragCommand.Execute(value);
+
+            MockMusicPlayer.Verify(mp => mp.PlayAt(It.IsAny<double>()), Times.Never());
+            Assert.AreEqual(0, viewModel.PurcentagePlayed);
         }
     }
 }
