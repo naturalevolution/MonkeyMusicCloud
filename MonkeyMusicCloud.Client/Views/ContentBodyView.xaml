@@ -21,10 +21,10 @@
                                 CommandParameter="{Binding}" Width="20" Height="20">           
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Name="ImageClose"  Source="../Themes/Images/close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
+                                    <Image Name="ImageClose"  Source="../Themes/Images/Close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
                                     <ControlTemplate.Triggers>
 				                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/close_hover.png" />
+                                            <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/Close_hover.png" />
                                         </Trigger>
 			                        </ControlTemplate.Triggers>
                                 </ControlTemplate>

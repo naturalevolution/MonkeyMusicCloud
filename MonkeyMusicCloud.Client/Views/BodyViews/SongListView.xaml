@@ -62,13 +62,20 @@
                     <GridViewColumn behaviours:GridViewColumnResize.Width="1*"  >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                               AncestorType={x:Type bodyViews:SongListView}}}"
-                                              CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}" Content="{x:Static const:MusicResource.PlayAllHeader}" />                            
+                                              CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
+                            <GridViewColumnHeader>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" />
+                                    <Label Content="{x:Static const:MusicResource.PlayAllHeader}"  />
+                                </StackPanel>
+                            </GridViewColumnHeader>
+                            </GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                                                         AncestorType={x:Type bodyViews:SongListView}}}"  
                                                                CommandParameter="{Binding}">
-                                    <Image Source="../../Themes/Images/add.png" />
+                                    <Image Source="../../Themes/Images/Add.png" />
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
