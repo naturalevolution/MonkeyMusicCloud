@@ -254,7 +254,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\add.png" />
+    <Resource Include="Themes\Images\Add.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Service.Proxy\" />
@@ -278,9 +278,7 @@
     <Resource Include="Themes\Images\PlayerSuivante.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\avant-medias-cherchent-icone-8923-48.png" />
     <Resource Include="Themes\Images\effacer-locationbar-icone-4656-48.png" />
-    <Resource Include="Themes\Images\les-medias-mettre-en-pause-lecture-icone-8969-48.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\PlayerPrecedente.png" />
@@ -289,7 +287,7 @@
     <Resource Include="Themes\Images\Browse.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\checked.png" />
+    <Resource Include="Themes\Images\Checked.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\MusiqueFolder.png" />
@@ -304,13 +302,13 @@
     <Resource Include="Themes\Images\Trashcan.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\close.png" />
+    <Resource Include="Themes\Images\Close.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\Upload.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\close_hover.png" />
+    <Resource Include="Themes\Images\Close_hover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -65,8 +65,8 @@
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                             <GridViewColumnHeader>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" />
-                                    <Label Content="{x:Static const:MusicResource.PlayAllHeader}"  />
+                                    <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" />
+                                    <Label Content="{x:Static const:MusicResource.PlayAllHeader}"  Margin="5" />
                                 </StackPanel>
                             </GridViewColumnHeader>
                             </GridViewColumnHeader>

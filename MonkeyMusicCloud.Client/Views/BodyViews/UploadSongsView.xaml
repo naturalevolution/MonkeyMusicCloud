@@ -22,7 +22,12 @@
             <ListView.View>
                 <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="{x:Static resource:MusicResource.SongToolTip}">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" behaviours:GridViewColumnResize.Width="2*">
-                        <GridViewColumnHeader Click="OpenSongFolderDialog" Content="{x:Static resource:MusicResource.BrowseHeader}" />
+                        <GridViewColumnHeader Click="OpenSongFolderDialog"  >
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../../Themes/Images/Browse.png" Width="24" Height="20" Margin="5" />
+                                <Label VerticalAlignment="Center" Content="{x:Static resource:MusicResource.BrowseHeader}" />
+                        </StackPanel>
+                        </GridViewColumnHeader>
                     </GridViewColumn>
                     <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Song.Title}" behaviours:GridViewColumnResize.Width="2*" />
                     <GridViewColumn Header="{x:Static resource:MusicResource.AlbumHeader}" DisplayMemberBinding="{Binding Path=Song.Album}" behaviours:GridViewColumnResize.Width="1*" />
