@@ -29,7 +29,6 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private string elapsedTime;
         private string totalTime;
 
-
         public bool SliderIsOnDrag { get; set; }
 
         public Song CurrentSong
@@ -110,7 +109,6 @@ namespace MonkeyMusicCloud.Client.ViewModels
             MusicPlayer.Play(fileToPlay.Id, fileToPlay.Content);
             CurrentSong = song;
         }
-
 
         public ICommand StartDragCommand { get { return new RelayCommand(() => { SliderIsOnDrag = true; }); } }
 

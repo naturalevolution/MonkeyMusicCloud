@@ -13,37 +13,55 @@ namespace MonkeyMusicCloud.Client.Views
         public PlayerView()
         {
             InitializeComponent();
+            Slider.ApplyTemplate();
+
+            Track track = Slider.Template.FindName("PART_Track", Slider) as Track;
+            if (track != null)
+            {
+                Thumb thumb = track.Thumb;
+
+                thumb.MouseEnter += thumb_MouseEnter;
+            }
+        }
+
+        private void thumb_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && e.MouseDevice.Captured == null)
+            {
+                MouseButtonEventArgs args = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left);
+
+                args.RoutedEvent = MouseLeftButtonDownEvent;
+
+                Thumb thumb = sender as Thumb;
+                if (thumb != null) thumb.RaiseEvent(args);
+            }
+        }
+
+        private void Slider_OnThumbDragStarted(object sender, DragStartedEventArgs e)
+        {
+            CallStartDragCommand();
         }
         
-        private void Slider_OnThumbDragStarted(object sender, DragStartedEventArgs e)
+        private void Slider_OnThumbDragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            CallStopDragCommand(sender);
+        }
+        
+        private void Slider_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             CallStartDragCommand();
         }
 
         private void CallStartDragCommand()
         {
-            ((PlayerViewModel) DataContext).StartDragCommand.Execute(null);
-        }
-
-        private void Slider_OnThumbDragCompleted(object sender, DragCompletedEventArgs e)
-        {
-            CallStopDragCommand(sender);
+            ((PlayerViewModel)DataContext).StartDragCommand.Execute(null);
         }
 
         private void CallStopDragCommand(object sender)
         {
-            SliderWithDraggingEvents slider = (SliderWithDraggingEvents) sender;
-            ((PlayerViewModel) DataContext).StopDragCommand.Execute(slider.Value);
+            SliderWithDraggingEvents slider = (SliderWithDraggingEvents)sender;
+            ((PlayerViewModel)DataContext).StopDragCommand.Execute(slider.Value);
         }
 
-        private void Slider_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            CallStartDragCommand();
-        }
-
-        private void Slider_OnMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            CallStopDragCommand(sender);
-        }
     }
 }

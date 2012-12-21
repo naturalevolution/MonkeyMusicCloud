@@ -19,13 +19,13 @@
             <ColumnDefinition Width="125" />            
         </Grid.ColumnDefinitions>
         <customControls:SliderWithDraggingEvents x:Name="Slider"
+                                                 IsManipulationEnabled="True"
             Grid.Row="0" Grid.ColumnSpan="2"  
             VerticalAlignment="Center" Minimum="0" Maximum="100" 
             IsSnapToTickEnabled="True" TickFrequency="1"  IsMoveToPointEnabled="True"
-            Value="{Binding PurcentagePlayed}"   ThumbDragStarted="Slider_OnThumbDragStarted"
+            Value="{Binding PurcentagePlayed}"   MouseDown="Slider_OnMouseDown"
+                                                 ThumbDragStarted="Slider_OnThumbDragStarted"
                                                  ThumbDragCompleted="Slider_OnThumbDragCompleted"
-                                                 MouseUp="Slider_OnMouseUp"
-                                                 MouseDown="Slider_OnMouseDown"
                                                 >
         </customControls:SliderWithDraggingEvents>
        

@@ -120,7 +120,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void SetSliderIsOnDragOnStartDragCommand()
         {
-            PlayerViewModel viewModel = new PlayerViewModel() { SliderIsOnDrag = false };
+            PlayerViewModel viewModel = new PlayerViewModel { SliderIsOnDrag = false };
 
             viewModel.StartDragCommand.Execute(null);
 
@@ -130,7 +130,11 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void SetSliderIsNotOnDragOnStopDragCommandAndMoveMusicToTheValue()
         {
-            PlayerViewModel viewModel = new PlayerViewModel { SliderIsOnDrag = true };
+            PlayerViewModel viewModel = new PlayerViewModel
+                {
+                    SliderIsOnDrag = true,
+                    CurrentSong = Create.Song()
+                };
             const double value = 50;
             
             viewModel.StopDragCommand.Execute(value);
