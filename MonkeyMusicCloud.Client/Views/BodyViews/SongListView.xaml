@@ -15,7 +15,7 @@
                   Margin="0,0,0,0" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True">
             <ListView.View>
-                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="{DynamicResource MusicResource.SongToolTip}">
+                <GridView AllowsColumnReorder="true">
                     <GridViewColumn Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" behaviours:GridViewColumnResize.Width="2*"   />
                     <GridViewColumn Header="{x:Static const:MusicResource.AlbumHeader}" behaviours:GridViewColumnResize.Width="2*" >
                         <GridViewColumn.CellTemplate>
@@ -59,15 +59,12 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn behaviours:GridViewColumnResize.Width="1*"  >
+                    <GridViewColumn >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                               AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                             <GridViewColumnHeader>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" />
-                                    <Label Content="{x:Static const:MusicResource.PlayAllHeader}"  Margin="5" />
-                                </StackPanel>
+                                <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" ToolTip="{x:Static const:MusicResource.PlayAllHeader}" />
                             </GridViewColumnHeader>
                             </GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
@@ -75,7 +72,30 @@
                                 <Button Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
                                                                                                                         AncestorType={x:Type bodyViews:SongListView}}}"  
                                                                CommandParameter="{Binding}">
-                                    <Image Source="../../Themes/Images/Add.png" />
+                                    <Image Source="../../Themes/Images/Add.png" ToolTip="{x:Static const:MusicResource.PlayToolTip}"/>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Command="{Binding  DataContext.DownloadSongListCommand, RelativeSource={RelativeSource FindAncestor,
+                                                                                              AncestorType={x:Type bodyViews:SongListView}}}"
+                                              CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
+                            <GridViewColumnHeader>
+                                <Image Source="../../Themes/Images/Download.png" Width="20" Height="20" VerticalAlignment="Center"  ToolTip="{x:Static const:MusicResource.DownloadAllHeader}"  />
+                            </GridViewColumnHeader>
+                        </GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="24" Height="24" Command="{Binding  DataContext.DownloadOneSongCommand, RelativeSource={RelativeSource FindAncestor,
+                                                                                                                        AncestorType={x:Type bodyViews:SongListView}}}"  
+                                                               CommandParameter="{Binding}">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../../Themes/Images/Download.png" ToolTip="{x:Static const:MusicResource.DowloadToolTip}" />
+                                        </ControlTemplate>    
+                                    </Button.Template>
+                                    
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

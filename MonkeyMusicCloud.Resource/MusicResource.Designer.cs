@@ -106,6 +106,42 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string DowloadToolTip {
+            get {
+                return ResourceManager.GetString("DowloadToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download All.
+        /// </summary>
+        public static string DownloadAllHeader {
+            get {
+                return ResourceManager.GetString("DownloadAllHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song Download : {0}.
+        /// </summary>
+        public static string DownloadSongTask {
+            get {
+                return ResourceManager.GetString("DownloadSongTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        public static string LibraryMenu {
+            get {
+                return ResourceManager.GetString("LibraryMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Path.
         /// </summary>
         public static string PathHeader {
@@ -115,11 +151,20 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Play all !.
+        ///   Looks up a localized string similar to Play all.
         /// </summary>
         public static string PlayAllHeader {
             get {
                 return ResourceManager.GetString("PlayAllHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string PlayToolTip {
+            get {
+                return ResourceManager.GetString("PlayToolTip", resourceCulture);
             }
         }
         
@@ -178,11 +223,20 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload To Server.
+        ///   Looks up a localized string similar to Share.
         /// </summary>
         public static string UploadMenu {
             get {
                 return ResourceManager.GetString("UploadMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song Upload : {0}.
+        /// </summary>
+        public static string UploadSongTask {
+            get {
+                return ResourceManager.GetString("UploadSongTask", resourceCulture);
             }
         }
     }

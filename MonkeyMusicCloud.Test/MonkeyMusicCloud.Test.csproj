@@ -41,8 +41,15 @@
     <Reference Include="Moq">
       <HintPath>..\Solution Items\Librairies\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="PixelLab.Common">
+      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Core">
+      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Core.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -52,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\BodyViewModels\LibraryViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SubViewModels\DownloadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\UploadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\TaskShould.cs" />
     <Compile Include="Client\ViewModels\TaskManagerViewModelShould.cs" />
@@ -119,6 +128,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

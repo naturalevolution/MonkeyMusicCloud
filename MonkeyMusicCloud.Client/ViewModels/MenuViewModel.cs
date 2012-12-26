@@ -22,6 +22,13 @@ namespace MonkeyMusicCloud.Client.ViewModels
                                     Label = MusicResource.UploadMenu, 
                                     View = new AddSongsView(), 
                                     ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Upload.png"
+                                },
+
+                            new MenuItem
+                                {
+                                    Label = MusicResource.LibraryMenu, 
+                                    View = new LibraryView(), 
+                                    ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Library.png"
                                 }
                         };
         }

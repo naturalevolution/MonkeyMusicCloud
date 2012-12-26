@@ -12,7 +12,8 @@
     <Grid>
         <ListView VerticalAlignment="Top" 
                   Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" >
+                  HorizontalAlignment="Stretch"
+                  MinHeight="250">
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Tasks">
                     <GridViewColumn Header="Task" DisplayMemberBinding="{Binding StringDescription}" />

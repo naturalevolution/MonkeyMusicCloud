@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Resource;
+using MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Test.Helper;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
@@ -41,6 +43,52 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
             Assert.AreEqual(2, eventCatcher.AddToPlayListSong.Count);
             CollectionAssert.Contains(eventCatcher.AddToPlayListSong, expectedSong1);
             CollectionAssert.Contains(eventCatcher.AddToPlayListSong, expectedSong1);
+        }
+
+
+        [TestMethod]
+        public void RaiseDownloadTaskEventWith()
+        {
+            Song expectedSong = Create.Song();
+
+            TaskEventCatcher eventCatcher = new TaskEventCatcher();
+            SongListViewModel viewModel = new SongListViewModel();
+
+            viewModel.DownloadOneSongCommand.Execute(expectedSong);
+
+            Assert.IsTrue(eventCatcher.AddTaskInvoked);
+            Assert.AreEqual(1, eventCatcher.AddTaskTimes);
+            Assert.AreEqual(1, eventCatcher.TaskListToAdd.Count);
+            Assert.IsTrue( eventCatcher.TaskListToAdd[0] is DownloadTask);
+            DownloadTask expectedTask = (DownloadTask) eventCatcher.TaskListToAdd[0];
+            Assert.AreEqual(expectedSong, expectedTask.Song);
+        }
+
+
+        [TestMethod]
+        public void RaiseDownloadTaskEventWithSeveralSongs()
+        {
+            Song expectedSong1 = Create.Song();
+            Song expectedSong2 = Create.Song();
+
+            TaskEventCatcher eventCatcher = new TaskEventCatcher();
+            SongListViewModel viewModel = new SongListViewModel();
+
+            viewModel.DownloadSongListCommand.Execute(new ObservableCollection<Song>
+                {
+                    expectedSong1, 
+                    expectedSong2
+                });
+
+            Assert.IsTrue(eventCatcher.AddTaskInvoked);
+            Assert.AreEqual(2, eventCatcher.AddTaskTimes);
+            Assert.AreEqual(2, eventCatcher.TaskListToAdd.Count);
+            Assert.IsTrue(eventCatcher.TaskListToAdd[0] is DownloadTask);
+            Assert.IsTrue(eventCatcher.TaskListToAdd[1] is DownloadTask);
+            DownloadTask expectedTask1 = (DownloadTask)eventCatcher.TaskListToAdd[0];
+            Assert.AreEqual(expectedSong1, expectedTask1.Song);
+            DownloadTask expectedTask2 = (DownloadTask)eventCatcher.TaskListToAdd[1];
+            Assert.AreEqual(expectedSong2, expectedTask2.Song);
         }
 
         [TestMethod]

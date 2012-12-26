@@ -42,6 +42,18 @@
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\Solution Items\Librairies\PixelLab\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Common">
+      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Core">
+      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Wpf">
+      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />
@@ -77,15 +89,20 @@
     <Compile Include="Utilities\StreamInstance.cs" />
     <Compile Include="ViewModels\BodyViewModels\AlbumDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\ArtistDetailViewModel.cs" />
+    <Compile Include="ViewModels\BodyViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\CustomViewModels\AlbumListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
+    <Compile Include="ViewModels\SubViewModels\DownloadTask.cs" />
     <Compile Include="ViewModels\SubViewModels\UploadTask.cs" />
     <Compile Include="ViewModels\SubViewModels\Task.cs" />
     <Compile Include="ViewModels\TaskManagerViewModel.cs" />
     <Compile Include="Views\BodyViews\ArtistDetailView.xaml.cs">
       <DependentUpon>ArtistDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BodyViews\LibraryView.xaml.cs">
+      <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BodyViews\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -112,6 +129,11 @@
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomControls\Behaviours.cs" />
+    <Compile Include="Views\CustomControls\OrgTree\OrgData.cs" />
+    <Compile Include="Views\CustomControls\OrgTree\OrgTreePage.xaml.cs">
+      <DependentUpon>OrgTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomControls\OrgTree\OrgView.cs" />
     <Compile Include="Views\CustomControls\SliderWithDraggingEvents.cs" />
     <Compile Include="Views\CustomViews\AlbumListView.xaml.cs">
       <DependentUpon>AlbumListView.xaml</DependentUpon>
@@ -152,6 +174,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BodyViews\LibraryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BodyViews\SearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +195,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentBodyView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomControls\OrgTree\OrgTreePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -290,9 +320,6 @@
     <Resource Include="Themes\Images\Checked.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\MusiqueFolder.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Themes\Images\fleche.png" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +336,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\Close_hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Library.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

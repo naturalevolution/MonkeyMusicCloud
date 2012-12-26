@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Resource;
 
 namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 {
@@ -22,7 +23,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 
         public override string StringDescription
         {
-            get { return string.Format("Upload de la musique :{0}", Song.Title); }
+            get { return string.Format(MusicResource.UploadSongTask, Song.Title); }
         }
     }
 }

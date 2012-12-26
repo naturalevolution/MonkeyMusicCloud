@@ -24,7 +24,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" behaviours:GridViewColumnResize.Width="2*">
                         <GridViewColumnHeader Click="OpenSongFolderDialog"  >
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="../../Themes/Images/Browse.png" Width="24" Height="20" Margin="5" />
+                                <Image Source="../../Themes/Images/Browse.png" Width="30" Height="25" Margin="5" />
                                 <Label VerticalAlignment="Center" Content="{x:Static resource:MusicResource.BrowseHeader}" />
                         </StackPanel>
                         </GridViewColumnHeader>

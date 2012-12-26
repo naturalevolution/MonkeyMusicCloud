@@ -32,6 +32,29 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             get { return new RelayCommand<Song>(AddOneSongToPlayListExecute); }
         }
 
+        public ICommand DownloadOneSongCommand
+        {
+            get { return new RelayCommand<Song>(DownloadOneSongExecute); }
+        }
+        public ICommand DownloadSongListCommand
+        {
+            get { return new RelayCommand<ObservableCollection<Song>>(DownloadSeveralSongExecute); }
+        }
+
+        private void DownloadSeveralSongExecute(ObservableCollection<Song> songListToDownload)
+        {
+            foreach (Song song in songListToDownload)
+            {
+                TaskObserver.NotifyAddTask(new DownloadTask(song));
+            }
+        }
+
+
+        private void DownloadOneSongExecute(Song song)
+        {
+            TaskObserver.NotifyAddTask(new DownloadTask(song));
+        }
+
         public ICommand OpenArtistCommand
         {
             get { return new RelayCommand<string>(OpenArtistExecute); }
@@ -59,6 +82,8 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
         {
             get { return new RelayCommand<string>(OpenAlbumExecute); }
         }
+
+        
 
         private void OpenAlbumExecute(string album)
         {

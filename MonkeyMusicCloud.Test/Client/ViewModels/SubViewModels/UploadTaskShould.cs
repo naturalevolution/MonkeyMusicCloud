@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
+using MonkeyMusicCloud.Resource;
 using MonkeyMusicCloud.Test.Helper;
 using Moq;
 
@@ -38,7 +39,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
             uploadTask.DoActionInNewThread();
             while (uploadTask.Worker.IsBusy) { }
 
-            Assert.AreEqual(string.Format("Upload de la musique :{0}", songToAdd.Song.Title), uploadTask.StringDescription);
+            Assert.AreEqual(string.Format(MusicResource.UploadSongTask, songToAdd.Song.Title), uploadTask.StringDescription);
             MockService.Verify(s => s.AddASong(songToAdd.Song, songToAdd.MediaFile), Times.Once());
         }
     }

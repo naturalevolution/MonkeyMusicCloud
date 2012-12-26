@@ -132,11 +132,26 @@
   <data name="BrowseHeader" xml:space="preserve">
     <value>Browse</value>
   </data>
+  <data name="DowloadToolTip" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadAllHeader" xml:space="preserve">
+    <value>Download All</value>
+  </data>
+  <data name="DownloadSongTask" xml:space="preserve">
+    <value>Song Download : {0}</value>
+  </data>
+  <data name="LibraryMenu" xml:space="preserve">
+    <value>Library</value>
+  </data>
   <data name="PathHeader" xml:space="preserve">
     <value>Path</value>
   </data>
   <data name="PlayAllHeader" xml:space="preserve">
-    <value>Play all !</value>
+    <value>Play all</value>
+  </data>
+  <data name="PlayToolTip" xml:space="preserve">
+    <value>Play</value>
   </data>
   <data name="SearchTab" xml:space="preserve">
     <value>Search : {0}</value>
@@ -157,6 +172,9 @@
     <value>Upload</value>
   </data>
   <data name="UploadMenu" xml:space="preserve">
-    <value>Upload To Server</value>
+    <value>Share</value>
+  </data>
+  <data name="UploadSongTask" xml:space="preserve">
+    <value>Song Upload : {0}</value>
   </data>
 </root>

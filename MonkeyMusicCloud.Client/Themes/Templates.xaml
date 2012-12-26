@@ -6,14 +6,13 @@
         <StackPanel>
             <Button Height="50" Margin="10"  Command="{Binding DataContext.OpenItemCommand, 
                                                                                      RelativeSource={RelativeSource FindAncestor, AncestorType=views:MenuView}}"
-                                                                   CommandParameter="{Binding}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="{Binding Path=ImagePath}" Width="20px" />
-                    <TextBlock Grid.Column="1" Text="{Binding Path=Label}" />
+                                                                   CommandParameter="{Binding}" HorizontalContentAlignment="Left" >
+                <Grid Margin="20,0,0,0">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Image Grid.Column="0" Source="{Binding Path=ImagePath}" Width="35px" />
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Label}" Padding="10" />
+                    </StackPanel>
+                    
                 </Grid>
 
             </Button>

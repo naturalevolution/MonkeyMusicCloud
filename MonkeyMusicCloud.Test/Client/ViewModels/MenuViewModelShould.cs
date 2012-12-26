@@ -13,7 +13,8 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             MenuViewModel viewModel = new MenuViewModel();
 
-            Assert.AreEqual(1, viewModel.Items.Count );
+            Assert.AreEqual(2, viewModel.Items.Count );
+            
         }
 
         [TestMethod]

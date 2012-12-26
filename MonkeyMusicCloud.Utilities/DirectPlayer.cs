@@ -11,7 +11,7 @@ namespace MonkeyMusicCloud.Utilities
     {
         private FilgraphManager objFilterGraph;
         private IMediaPosition objMediaPosition;
-        private Timer tmProgressionFlux = new Timer(1000);
+        private Timer tmProgressionFlux = new Timer(500);
         
         private static DirectPlayer instance;
         static readonly object InstanceLock = new object();
