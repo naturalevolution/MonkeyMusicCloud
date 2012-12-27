@@ -64,4 +64,8 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}" x:Key="ListViewItemStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    
 </ResourceDictionary>

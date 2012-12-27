@@ -11,25 +11,27 @@
         <bodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid x:Name="Layout">
-        <ListView Name="LvSongList" VerticalAlignment="Top" 
-                  ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <ListView Name="LvSongList" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True"  
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
+            <ListView.ItemContainerStyle>
+                <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="listViewItem_MouseDoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" behaviours:GridViewColumnResize.Width="2*"   />
                     <GridViewColumn Header="{x:Static const:MusicResource.AlbumHeader}" behaviours:GridViewColumnResize.Width="2*" CellTemplate="{StaticResource LinkButtonAlbum}" />
                     <GridViewColumn Header="{x:Static const:MusicResource.ArtistHeader}" behaviours:GridViewColumnResize.Width="2*" CellTemplate="{StaticResource LinkButtonArtist}" />
                     <GridViewColumn CellTemplate="{StaticResource PlayButtonTemplate}" >
-                        <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor,
-                                                                                              AncestorType={x:Type bodyViews:SongListView}}}"
+                        <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                                 <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" ToolTip="{x:Static const:MusicResource.PlayAllHeader}" />
                         </GridViewColumnHeader>
                     </GridViewColumn>
                     <GridViewColumn CellTemplate="{StaticResource DownloadButtonTemplate}">
-                        <GridViewColumnHeader Command="{Binding  DataContext.DownloadSongListCommand, RelativeSource={RelativeSource FindAncestor,
-                                                                                              AncestorType={x:Type bodyViews:SongListView}}}"
+                        <GridViewColumnHeader Command="{Binding  DataContext.DownloadSongListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                             <GridViewColumnHeader>
                                 <Image Source="../../Themes/Images/Download.png" Width="20" Height="20" VerticalAlignment="Center"  ToolTip="{x:Static const:MusicResource.DownloadAllHeader}"  />

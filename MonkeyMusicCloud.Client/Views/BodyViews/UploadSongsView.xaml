@@ -19,12 +19,12 @@
         
         <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" 
                   ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0"
-                  behaviours:GridViewColumnResize.Enabled="True" 
+                  behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" behaviours:GridViewColumnResize.Width="2*">
-                        <GridViewColumnHeader Click="OpenSongFolderDialog"  >
+                        <GridViewColumnHeader Click="OpenSongFolderDialog">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="../../Themes/Images/Browse.png" Width="30" Height="25" Margin="5" />
                                 <Label VerticalAlignment="Center" Content="{x:Static resource:MusicResource.BrowseHeader}" />

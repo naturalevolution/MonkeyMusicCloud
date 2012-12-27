@@ -20,8 +20,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
 
             Assert.AreEqual(songToAdd.Song, uploadTask.Song);
         }
-
-
+        
         [TestMethod]
         public void CallServiceOnDoActionAndRaiseFinishedTaskEvent()
         {

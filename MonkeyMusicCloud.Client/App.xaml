@@ -7,8 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Theme.xaml"/>
-                <ResourceDictionary Source="Themes\Templates.xaml"/>
                 <ResourceDictionary Source="Themes\Styles.xaml"/>
+                <ResourceDictionary Source="Themes\Templates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

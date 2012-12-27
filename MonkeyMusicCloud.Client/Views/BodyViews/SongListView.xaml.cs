@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.Views.BodyViews
@@ -36,6 +38,16 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             set
             {
                 SetValue(MyCustomProperty, value);
+            }
+        }
+
+        private void listViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = sender as ListViewItem;
+            if (item != null && item.Content.GetType() == typeof(Song))
+            {
+                Song song = (Song) item.Content;
+                ((SongListViewModel)DataContext).AddOneSongToPlayListCommand.Execute(song);
             }
         }
     }

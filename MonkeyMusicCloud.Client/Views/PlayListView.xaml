@@ -33,7 +33,7 @@
         <DockPanel Grid.Row="2" x:Name="Layout">
             <ListView Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}">
+                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />

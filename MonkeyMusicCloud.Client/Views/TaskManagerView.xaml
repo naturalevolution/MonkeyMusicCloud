@@ -12,11 +12,11 @@
     <Grid x:Name="Layout">
         <ListView VerticalAlignment="Top" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch">
+                  HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Tasks">
                     <GridViewColumn Header="Task" DisplayMemberBinding="{Binding StringDescription}" />
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}"  />
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" />
                 </GridView>
             </ListView.View>
         </ListView>
