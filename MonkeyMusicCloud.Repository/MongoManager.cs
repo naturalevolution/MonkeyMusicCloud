@@ -1,9 +1,5 @@
-﻿#region Usings
-
-using System.Configuration;
+﻿using System.Configuration;
 using MongoDB.Driver;
-
-#endregion
 
 namespace MonkeyMusicCloud.Repository
 {

@@ -1,6 +1,4 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -13,8 +11,6 @@ using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Utilities.Interface;
 using File = TagLib.File;
-
-#endregion
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {

@@ -1,10 +1,6 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Domain.Model;
-
-#endregion
 
 namespace MonkeyMusicCloud.Test.Domain.Model
 {

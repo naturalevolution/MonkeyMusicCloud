@@ -7,6 +7,7 @@ using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
+using MonkeyMusicCloud.Test.Helper.EventCatchers;
 using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels

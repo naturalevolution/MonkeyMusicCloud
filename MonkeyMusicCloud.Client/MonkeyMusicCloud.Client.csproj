@@ -42,18 +42,6 @@
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism">
-      <HintPath>..\Solution Items\Librairies\PixelLab\Microsoft.Practices.Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Common">
-      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Core">
-      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Wpf">
-      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />

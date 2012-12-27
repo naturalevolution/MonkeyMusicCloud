@@ -1,8 +1,4 @@
-﻿#region Usings
-
-using MonkeyMusicCloud.Domain.Model;
-
-#endregion
+﻿using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Repository
 {

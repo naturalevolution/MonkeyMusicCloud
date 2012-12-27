@@ -1,13 +1,9 @@
-﻿#region Usings
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels.OrgItems;
-
-#endregion
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {

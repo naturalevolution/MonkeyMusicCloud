@@ -1,11 +1,7 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Repository;
-
-#endregion
 
 namespace MonkeyMusicCloud.Service
 {

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using MonkeyMusicCloud.Client.Exceptions;
+﻿using MonkeyMusicCloud.Client.Exceptions;
 using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 
 namespace MonkeyMusicCloud.Test.Helper.EventCatchers
 {

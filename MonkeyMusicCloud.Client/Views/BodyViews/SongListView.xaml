@@ -12,9 +12,8 @@
     </UserControl.DataContext>
     <Grid x:Name="Layout">
         <ListView Name="LvSongList" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True"  
-                  Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}"
-                  MouseMove="List_MouseMove" MouseDown="LvSongList_OnMouseDown">
+                  HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True" MouseMove="List_MouseMove"
+                  Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick" Handler="ListViewItemMouseDoubleClick" />

@@ -3,7 +3,7 @@ using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 
-namespace MonkeyMusicCloud.Test.Helper
+namespace MonkeyMusicCloud.Test.Helper.EventCatchers
 {
     public class ContentBodyEventCatcher
     {

@@ -2,6 +2,7 @@
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Test.Helper;
+using MonkeyMusicCloud.Test.Helper.EventCatchers;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
 {

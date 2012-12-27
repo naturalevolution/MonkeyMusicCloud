@@ -41,12 +41,6 @@
     <Reference Include="Moq">
       <HintPath>..\Solution Items\Librairies\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Common">
-      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="PixelLab.Core">
-      <HintPath>..\Solution Items\Librairies\PixelLab\PixelLab.Core.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

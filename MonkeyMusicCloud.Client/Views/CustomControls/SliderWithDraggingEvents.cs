@@ -1,9 +1,5 @@
-﻿#region Usings
-
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-
-#endregion
 
 namespace MonkeyMusicCloud.Client.Views.CustomControls
 {

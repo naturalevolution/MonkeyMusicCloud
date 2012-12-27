@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Exceptions;
-using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Test.Helper.EventCatchers;
 
 namespace MonkeyMusicCloud.Test.Client.Exceptions
@@ -17,6 +16,5 @@ namespace MonkeyMusicCloud.Test.Client.Exceptions
 
             Assert.IsTrue(catcher.SongFinishedInvoked);
         }
-
     }
 }

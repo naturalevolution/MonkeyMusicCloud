@@ -1,12 +1,8 @@
-﻿#region Usings
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using MonkeyMusicCloud.Domain.IRepository;
-
-#endregion
 
 namespace MonkeyMusicCloud.Repository
 {

@@ -59,8 +59,5 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             }
         }
 
-        private void LvSongList_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-        }
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Service.Proxy;
 using MonkeyMusicCloud.Client.Utilities;
-using MonkeyMusicCloud.Test.Helper;
 using MonkeyMusicCloud.Utilities.Interface;
 using Moq;
 

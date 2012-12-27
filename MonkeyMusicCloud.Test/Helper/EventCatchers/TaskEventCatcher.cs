@@ -2,7 +2,7 @@
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 
-namespace MonkeyMusicCloud.Test.Helper
+namespace MonkeyMusicCloud.Test.Helper.EventCatchers
 {
     public class TaskEventCatcher
     {
