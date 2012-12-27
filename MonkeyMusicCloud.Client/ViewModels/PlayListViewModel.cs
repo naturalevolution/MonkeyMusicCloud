@@ -108,8 +108,8 @@ namespace MonkeyMusicCloud.Client.ViewModels
             if (SongList.Count > 0)
             {
                 Song songToPlay = song ?? SongList.First();
-                PlayerObserver.NotifyPlayNewSong(songToPlay);
                 ActualPlayedSong = songToPlay;
+                PlayerObserver.NotifyPlayNewSong(songToPlay);
                 PlayerState = State.Play;
             }
         }

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MonkeyMusicCloud.Client.Observers;
 
 namespace MonkeyMusicCloud.Client.Exceptions
 {
     public class PlayException : BaseException
     {
-
-        public override string Message
+        public PlayException()
         {
-            get { return base.Message; }
+            PlayerObserver.NotifyCurrentSongFinished();
         }
     }
 }

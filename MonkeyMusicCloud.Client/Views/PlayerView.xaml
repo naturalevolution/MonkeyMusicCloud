@@ -27,12 +27,12 @@
                                                  ThumbDragStarted="Slider_OnThumbDragStarted"
                                                  ThumbDragCompleted="Slider_OnThumbDragCompleted"
                                                 />
-       
-        <Label Grid.Row="1" Grid.Column="0" Content="{Binding CurrentSong.Title, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="{Binding CurrentSong.Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
             <Label Content="/" Style="{StaticResource SongTimeSeparator}" />
-            <Label Content="{Binding TotalTime, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="{Binding TotalTime, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
         </StackPanel>
     </Grid>
 </UserControl>

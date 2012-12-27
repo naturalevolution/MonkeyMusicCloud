@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Exceptions\BaseExceptionShould.cs" />
+    <Compile Include="Client\Exceptions\PlayExceptionShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\LibraryViewModelShould.cs" />

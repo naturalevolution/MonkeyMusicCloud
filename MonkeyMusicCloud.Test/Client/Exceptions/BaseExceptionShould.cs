@@ -5,7 +5,7 @@ using MonkeyMusicCloud.Test.Helper.EventCatchers;
 namespace MonkeyMusicCloud.Test.Client.Exceptions
 {
     [TestClass]
-    public class PlayerViewModelShould
+    public class BaseExceptionModelShould
     {
         [TestMethod]
         public void RaiseNewCatchedExceptionEventAtInstantiate()

@@ -16,7 +16,7 @@
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
-                    <EventSetter Event="MouseDoubleClick" Handler="listViewItem_MouseDoubleClick" />
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItemMouseDoubleClick" />
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.View>

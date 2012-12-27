@@ -23,9 +23,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
             PlayerObserver.PauseSong += () => MusicPlayer.Pause();
             PlayerObserver.ResumeSong += () => MusicPlayer.Resume();
             PlayerObserver.StopSong += OnStopSong;
-
             MusicPlayer.PurcentagePlayed += RefreshSongTimes;
-
             MusicPlayer.SongFinished += OnSongFinished;
         }
 
@@ -116,6 +114,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private void PlayNewSong(Song song)
         {
             MusicPlayer.Stop();
+            CurrentSong = song;
             MediaFile fileToPlay = Service.GetMediaFileById(song.MediaFileId);
             try
             {
@@ -123,10 +122,8 @@ namespace MonkeyMusicCloud.Client.ViewModels
             }
             catch (Exception e)
             {
-                BaseException exception = new PlayException();
+                new PlayException();
             }
-
-            CurrentSong = song;
         }
 
         private void StopDragExecute(double value)

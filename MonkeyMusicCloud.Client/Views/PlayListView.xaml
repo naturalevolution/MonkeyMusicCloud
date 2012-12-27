@@ -33,14 +33,19 @@
         <DockPanel Grid.Row="2" x:Name="Layout">
             <ListView Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
-            <ListView.View >
+                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                <ListView.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
+                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItemMouseDoubleClick" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View >
                 <GridView>
                     <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />
                         <GridViewColumn HeaderTemplate="{StaticResource ClearPlayListTemplate}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate></DataTemplate>
-                        </GridViewColumn.CellTemplate>>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>

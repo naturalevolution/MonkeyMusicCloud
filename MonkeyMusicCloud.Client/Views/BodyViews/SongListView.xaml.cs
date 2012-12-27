@@ -41,7 +41,7 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             }
         }
 
-        private void listViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListViewItem item = sender as ListViewItem;
             if (item != null && item.Content.GetType() == typeof(Song))
