@@ -26,14 +26,15 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
         public void CallServiceOnDoActionAndRaiseFinishedTaskEvent()
         {
             Song song = Create.Song();
-            
+            MockService.Setup(ms => ms.GetMediaFileById(song.MediaFileId)).Returns(Create.MediaFile);
+            string songPath = ConfigurationManager.AppSettings["LibraryRoot"] + song.Artist + "\\" + song.Album + "\\" + song.Title + ".mp3";
             DownloadTask downloadTask = new DownloadTask(song);
+
             downloadTask.DoActionInNewThread();
             while (downloadTask.Worker.IsBusy) { }
 
             Assert.AreEqual(string.Format(MusicResource.DownloadSongTask, song.Title), downloadTask.StringDescription);
             MockService.Verify(s => s.GetMediaFileById(song.MediaFileId), Times.Once());
-            string songPath = ConfigurationManager.AppSettings["LibraryRoot"] + song.Artist + "\\" + song.Album + "\\" + song.Title + ".mp3";
             Assert.IsTrue(File.Exists(songPath));
         }
     }
