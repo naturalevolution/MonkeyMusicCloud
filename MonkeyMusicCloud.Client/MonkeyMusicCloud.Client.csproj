@@ -75,7 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\BaseException.cs" />
+    <Compile Include="Exceptions\PlayException.cs" />
     <Compile Include="Observers\ContentBodyObserver.cs" />
+    <Compile Include="Observers\ExceptionObserver.cs" />
     <Compile Include="Observers\TaskObserver.cs" />
     <Compile Include="Observers\PlayerObserver.cs" />
     <Compile Include="Service References\Service.Proxy\Reference.cs">
@@ -95,6 +98,7 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
     <Compile Include="ViewModels\SubViewModels\DownloadTask.cs" />
+    <Compile Include="ViewModels\SubViewModels\OrgItems\OrgItem.cs" />
     <Compile Include="ViewModels\SubViewModels\UploadTask.cs" />
     <Compile Include="ViewModels\SubViewModels\Task.cs" />
     <Compile Include="ViewModels\TaskManagerViewModel.cs" />
@@ -129,11 +133,6 @@
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomControls\Behaviours.cs" />
-    <Compile Include="Views\CustomControls\OrgTree\OrgData.cs" />
-    <Compile Include="Views\CustomControls\OrgTree\OrgTreePage.xaml.cs">
-      <DependentUpon>OrgTreePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CustomControls\OrgTree\OrgView.cs" />
     <Compile Include="Views\CustomControls\SliderWithDraggingEvents.cs" />
     <Compile Include="Views\CustomViews\AlbumListView.xaml.cs">
       <DependentUpon>AlbumListView.xaml</DependentUpon>
@@ -162,6 +161,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Templates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,10 +198,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ContentBodyView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CustomControls\OrgTree\OrgTreePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

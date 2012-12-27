@@ -1,13 +1,16 @@
-﻿using System.Configuration;
+﻿#region Usings
+
+using System.Configuration;
 using MongoDB.Driver;
+
+#endregion
 
 namespace MonkeyMusicCloud.Repository
 {
     public class MongoManager
     {
         private static MongoManager instance;
-        public MongoDatabase Database { get; set; }
-        static readonly object InstanceLock = new object();
+        private static readonly object InstanceLock = new object();
 
         public MongoManager()
         {
@@ -15,6 +18,8 @@ namespace MonkeyMusicCloud.Repository
             server.Connect();
             Database = server.GetDatabase(ConfigurationManager.AppSettings["DataBaseName"]);
         }
+
+        public MongoDatabase Database { get; set; }
 
         public static MongoManager GetInstance()
         {
@@ -25,4 +30,3 @@ namespace MonkeyMusicCloud.Repository
         }
     }
 }
-

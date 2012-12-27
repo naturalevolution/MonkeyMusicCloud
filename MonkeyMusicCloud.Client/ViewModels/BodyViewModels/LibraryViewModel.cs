@@ -1,43 +1,58 @@
-﻿using System.Collections.Generic;
+﻿#region Usings
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using MonkeyMusicCloud.Client.Views.CustomControls.OrgTree;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.OrgItems;
+
+#endregion
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
     public class LibraryViewModel : ViewModelBase
     {
-        private ObservableCollection<OrgViewItem> folders;
+        private ObservableCollection<OrgItem> folders;
 
         public LibraryViewModel()
         {
             SearchForArtists();
         }
 
-        public ObservableCollection<OrgViewItem> Folders  
+        public ObservableCollection<OrgItem> Folders
         {
             get { return folders; }
-            set { 
+            set
+            {
                 folders = value;
                 RaisePropertyChanged("Folders");
             }
         }
 
+        private string RootPath
+        {
+            get { return ConfigurationManager.AppSettings["LibraryRoot"]; }
+        }
+
         private void SearchForArtists()
         {
-            string rootPath = ConfigurationManager.AppSettings["LibraryRoot"];
             ObservableCollection<OrgItem> orgItems = new ObservableCollection<OrgItem>();
-            IEnumerable<string> artistPathes = Directory.GetDirectories(rootPath);
+            IEnumerable<string> artistPathes = Directory.GetDirectories(RootPath);
             foreach (string artistPath in artistPathes)
             {
-                ObservableCollection<Album> albumPath = new ObservableCollection<Album>(Directory.GetDirectories(artistPath).Select(oi => new Album(Path.GetFileName(oi), null)));
-                Artist artist = new Artist(Path.GetFileName(artistPath), new ObservableCollection<OrgItem>(albumPath));
+                ObservableCollection<OrgItem> albumPath =
+                    new ObservableCollection<OrgItem>(Directory.GetDirectories(artistPath)
+                                                               .Select(
+                                                                   oi =>
+                                                                   new OrgItem(new ObservableCollection<OrgItem>(), oi,
+                                                                               Path.GetFileName(oi))));
+                OrgItem artist = new OrgItem(new ObservableCollection<OrgItem>(albumPath), artistPath,
+                                             Path.GetFileName(artistPath));
                 orgItems.Add(artist);
             }
 
-            Folders = OrgViewItem.GetViewArray(orgItems);
+            Folders = orgItems;
         }
     }
 }

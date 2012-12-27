@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Domain.Model;
+
+#endregion
 
 namespace MonkeyMusicCloud.Test.Domain.Model
 {
@@ -12,7 +16,7 @@ namespace MonkeyMusicCloud.Test.Domain.Model
         {
             byte[] content = new byte[5];
             Guid id = new Guid();
-            MediaFile mediaFile = new MediaFile { Content = content, Id = id };
+            MediaFile mediaFile = new MediaFile {Content = content, Id = id};
             Assert.AreEqual(content, mediaFile.Content);
             Assert.AreEqual(id, mediaFile.Id);
         }

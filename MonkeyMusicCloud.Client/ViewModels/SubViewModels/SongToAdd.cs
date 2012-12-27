@@ -7,9 +7,9 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
         public Song Song { get; set; }
 
         public bool IsSelected { get; set; }
-        
+
         public string Path { get; set; }
 
-        public MediaFile MediaFile{ get; set;}
+        public MediaFile MediaFile { get; set; }
     }
 }

@@ -1,15 +1,21 @@
-﻿using System.Windows.Controls;
+﻿#region Usings
+
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+
+#endregion
 
 namespace MonkeyMusicCloud.Client.Views.CustomControls
 {
     public class SliderWithDraggingEvents : Slider
     {
+        public delegate void ThumbDragCompletedHandler(object sender, DragCompletedEventArgs e);
+
         public delegate void ThumbDragStartedHandler(object sender, DragStartedEventArgs e);
+
         public event ThumbDragStartedHandler ThumbDragStarted;
 
 
-        public delegate void ThumbDragCompletedHandler(object sender, DragCompletedEventArgs e);
         public event ThumbDragCompletedHandler ThumbDragCompleted;
 
         protected override void OnThumbDragStarted(DragStartedEventArgs e)

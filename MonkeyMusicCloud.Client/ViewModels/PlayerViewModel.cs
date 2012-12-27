@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Input;
 using MicroMvvm;
+using MonkeyMusicCloud.Client.Exceptions;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Domain.Model;
@@ -11,23 +12,37 @@ namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class PlayerViewModel : ViewModelBase
     {
+        private Song currentSong;
+        private string elapsedTime;
         private int purcentagePlayed;
-        private IMusicPlayer MusicPlayer { get { return MusicPlayerInstance.GetInstance().Player; } }
-        
+        private string totalTime;
+
+        public PlayerViewModel()
+        {
+            PlayerObserver.PlaySong += PlayNewSong;
+            PlayerObserver.PauseSong += () => MusicPlayer.Pause();
+            PlayerObserver.ResumeSong += () => MusicPlayer.Resume();
+            PlayerObserver.StopSong += OnStopSong;
+
+            MusicPlayer.PurcentagePlayed += RefreshSongTimes;
+
+            MusicPlayer.SongFinished += OnSongFinished;
+        }
+
+        private IMusicPlayer MusicPlayer
+        {
+            get { return MusicPlayerInstance.GetInstance().Player; }
+        }
+
         public int PurcentagePlayed
         {
-            get {
-                return purcentagePlayed;
-            }
-            set {
+            get { return purcentagePlayed; }
+            set
+            {
                 purcentagePlayed = value;
                 RaisePropertyChanged("PurcentagePlayed");
             }
         }
-
-        private Song currentSong;
-        private string elapsedTime;
-        private string totalTime;
 
         public bool SliderIsOnDrag { get; set; }
 
@@ -43,10 +58,9 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         public string ElapsedTime
         {
-            get {
-                return elapsedTime;
-            }
-            set {
+            get { return elapsedTime; }
+            set
+            {
                 elapsedTime = value;
                 RaisePropertyChanged("ElapsedTime");
             }
@@ -54,44 +68,41 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         public string TotalTime
         {
-            get {
-                return totalTime;
-            }
-            set {
+            get { return totalTime; }
+            set
+            {
                 totalTime = value;
                 RaisePropertyChanged("TotalTime");
             }
         }
 
-        public PlayerViewModel()
+        public ICommand StartDragCommand
         {
-            PlayerObserver.PlaySong += PlayNewSong;
-            PlayerObserver.PauseSong += delegate
-                {
-                    MusicPlayer.Pause();
-                };
-            PlayerObserver.ResumeSong += delegate
-                {
-                    MusicPlayer.Resume();
-                };
-            PlayerObserver.StopSong += delegate
-                                           {
-                                               ClearPlayer();
-                                               MusicPlayer.Stop();
-                                           };
+            get { return new RelayCommand(() => { SliderIsOnDrag = true; }); }
+        }
 
-            MusicPlayer.PurcentagePlayed += delegate(int elapsedTime, int totalTime)
-                                                {
-                                                    PurcentagePlayed = !SliderIsOnDrag?(100 * elapsedTime / totalTime ) : PurcentagePlayed;
-                                                    ElapsedTime = TimeSpan.FromSeconds(elapsedTime).ToString("T", DateTimeFormatInfo.InvariantInfo);
-                                                    TotalTime = TimeSpan.FromSeconds(totalTime).ToString("T", DateTimeFormatInfo.InvariantInfo);
-                                                };
+        public ICommand StopDragCommand
+        {
+            get { return new RelayCommand<double>(StopDragExecute); }
+        }
 
-            MusicPlayer.SongFinished += delegate
-                                            {
-                                                ClearPlayer();
-                                                PlayerObserver.NotifyCurrentSongFinished();
-                                            };
+        private void OnStopSong()
+        {
+            ClearPlayer();
+            MusicPlayer.Stop();
+        }
+
+        private void OnSongFinished()
+        {
+            ClearPlayer();
+            PlayerObserver.NotifyCurrentSongFinished();
+        }
+
+        private void RefreshSongTimes(int elapsedTimeFromEvent, int totalTimeFromEvent)
+        {
+            PurcentagePlayed = !SliderIsOnDrag ? (100*elapsedTimeFromEvent/totalTimeFromEvent) : PurcentagePlayed;
+            ElapsedTime = TimeSpan.FromSeconds(elapsedTimeFromEvent).ToString("T", DateTimeFormatInfo.InvariantInfo);
+            TotalTime = TimeSpan.FromSeconds(totalTimeFromEvent).ToString("T", DateTimeFormatInfo.InvariantInfo);
         }
 
         private void ClearPlayer()
@@ -106,13 +117,17 @@ namespace MonkeyMusicCloud.Client.ViewModels
         {
             MusicPlayer.Stop();
             MediaFile fileToPlay = Service.GetMediaFileById(song.MediaFileId);
-            MusicPlayer.Play(fileToPlay.Id, fileToPlay.Content);
+            try
+            {
+                MusicPlayer.Play(fileToPlay.Id, fileToPlay.Content);
+            }
+            catch (Exception e)
+            {
+                BaseException exception = new PlayException();
+            }
+
             CurrentSong = song;
         }
-
-        public ICommand StartDragCommand { get { return new RelayCommand(() => { SliderIsOnDrag = true; }); } }
-
-        public ICommand StopDragCommand { get { return new RelayCommand<double>(StopDragExecute); } }
 
         private void StopDragExecute(double value)
         {

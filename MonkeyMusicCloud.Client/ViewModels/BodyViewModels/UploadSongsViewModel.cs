@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -11,6 +13,8 @@ using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Utilities.Interface;
 using File = TagLib.File;
+
+#endregion
 
 namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
@@ -73,15 +77,16 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                         {
                             File mp3 = File.Create(path);
                             MediaFile mediaFile = new MediaFile {Content = StreamHelper.ReadToEnd(path)};
-                            Song song = new Song{
-                                           Album = mp3.Tag.Album,
-                                           Title = mp3.Tag.Title,
-                                           Artist = mp3.Tag.FirstAlbumArtist
-                                       };
+                            Song song = new Song
+                                {
+                                    Album = mp3.Tag.Album,
+                                    Title = mp3.Tag.Title,
+                                    Artist = mp3.Tag.FirstAlbumArtist
+                                };
                             songs.Add(new SongToAdd {IsSelected = true, Song = song, Path = path, MediaFile = mediaFile});
                         }
                     }
-                    //TODO Logger le message
+                        //TODO Logger le message
                     catch (Exception)
                     {
                         continue;

@@ -3,40 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" 
-             xmlns:views="clr-namespace:MonkeyMusicCloud.Client.Views" mc:Ignorable="d" 
+             xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
+             mc:Ignorable="d" 
              d:DesignHeight="625" d:DesignWidth="800">
     <UserControl.DataContext>
         <viewModels:ContentBodyViewModel />
     </UserControl.DataContext>
 
-        <TabControl ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                        <Image Source="{Binding ImagePath}"  Width="15" Height="15"/>
-                        <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
-                        <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, 
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:ContentBodyView}}}" 
-                                CommandParameter="{Binding}" Width="20" Height="20">           
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Name="ImageClose"  Source="../Themes/Images/Close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
-                                    <ControlTemplate.Triggers>
-				                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/Close_hover.png" />
-                                        </Trigger>
-			                        </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </StackPanel>                    
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <UserControl Content="{Binding View}" />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>    
+    <TabControl ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" ItemTemplate="{StaticResource TabHeaderItemTemplate}">
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <UserControl Content="{Binding View}" />
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>    
 </UserControl>

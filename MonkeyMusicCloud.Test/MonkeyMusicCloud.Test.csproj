@@ -57,6 +57,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\Exceptions\BaseExceptionShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\LibraryViewModelShould.cs" />
@@ -75,10 +76,11 @@
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />
     <Compile Include="Domain\Model\SongShould.cs" />
-    <Compile Include="Helper\TaskEventCatcher.cs" />
-    <Compile Include="Helper\PlayerEventCatcher.cs" />
+    <Compile Include="Helper\EventCatchers\ExceptionEventCatcher.cs" />
+    <Compile Include="Helper\EventCatchers\TaskEventCatcher.cs" />
+    <Compile Include="Helper\EventCatchers\PlayerEventCatcher.cs" />
     <Compile Include="Helper\Create.cs" />
-    <Compile Include="Helper\ContentBodyEventCatcher.cs" />
+    <Compile Include="Helper\EventCatchers\ContentBodyEventCatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepositoryTests.cs" />
     <Compile Include="Repository\RepositoryShould.cs" />

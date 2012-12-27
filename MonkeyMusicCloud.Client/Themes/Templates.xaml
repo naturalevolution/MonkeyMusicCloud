@@ -1,22 +1,99 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:MonkeyMusicCloud.Client.Views"
-                    >
+                    xmlns:const="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
+                    xmlns:bodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews">
+    
     <DataTemplate x:Key="MenuItemTemplate">
         <StackPanel>
-            <Button Height="50" Margin="10"  Command="{Binding DataContext.OpenItemCommand, 
-                                                                                     RelativeSource={RelativeSource FindAncestor, AncestorType=views:MenuView}}"
-                                                                   CommandParameter="{Binding}" HorizontalContentAlignment="Left" >
+            <Button Height="50" Margin="10"  Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=views:MenuView}}"
+                                             CommandParameter="{Binding}" HorizontalContentAlignment="Left" >
                 <Grid Margin="20,0,0,0">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                         <Image Grid.Column="0" Source="{Binding Path=ImagePath}" Width="35px" />
                         <TextBlock Grid.Column="1" Text="{Binding Path=Label}" Padding="10" />
                     </StackPanel>
-                    
                 </Grid>
-
             </Button>
         </StackPanel>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="DownloadButtonTemplate">
+
+        <Button Width="24" Height="24" Command="{Binding  DataContext.DownloadOneSongCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"  
+                                       CommandParameter="{Binding}">
+            <Image Source="../../Themes/Images/Download.png" ToolTip="{x:Static const:MusicResource.DowloadToolTip}" />
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PlayButtonTemplate">
+        <Button Width="24" Height="24" Command="{Binding  DataContext.AddOneSongToPlayListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"  
+                                       CommandParameter="{Binding}">
+            <Image Source="../../Themes/Images/Add.png" ToolTip="{x:Static const:MusicResource.PlayToolTip}"/>
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LinkButtonArtist">
+        <Button Command="{Binding  DataContext.OpenArtistCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"                                        
+                CommandParameter="{Binding Path=Artist}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Label Content="{Binding Path=Artist}" />
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Style>
+            </Button.Style>
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LinkButtonAlbum">
+        <Button Command="{Binding  DataContext.OpenAlbumCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type bodyViews:SongListView}}}"                                        
+                CommandParameter="{Binding Path=Album}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Label Content="{Binding Path=Album}" />
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Style>
+            </Button.Style>
+        </Button>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TabHeaderItemTemplate">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Image Source="{Binding ImagePath}"  Width="15" Height="15"/>
+            <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
+            <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:ContentBodyView}}}" 
+                                                  CommandParameter="{Binding}" Width="20" Height="20">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Name="ImageClose"  Source="../Themes/Images/Close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/Close_hover.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ClearPlayListTemplate">
+        <Button Height="22" Command="{Binding DataContext.ClearPlayListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=views:PlayListView}}">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="../../Themes/Images/Trashcan.png" Style="{StaticResource ResourceKey=ImageClickable}" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </DataTemplate>
     
 </ResourceDictionary>

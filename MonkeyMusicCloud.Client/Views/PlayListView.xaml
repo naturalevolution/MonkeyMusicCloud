@@ -4,112 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels" 
-             xmlns:views="clr-namespace:MonkeyMusicCloud.Client.Views" 
-             xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
+             xmlns:views="clr-namespace:MonkeyMusicCloud.Client.Views"
              xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
              mc:Ignorable="d"
-             d:DesignWidth="300">
+             d:DesignWidth="250"
+             d:DesignHeight="250">
     <UserControl.DataContext>
         <viewModels:PlayListViewModel />
     </UserControl.DataContext>
-    <Grid HorizontalAlignment="Center">
-        <Grid.Resources>
-            <Style TargetType="StackPanel">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-            </Style>
-        </Grid.Resources>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="52"></RowDefinition>
-            <RowDefinition Height="48"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding PreviousSongCommand}">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding PreviousSongCommand}" Style="{StaticResource PlayerButton}">
                 <Image Width="38" Height="38" Source="../Themes/Images/PlayerPrecedente.png" />
             </Button>
-            <Button Margin="5,0,5,0" Width="48" Height="48">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">                        
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding PlayerState}">
-                                <DataTrigger.Value>
-                                    <viewModels:State>Stop</viewModels:State>
-                                </DataTrigger.Value>
-                                <Setter Property="Command" Value="{Binding PlaySongCommand }" />
-                                <Setter Property="CommandParameter" Value="{Binding ElementName=LvSongList, Path=SelectedItem }" />
-                            </DataTrigger>
-
-                            <DataTrigger Binding="{Binding PlayerState}">
-                                <DataTrigger.Value>
-                                    <viewModels:State>Pause</viewModels:State>
-                                </DataTrigger.Value>
-                                <Setter Property="Command" Value="{Binding ResumeSongCommand }" />
-                            </DataTrigger>
-
-                            <DataTrigger Binding="{Binding PlayerState}">
-                                <DataTrigger.Value>
-                                    <viewModels:State>Play</viewModels:State>
-                                </DataTrigger.Value>
-                                <Setter Property="Command" Value="{Binding PauseSongCommand }" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Image Width="38" Height="38" >
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding PlayerState}">
-                                    <DataTrigger.Value>
-                                        <viewModels:State>Stop</viewModels:State>
-                                    </DataTrigger.Value>
-                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding PlayerState}">
-                                    <DataTrigger.Value>
-                                        <viewModels:State>Pause</viewModels:State>
-                                    </DataTrigger.Value>
-                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
-                                </DataTrigger>
-
-                                <DataTrigger Binding="{Binding PlayerState}">
-                                    <DataTrigger.Value>
-                                        <viewModels:State>Play</viewModels:State>
-                                    </DataTrigger.Value>
-                                    <Setter Property="Source" Value="../../Themes/Images/PlayerPause.png" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
+            <Button Margin="5,0,5,0" Width="48" Height="48" Style="{StaticResource PlayPauseButtonStyle}">
+                <Image Width="38" Height="38" Style="{StaticResource PlayPauseImageStyle}" />
             </Button>
-
-            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding NextSongCommand}">
+            <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding NextSongCommand}" Style="{StaticResource PlayerButton}">
                 <Image Width="38" Height="38" Source="../Themes/Images/PlayerSuivante.png"/>
             </Button>
         </StackPanel>
         <views:PlayerView  Grid.Row="1" />
-        <ListView Grid.Row="2" Name="LvSongList" 
+        <DockPanel Grid.Row="2" x:Name="Layout">
+            <ListView Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}"
-                  behaviours:GridViewColumnResize.Enabled="True" MinHeight="250" MinWidth="300">
+                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged}">
             <ListView.View >
-                <GridView AllowsColumnReorder="true"  ColumnHeaderToolTip="Musics">
-                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}"  behaviours:GridViewColumnResize.Width="5*" />
-                    <GridViewColumn behaviours:GridViewColumnResize.Width="1*">
-                        <GridViewColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <Button Height="22" Command="{Binding DataContext.ClearPlayListCommand, 
-                                                                        RelativeSource={RelativeSource FindAncestor, AncestorType=views:PlayListView}}">
-                                    <Button.Template>
-                                        <ControlTemplate>
-                                            <Image Source="../../Themes/Images/Trashcan.png" Style="{StaticResource ResourceKey=ImageClickable}" />
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-                            </DataTemplate>
-                        </GridViewColumn.HeaderTemplate>
+                <GridView>
+                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn HeaderTemplate="{StaticResource ClearPlayListTemplate}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate></DataTemplate>
                         </GridViewColumn.CellTemplate>>
@@ -117,5 +45,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        </DockPanel>
     </Grid>
 </UserControl>

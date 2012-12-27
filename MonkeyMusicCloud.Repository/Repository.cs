@@ -1,15 +1,22 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using MonkeyMusicCloud.Domain.IRepository;
 
+#endregion
+
 namespace MonkeyMusicCloud.Repository
 {
     public class Repository<T> : IRepository<T>
     {
-        protected MongoDatabase Database{get { return MongoManager.GetInstance().Database; }}
-        
+        protected MongoDatabase Database
+        {
+            get { return MongoManager.GetInstance().Database; }
+        }
+
         public virtual IList<T> GetAll()
         {
             MongoCursor<T> cursor = Collection.FindAllAs<T>();
@@ -29,11 +36,11 @@ namespace MonkeyMusicCloud.Repository
         {
             get
             {
-                if (!Database.CollectionExists(typeof(T).FullName))
+                if (!Database.CollectionExists(typeof (T).FullName))
                 {
-                    Database.CreateCollection(typeof(T).FullName);
+                    Database.CreateCollection(typeof (T).FullName);
                 }
-                return Database.GetCollection<T>(typeof(T).FullName);
+                return Database.GetCollection<T>(typeof (T).FullName);
             }
         }
 

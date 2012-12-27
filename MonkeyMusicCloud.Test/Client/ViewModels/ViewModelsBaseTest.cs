@@ -22,8 +22,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             MockService = new Mock<IMusicService>();
             new ServiceInstance(MockService.Object);
-            MockService.Setup(s => s.GetMediaFileById(It.IsAny<Guid>())).Returns(Create.MediaFile);
-
+            
             MockStreamHelper = new Mock<IStreamHelper>();
             new StreamInstance(MockStreamHelper.Object);
 

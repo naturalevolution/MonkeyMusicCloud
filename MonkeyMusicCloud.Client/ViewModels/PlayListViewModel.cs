@@ -9,31 +9,33 @@ namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class PlayListViewModel : ViewModelBase
     {
+        private Song actualPlayedSong;
+        private State playerState;
+        private ObservableCollection<Song> songList;
+
         public PlayListViewModel()
         {
             SongList = new ObservableCollection<Song>();
             PlayerObserver.AddToPlayList += delegate(ObservableCollection<Song> songs)
-                                               {
-                                                   foreach (Song song in songs)
-                                                   {
-                                                       if (!SongList.Contains(song))
-                                                       {
-                                                           SongList.Add(song);
-                                                       } 
-                                                   }
-                                               };
+                {
+                    foreach (Song song in songs)
+                    {
+                        if (!SongList.Contains(song))
+                        {
+                            SongList.Add(song);
+                        }
+                    }
+                };
             PlayerObserver.CurrentSongFinished += delegate
-                                                     {
-                                                         if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
-                                                         {
-                                                             ClearPlayer();
-                                                         }
-                                                         RaiseNewNextSongDemand();
-                                                     };
+                {
+                    if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
+                    {
+                        ClearPlayer();
+                    }
+                    RaiseNewNextSongDemand();
+                };
             PlayerState = State.Stop;
         }
-        
-        private ObservableCollection<Song> songList;
 
         public ObservableCollection<Song> SongList
         {
@@ -45,8 +47,6 @@ namespace MonkeyMusicCloud.Client.ViewModels
             }
         }
 
-        private Song actualPlayedSong;
-
         public Song ActualPlayedSong
         {
             get { return actualPlayedSong; }
@@ -54,6 +54,46 @@ namespace MonkeyMusicCloud.Client.ViewModels
             {
                 actualPlayedSong = value;
                 RaisePropertyChanged("ActualPlayedSong");
+            }
+        }
+
+        public ICommand PlaySongCommand
+        {
+            get { return new RelayCommand<Song>(RaiseNewPlaySongDemand); }
+        }
+
+        public ICommand ClearPlayListCommand
+        {
+            get { return new RelayCommand(RaiseClearPlayListDemand); }
+        }
+
+        public ICommand NextSongCommand
+        {
+            get { return new RelayCommand(RaiseNewNextSongDemand); }
+        }
+
+        public ICommand PreviousSongCommand
+        {
+            get { return new RelayCommand(RaiseNewPreviousSongDemand); }
+        }
+
+        public ICommand PauseSongCommand
+        {
+            get { return new RelayCommand(RaiseNewPauseSongDemand); }
+        }
+
+        public ICommand ResumeSongCommand
+        {
+            get { return new RelayCommand(RaiseNewResumeSongDemand); }
+        }
+
+        public State PlayerState
+        {
+            get { return playerState; }
+            set
+            {
+                playerState = value;
+                RaisePropertyChanged("PlayerState");
             }
         }
 
@@ -100,20 +140,13 @@ namespace MonkeyMusicCloud.Client.ViewModels
                 RaiseNewPlaySongDemand(SongList[indexOfActualSong - 1]);
             }
         }
-        
+
         private void RaiseClearPlayListDemand()
         {
             SongList.Clear();
             PlayerState = State.Stop;
             PlayerObserver.NotifyStopSong();
         }
-
-        public ICommand PlaySongCommand { get { return new RelayCommand<Song>(RaiseNewPlaySongDemand); } }
-        public ICommand ClearPlayListCommand { get { return new RelayCommand(RaiseClearPlayListDemand); } }
-        public ICommand NextSongCommand { get { return new RelayCommand(RaiseNewNextSongDemand); } }
-        public ICommand PreviousSongCommand { get { return new RelayCommand(RaiseNewPreviousSongDemand); } }
-        public ICommand PauseSongCommand { get { return new RelayCommand(RaiseNewPauseSongDemand); } }
-        public ICommand ResumeSongCommand { get { return new RelayCommand(RaiseNewResumeSongDemand); } }
 
         private void RaiseNewResumeSongDemand()
         {
@@ -123,23 +156,12 @@ namespace MonkeyMusicCloud.Client.ViewModels
                 PlayerState = State.Play;
             }
         }
-
-        private State playerState;
-
-        public State PlayerState
-        {
-            get { return playerState; }
-            set { 
-                playerState = value;
-                RaisePropertyChanged("PlayerState");
-            }
-        }
     }
 
     public enum State
     {
-        Play, 
-        Pause, 
+        Play,
+        Pause,
         Stop
     }
 }

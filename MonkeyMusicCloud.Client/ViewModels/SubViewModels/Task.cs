@@ -11,43 +11,48 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
             Worker = new BackgroundWorker();
             Worker.DoWork += delegate { DoAction(); };
             Worker.RunWorkerCompleted += delegate
-            {
-                if (ActionFinished != null)
                 {
-                    ActionFinished.Invoke();    
-                }
-            };
+                    if (ActionFinished != null)
+                    {
+                        ActionFinished.Invoke();
+                    }
+                };
             State = TaskState.Waiting;
         }
 
-        public virtual void DoActionInNewThread()
-        {
-            State = TaskState.Running;
-            Worker.RunWorkerAsync();
-        }
-        
-        protected abstract void DoAction();
-
-        public event ActionFinishedHandler ActionFinished;
-        public void NotifyActionFinished()
-        {
-            ActionFinishedHandler handler = ActionFinished;
-            if (handler != null) handler();
-        }
         public BackgroundWorker Worker { get; set; }
+
         public TaskState State
         {
             get { return state; }
-            set { 
+            set
+            {
                 state = value;
                 RaisePropertyChanged("State");
             }
         }
 
         public abstract string StringDescription { get; }
+
+        public virtual void DoActionInNewThread()
+        {
+            State = TaskState.Running;
+            Worker.RunWorkerAsync();
+        }
+
+        protected abstract void DoAction();
+
+        public event ActionFinishedHandler ActionFinished;
+
+        public void NotifyActionFinished()
+        {
+            ActionFinishedHandler handler = ActionFinished;
+            if (handler != null) handler();
+        }
     }
 
     public delegate void ActionFinishedHandler();
+
     public enum TaskState
     {
         Waiting,

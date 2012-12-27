@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 
-namespace MonkeyMusicCloud.Test.Helper
+namespace MonkeyMusicCloud.Test.Helper.EventCatchers
 {
     public class PlayerEventCatcher
     {
@@ -26,6 +24,7 @@ namespace MonkeyMusicCloud.Test.Helper
                 StopSongInvoked = true;
             };
 
+            
             PlayerObserver.CurrentSongFinished += delegate()
             {
                 SongFinishedInvoked = true;
@@ -45,6 +44,7 @@ namespace MonkeyMusicCloud.Test.Helper
 
           
         }
+
 
         public ObservableCollection<Song> AddToPlayListSong { get; set; }
         public Song SongToPlay { get; set; }

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:BodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
-             xmlns:BodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" mc:Ignorable="d" 
+             xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
+             xmlns:bodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" mc:Ignorable="d" 
               d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.DataContext>
-        <BodyViewModels:AlbumDetailViewModel />
+        <bodyViewModels:AlbumDetailViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Label Name="Album" Content="{Binding Album, Mode=TwoWay}" />
         <Image Grid.Column="1" Grid.Row="0" Source="{Binding AlbumImagePath, UpdateSourceTrigger=PropertyChanged}" />
-        <BodyViews:SongListView Grid.ColumnSpan="2" Grid.Row="1" SongList="{Binding DataContext.SongList, UpdateSourceTrigger=PropertyChanged
-                                                                               , RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type BodyViews:AlbumDetailView}}}" />
+        <bodyViews:SongListView Grid.ColumnSpan="2" Grid.Row="1" SongList="{Binding DataContext.SongList, UpdateSourceTrigger=PropertyChanged
+                                                                               , RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type bodyViews:AlbumDetailView}}}" />
     </Grid>
 </UserControl>

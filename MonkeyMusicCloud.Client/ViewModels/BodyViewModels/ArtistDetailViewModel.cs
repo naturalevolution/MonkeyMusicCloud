@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
@@ -11,25 +10,27 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
     public class ArtistDetailViewModel : ViewModelBase
     {
-        private string artist;
         private ObservableCollection<string> albumList;
+        private string artist;
         private ObservableCollection<Song> songList;
 
         public string Artist
         {
             get { return artist; }
-            set { 
+            set
+            {
                 artist = value;
                 AlbumList = Service.GetAlbumsByArtist(artist);
                 SongList = Service.GetByArtist(artist);
                 RaisePropertyChanged("Artist");
             }
         }
-        
+
         public ObservableCollection<string> AlbumList
         {
             get { return albumList; }
-            set {
+            set
+            {
                 albumList = value;
                 RaisePropertyChanged("AlbumList");
             }
@@ -37,10 +38,9 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         public ObservableCollection<Song> SongList
         {
-            get {
-                return songList;
-            }
-            set {
+            get { return songList; }
+            set
+            {
                 songList = value;
                 RaisePropertyChanged("SongList");
             }
@@ -53,7 +53,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         private void OpenAlbumExecute(string album)
         {
-            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = album, View = new AlbumDetailView(album) });
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem {Label = album, View = new AlbumDetailView(album)});
         }
     }
 }

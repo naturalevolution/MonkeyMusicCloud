@@ -1,10 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.BodyViewModels;
-using MonkeyMusicCloud.Domain.Model;
-using MonkeyMusicCloud.Test.Helper;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
 {
@@ -33,11 +30,11 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels.BodyViewModels
             LibraryViewModel viewModel = new LibraryViewModel();
 
             Assert.AreEqual(2, viewModel.Folders.Count);
-            Assert.AreEqual("artist1", viewModel.Folders[0].Data.Name);
+            Assert.AreEqual("artist1", viewModel.Folders[0].Name);
             Assert.AreEqual(2, viewModel.Folders[0].Children.Count);
-            Assert.AreEqual("album1", viewModel.Folders[0].Children[0].Data.Name);
-            Assert.AreEqual("album2", viewModel.Folders[0].Children[1].Data.Name);
-            Assert.AreEqual("artist2", viewModel.Folders[1].Data.Name);
+            Assert.AreEqual("album1", viewModel.Folders[0].Children[0].Name);
+            Assert.AreEqual("album2", viewModel.Folders[0].Children[1].Name);
+            Assert.AreEqual("artist2", viewModel.Folders[1].Name);
         }
     }
 }

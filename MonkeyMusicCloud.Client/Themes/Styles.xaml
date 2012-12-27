@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels">
+   
+    
+    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}" x:Key="SongTimeSeparator">
+        <Setter Property="Visibility" Value="Visible" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding TotalTime}" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="Button" BasedOn="{StaticResource PlayerButton}" x:Key="PlayPauseButtonStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Stop</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Command" Value="{Binding PlaySongCommand }" />
+                <Setter Property="CommandParameter" Value="{Binding ElementName=LvSongList, Path=SelectedItem }" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Pause</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Command" Value="{Binding ResumeSongCommand }" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Play</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Command" Value="{Binding PauseSongCommand }" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Image" x:Key="PlayPauseImageStyle">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Stop</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Pause</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Source" Value="../../Themes/Images/PlayerPlay.png" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding PlayerState}">
+                <DataTrigger.Value>
+                    <viewModels:State>Play</viewModels:State>
+                </DataTrigger.Value>
+                <Setter Property="Source" Value="../../Themes/Images/PlayerPause.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

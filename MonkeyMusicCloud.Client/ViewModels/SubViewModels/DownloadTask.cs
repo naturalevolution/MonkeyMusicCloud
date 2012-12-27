@@ -12,12 +12,18 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
             Song = song;
         }
 
+        public override string StringDescription
+        {
+            get { return string.Format(MusicResource.DownloadSongTask, Song.Title); }
+        }
+
+        public Song Song { get; set; }
+
         protected override void DoAction()
         {
             string rootPath = ConfigurationManager.AppSettings["LibraryRoot"];
             MediaFile file = Service.GetMediaFileById(Song.MediaFileId);
             CreateFile(rootPath, file);
-            
         }
 
         private void CreateFile(string rootPath, MediaFile file)
@@ -40,12 +46,5 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
 
             File.WriteAllBytes(fullPath, file.Content);
         }
-
-        public override string StringDescription
-        {
-            get { return string.Format(MusicResource.DownloadSongTask, Song.Title); }
-        }
-
-        public Song Song { get; set; }
     }
 }

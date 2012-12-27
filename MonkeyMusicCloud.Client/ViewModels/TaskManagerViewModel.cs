@@ -7,11 +7,25 @@ namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class TaskManagerViewModel : ViewModelBase
     {
+        private ObservableCollection<Task> taskList;
+
         public TaskManagerViewModel()
         {
             TaskList = new ObservableCollection<Task>();
             TaskObserver.AddTask += AddNewTask;
         }
+
+        public ObservableCollection<Task> TaskList
+        {
+            get { return taskList; }
+            set
+            {
+                taskList = value;
+                RaisePropertyChanged("TaskList");
+            }
+        }
+
+        public bool ThreadInProgress { get; set; }
 
         private void AddNewTask(Task taskToAdd)
         {
@@ -29,24 +43,12 @@ namespace MonkeyMusicCloud.Client.ViewModels
             TaskList.Remove(taskToAdd);
             if (TaskList.Any())
             {
-                TaskList.First().DoActionInNewThread();    
+                TaskList.First().DoActionInNewThread();
             }
             else
             {
                 ThreadInProgress = false;
             }
         }
-
-        private ObservableCollection<Task> taskList;
-        public ObservableCollection<Task> TaskList
-        {
-            get { return taskList; }
-            set { 
-                taskList = value;
-                RaisePropertyChanged("TaskList");
-            }
-        }
-
-        public bool ThreadInProgress { get; set; }
     }
 }

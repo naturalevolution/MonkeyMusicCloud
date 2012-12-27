@@ -4,6 +4,7 @@ using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
+using MonkeyMusicCloud.Test.Helper.EventCatchers;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
 {

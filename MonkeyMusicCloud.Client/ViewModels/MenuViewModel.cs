@@ -11,34 +11,33 @@ namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class MenuViewModel : ViewModelBase
     {
-
+        private ObservableCollection<MenuItem> items;
 
         public MenuViewModel()
         {
             Items = new ObservableCollection<MenuItem>()
+                {
+                    new MenuItem
                         {
-                            new MenuItem
-                                {
-                                    Label = MusicResource.UploadMenu, 
-                                    View = new AddSongsView(), 
-                                    ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Upload.png"
-                                },
-
-                            new MenuItem
-                                {
-                                    Label = MusicResource.LibraryMenu, 
-                                    View = new LibraryView(), 
-                                    ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Library.png"
-                                }
-                        };
+                            Label = MusicResource.UploadMenu,
+                            View = new AddSongsView(),
+                            ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Upload.png"
+                        },
+                    new MenuItem
+                        {
+                            Label = MusicResource.LibraryMenu,
+                            View = new LibraryView(),
+                            ImagePath = ConfigurationManager.AppSettings["ImageFolder"] + "Library.png"
+                        }
+                };
         }
 
-        private ObservableCollection<MenuItem> items;
         public ObservableCollection<MenuItem> Items
         {
             get { return items; }
-            set { 
-                items = value; 
+            set
+            {
+                items = value;
                 RaisePropertyChanged("Items");
             }
         }

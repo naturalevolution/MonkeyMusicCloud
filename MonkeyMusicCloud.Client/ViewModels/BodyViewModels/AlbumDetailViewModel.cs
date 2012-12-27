@@ -7,15 +7,20 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 {
     public class AlbumDetailViewModel : ViewModelBase
     {
-        protected IImageSearch ImageSearch { get { return ImageSearchInstance.GetInstance().ImageSearch; } }
-        private ObservableCollection<Song> songList;
         private string album;
         private string albumImagePath;
+        private ObservableCollection<Song> songList;
+
+        protected IImageSearch ImageSearch
+        {
+            get { return ImageSearchInstance.GetInstance().ImageSearch; }
+        }
 
         public string Album
         {
             get { return album; }
-            set { 
+            set
+            {
                 album = value;
                 SongList = Service.GetByAlbum(album);
                 AlbumImagePath = ImageSearch.GetImagePath(album);
@@ -24,10 +29,9 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         public ObservableCollection<Song> SongList
         {
-            get {
-                return songList;
-            }
-            set {
+            get { return songList; }
+            set
+            {
                 songList = value;
                 RaisePropertyChanged("SongList");
             }
@@ -35,10 +39,9 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
 
         public string AlbumImagePath
         {
-            get {
-                return albumImagePath;
-            }
-            set {
+            get { return albumImagePath; }
+            set
+            {
                 albumImagePath = value;
                 RaisePropertyChanged("AlbumImagePath");
             }

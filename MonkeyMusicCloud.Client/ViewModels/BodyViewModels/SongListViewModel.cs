@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Documents;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
@@ -26,7 +24,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                 RaisePropertyChanged("SongList");
             }
         }
-        
+
         public ICommand AddOneSongToPlayListCommand
         {
             get { return new RelayCommand<Song>(AddOneSongToPlayListExecute); }
@@ -36,9 +34,25 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
         {
             get { return new RelayCommand<Song>(DownloadOneSongExecute); }
         }
+
         public ICommand DownloadSongListCommand
         {
             get { return new RelayCommand<ObservableCollection<Song>>(DownloadSeveralSongExecute); }
+        }
+
+        public ICommand OpenArtistCommand
+        {
+            get { return new RelayCommand<string>(OpenArtistExecute); }
+        }
+
+        public ICommand AddSongsToPlayListCommand
+        {
+            get { return new RelayCommand<IList>(AddSongsToPlayListExecute); }
+        }
+
+        public ICommand OpenAlbumCommand
+        {
+            get { return new RelayCommand<string>(OpenAlbumExecute); }
         }
 
         private void DownloadSeveralSongExecute(ObservableCollection<Song> songListToDownload)
@@ -55,45 +69,36 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
             TaskObserver.NotifyAddTask(new DownloadTask(song));
         }
 
-        public ICommand OpenArtistCommand
-        {
-            get { return new RelayCommand<string>(OpenArtistExecute); }
-        }
-
         private void OpenArtistExecute(string artist)
         {
-            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = string.Format(MusicResource.ArtistTab, artist), View = new ArtistDetailView(artist) });
-        }
-
-        public ICommand AddSongsToPlayListCommand
-        {
-            get { return new RelayCommand<IList>(AddSongsToPlayListExecute); }
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem
+                {
+                    Label = string.Format(MusicResource.ArtistTab, artist),
+                    View = new ArtistDetailView(artist)
+                });
         }
 
         private void AddSongsToPlayListExecute(IList songs)
         {
             if (songs != null)
             {
-                PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>(songs.Cast<Song>()));    
+                PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>(songs.Cast<Song>()));
             }
         }
 
-        public ICommand OpenAlbumCommand
-        {
-            get { return new RelayCommand<string>(OpenAlbumExecute); }
-        }
-
-        
 
         private void OpenAlbumExecute(string album)
         {
-            ContentBodyObserver.NotifyChangeContentView(new MenuItem { Label = string.Format(MusicResource.AlbumTab, album), View = new AlbumDetailView(album) });
+            ContentBodyObserver.NotifyChangeContentView(new MenuItem
+                {
+                    Label = string.Format(MusicResource.AlbumTab, album),
+                    View = new AlbumDetailView(album)
+                });
         }
-        
+
         private void AddOneSongToPlayListExecute(Song song)
         {
-
-            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song> { song });
+            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song> {song});
         }
     }
 }

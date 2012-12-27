@@ -12,16 +12,35 @@ namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class ContentBodyViewModel : ViewModelBase
     {
-        public ContentBodyViewModel ()
+        private MenuItem selectedItem;
+
+        public ContentBodyViewModel()
         {
             Items = new ObservableCollection<MenuItem>();
-                      
+
             ContentBodyObserver.ChangeContentView += delegate(MenuItem item)
-                                                         {
-                                                             Items.Add(item);
-                                                             SelectedItem = item;
-                                                         };
+                {
+                    Items.Add(item);
+                    SelectedItem = item;
+                };
             ContentBodyObserver.NewSearch += OnContentBodyObserverOnNewSearch;
+        }
+
+        public ObservableCollection<MenuItem> Items { get; set; }
+
+        public MenuItem SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                RaisePropertyChanged("SelectedItem");
+            }
+        }
+
+        public ICommand CloseCommand
+        {
+            get { return new RelayCommand<MenuItem>(CloseExecute); }
         }
 
         private void OnContentBodyObserverOnNewSearch(ObservableCollection<Song> songs, string search)
@@ -29,31 +48,12 @@ namespace MonkeyMusicCloud.Client.ViewModels
             SongListView songListView = new SongListView {SongList = songs};
             MenuItem item = new MenuItem
                 {
-                    Label = string.Format(MusicResource.SearchTab, search), 
-                    View = songListView, 
+                    Label = string.Format(MusicResource.SearchTab, search),
+                    View = songListView,
                     ImagePath = string.Format("{0}search.png", ConfigurationManager.AppSettings["ImageFolder"])
                 };
             Items.Add(item);
             SelectedItem = item;
-        }
-
-        public ObservableCollection<MenuItem> Items { get; set; }
-
-        private MenuItem selectedItem;
-        public MenuItem SelectedItem
-        {
-            get {
-                return selectedItem;
-            }
-            set {
-                selectedItem = value;
-                RaisePropertyChanged("SelectedItem");
-            }
-        }
-        
-        public ICommand CloseCommand
-        {
-            get { return new RelayCommand<MenuItem>(CloseExecute); }
         }
 
         private void CloseExecute(MenuItem item)

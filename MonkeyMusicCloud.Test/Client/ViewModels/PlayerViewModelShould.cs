@@ -1,8 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MonkeyMusicCloud.Client.Exceptions;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
+using MonkeyMusicCloud.Test.Helper.EventCatchers;
 using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
@@ -27,9 +30,25 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         }
 
         [TestMethod]
+        public void IfPlaySongReturnsAnExceptionCatchIt()
+        {
+            ExceptionEventCatcher catcher = new ExceptionEventCatcher();
+            MediaFile file = Create.MediaFile();
+            Song songToPlay = Create.Song(file);
+            PlayerViewModel viewModel = new PlayerViewModel();
+            MockService.Setup(s => s.GetMediaFileById(songToPlay.MediaFileId)).Returns(file);
+            MockMusicPlayer.Setup(mp => mp.Play(file.Id, file.Content)).Throws<Exception>();
+            
+            PlayerObserver.NotifyPlayNewSong(songToPlay);
+
+            Assert.IsTrue(catcher.ExceptionEventInvoked);
+            Assert.IsTrue(catcher.Exception is PlayException);
+        }
+
+        [TestMethod]
         public void CallMusicPlayerResumeWhenAResumeSongEventIsCatched()
         {
-            new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel();
 
             PlayerObserver.NotifyResumeSong();
 
@@ -39,7 +58,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         [TestMethod]
         public void CallMusicPlayerPauseWhenAPauseSongEventIsCatched()
         {
-            new PlayerViewModel();
+            PlayerViewModel viewModel = new PlayerViewModel();
 
             PlayerObserver.NotifyPauseSong();
 

@@ -9,11 +9,10 @@
     <UserControl.DataContext>
         <viewModels:TaskManagerViewModel />
     </UserControl.DataContext>
-    <Grid>
-        <ListView VerticalAlignment="Top" 
+    <Grid x:Name="Layout">
+        <ListView VerticalAlignment="Top" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch"
-                  MinHeight="250">
+                  HorizontalAlignment="Stretch">
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Tasks">
                     <GridViewColumn Header="Task" DisplayMemberBinding="{Binding StringDescription}" />

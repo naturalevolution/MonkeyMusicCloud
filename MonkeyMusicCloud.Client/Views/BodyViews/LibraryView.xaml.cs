@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using MonkeyMusicCloud.Client.Views.CustomControls.OrgTree;
 
 namespace MonkeyMusicCloud.Client.Views.BodyViews
 {

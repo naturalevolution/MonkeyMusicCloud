@@ -9,7 +9,7 @@
     <UserControl.DataContext>
         <viewModels:PlayerViewModel />        
     </UserControl.DataContext>
-    <Grid AllowDrop="True">
+    <Grid AllowDrop="True" >
         <Grid.RowDefinitions>
             <RowDefinition Height="26" />
             <RowDefinition Height="26" />
@@ -20,30 +20,18 @@
         </Grid.ColumnDefinitions>
         <customControls:SliderWithDraggingEvents x:Name="Slider"
                                                  IsManipulationEnabled="True"
-            Grid.Row="0" Grid.ColumnSpan="2"  
-            VerticalAlignment="Center" Minimum="0" Maximum="100" 
-            IsSnapToTickEnabled="True" TickFrequency="1"  IsMoveToPointEnabled="True"
-            Value="{Binding PurcentagePlayed}"   MouseDown="Slider_OnMouseDown"
+                                                 Grid.Row="0" Grid.ColumnSpan="2"  
+                                                 VerticalAlignment="Center" Minimum="0" Maximum="100" 
+                                                 IsSnapToTickEnabled="True" TickFrequency="1"  IsMoveToPointEnabled="True"
+                                                 Value="{Binding PurcentagePlayed}"   MouseDown="Slider_OnMouseDown"
                                                  ThumbDragStarted="Slider_OnThumbDragStarted"
                                                  ThumbDragCompleted="Slider_OnThumbDragCompleted"
-                                                >
-        </customControls:SliderWithDraggingEvents>
+                                                />
        
         <Label Grid.Row="1" Grid.Column="0" Content="{Binding CurrentSong.Title, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="{Binding ElapsedTime, UpdateSourceTrigger=PropertyChanged}" />
-            <Label Content="/" >
-                <Label.Style>                    
-                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                        <Setter Property="Visibility" Value="Visible" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding TotalTime}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>
-            </Label>
+            <Label Content="/" Style="{StaticResource SongTimeSeparator}" />
             <Label Content="{Binding TotalTime, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
