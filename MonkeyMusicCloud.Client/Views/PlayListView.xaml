@@ -31,9 +31,10 @@
         </StackPanel>
         <views:PlayerView  Grid.Row="1" />
         <DockPanel Grid.Row="2" x:Name="Layout">
-            <ListView Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}"
+            <ListView Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}" 
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                  SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                  DragOver="DragOverMethode" Drop="LvSongList_OnDrop"  AllowDrop="True">
                 <ListView.ItemContainerStyle>
                     <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
                         <EventSetter Event="MouseDoubleClick" Handler="ListViewItemMouseDoubleClick" />
