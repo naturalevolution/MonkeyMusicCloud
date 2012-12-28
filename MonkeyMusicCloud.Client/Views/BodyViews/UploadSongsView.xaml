@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
              xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
-             xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource">
+             xmlns:resource="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
+             xmlns:ctrl="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout">
     <UserControl.DataContext>
         <bodyViewModels:UploadSongsViewModel />
     </UserControl.DataContext>
@@ -19,11 +20,11 @@
         
         <ListView Grid.RowSpan="2" Grid.ColumnSpan="2" 
                   ItemsSource="{Binding SongsToAdd, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="0"
-                  behaviours:GridViewColumnResize.Enabled="True" ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                  ctrl:ListViewLayoutManager.Enabled="true" ItemContainerStyle="{StaticResource ListViewItemStyle}"
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Path}" behaviours:GridViewColumnResize.Width="2*">
+                    <GridViewColumn ctrl:ProportionalColumn.Width="5"  DisplayMemberBinding="{Binding Path=Path}" >
                         <GridViewColumnHeader Click="OpenSongFolderDialog">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="../../Themes/Images/Browse.png" Width="30" Height="25" Margin="5" />
@@ -31,9 +32,9 @@
                         </StackPanel>
                         </GridViewColumnHeader>
                     </GridViewColumn>
-                    <GridViewColumn Header="{x:Static resource:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Song.Title}" behaviours:GridViewColumnResize.Width="2*" />
-                    <GridViewColumn Header="{x:Static resource:MusicResource.AlbumHeader}" DisplayMemberBinding="{Binding Path=Song.Album}" behaviours:GridViewColumnResize.Width="1*" />
-                    <GridViewColumn Header="{x:Static resource:MusicResource.ArtistHeader}" DisplayMemberBinding="{Binding Path=Song.Artist}" behaviours:GridViewColumnResize.Width="1*" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Song.Title}" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.AlbumHeader}" DisplayMemberBinding="{Binding Path=Song.Album}" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.ArtistHeader}" DisplayMemberBinding="{Binding Path=Song.Artist}" />
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

@@ -11,6 +11,7 @@ namespace MonkeyMusicCloud.Utilities.Interface
         void Pause();
         void Resume();
         void PlayAt(double purcentage);
+        void ChangeVolume(double volume);
     }
 
     public delegate void SongFinishedHandler();

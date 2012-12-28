@@ -56,6 +56,7 @@
     <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\LibraryViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\VolumeViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\DownloadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\UploadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\TaskShould.cs" />

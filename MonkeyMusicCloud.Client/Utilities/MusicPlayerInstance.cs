@@ -19,7 +19,7 @@ namespace MonkeyMusicCloud.Client.Utilities
         {
             lock (InstanceLock)
             {
-                return instance ?? (instance = new MusicPlayerInstance(new DirectPlayer()));
+                return instance ?? (instance = new MusicPlayerInstance(new KlangPlayer()));
             }
         }
     }

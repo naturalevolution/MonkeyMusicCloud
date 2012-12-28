@@ -4,15 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:bodyViews="clr-namespace:MonkeyMusicCloud.Client.Views.BodyViews" 
-             xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels" 
-             xmlns:behaviours="clr-namespace:MonkeyMusicCloud.Client.Views.CustomControls"
-             xmlns:const="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource" mc:Ignorable="d" d:DesignWidth="800">
+             xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels"
+             xmlns:const="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
+             xmlns:ctrl="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
+             xmlns:util="clr-namespace:MonkeyMusicCloud.Client.ViewModels.SubViewModels"
+             mc:Ignorable="d" d:DesignWidth="800">
     <UserControl.DataContext>
         <bodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid x:Name="Layout">
-        <ListView Name="LvSongList" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  HorizontalAlignment="Stretch" behaviours:GridViewColumnResize.Enabled="True" MouseMove="List_MouseMove"
+        <ListView Name="LvSongList" ctrl:ListViewLayoutManager.Enabled="true" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  MouseMove="List_MouseMove" IsSynchronizedWithCurrentItem="True" util:GridViewSort.AutoSort="True"
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.ItemContainerStyle>
                 <Style BasedOn="{StaticResource ListViewItemStyle}" TargetType="ListViewItem">
@@ -21,21 +23,19 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
-                    <GridViewColumn Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" behaviours:GridViewColumnResize.Width="2*"   />
-                    <GridViewColumn Header="{x:Static const:MusicResource.AlbumHeader}" behaviours:GridViewColumnResize.Width="2*" CellTemplate="{StaticResource LinkButtonAlbum}" />
-                    <GridViewColumn Header="{x:Static const:MusicResource.ArtistHeader}" behaviours:GridViewColumnResize.Width="2*" CellTemplate="{StaticResource LinkButtonArtist}" />
-                    <GridViewColumn CellTemplate="{StaticResource PlayButtonTemplate}" >
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" util:GridViewSort.PropertyName="Title" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.AlbumHeader}" CellTemplate="{StaticResource LinkButtonAlbum}" util:GridViewSort.PropertyName="Album" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.ArtistHeader}" CellTemplate="{StaticResource LinkButtonArtist}" util:GridViewSort.PropertyName="Artist" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="1" CellTemplate="{StaticResource PlayButtonTemplate}" >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                                 <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" ToolTip="{x:Static const:MusicResource.PlayAllHeader}" />
                         </GridViewColumnHeader>
                     </GridViewColumn>
-                    <GridViewColumn CellTemplate="{StaticResource DownloadButtonTemplate}">
+                    <GridViewColumn ctrl:ProportionalColumn.Width="1" CellTemplate="{StaticResource DownloadButtonTemplate}">
                         <GridViewColumnHeader Command="{Binding  DataContext.DownloadSongListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
-                            <GridViewColumnHeader>
                                 <Image Source="../../Themes/Images/Download.png" Width="20" Height="20" VerticalAlignment="Center"  ToolTip="{x:Static const:MusicResource.DownloadAllHeader}"  />
-                            </GridViewColumnHeader>
                         </GridViewColumnHeader>
                     </GridViewColumn>
                 </GridView>

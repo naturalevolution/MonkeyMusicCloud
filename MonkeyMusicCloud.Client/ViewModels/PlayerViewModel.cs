@@ -26,12 +26,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
             MusicPlayer.PurcentagePlayed += RefreshSongTimes;
             MusicPlayer.SongFinished += OnSongFinished;
         }
-
-        private IMusicPlayer MusicPlayer
-        {
-            get { return MusicPlayerInstance.GetInstance().Player; }
-        }
-
+        
         public int PurcentagePlayed
         {
             get { return purcentagePlayed; }

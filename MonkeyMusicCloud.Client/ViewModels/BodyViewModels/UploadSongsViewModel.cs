@@ -82,7 +82,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.BodyViewModels
                             songs.Add(new SongToAdd {IsSelected = true, Song = song, Path = path, MediaFile = mediaFile});
                         }
                     }
-                        //TODO Logger le message
+                    //TODO Logger le message
                     catch (Exception)
                     {
                         continue;

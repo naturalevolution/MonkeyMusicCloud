@@ -39,6 +39,9 @@
     <Reference Include="FluidKit">
       <HintPath>..\Solution Items\Librairies\FluidKit\FluidKit.dll</HintPath>
     </Reference>
+    <Reference Include="Itenso.Windows.Controls.ListViewLayout">
+      <HintPath>..\Solution Items\Librairies\ColumnWidthHelper\Itenso.Windows.Controls.ListViewLayout.dll</HintPath>
+    </Reference>
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
@@ -82,6 +85,8 @@
     <Compile Include="ViewModels\BodyViewModels\ArtistDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\GridViewSort.cs" />
+    <Compile Include="ViewModels\VolumeViewModel.cs" />
     <Compile Include="ViewModels\CustomViewModels\AlbumListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
@@ -120,7 +125,6 @@
     <Compile Include="Views\ContentBodyView.xaml.cs">
       <DependentUpon>ContentBodyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomControls\Behaviours.cs" />
     <Compile Include="Views\CustomControls\SliderWithDraggingEvents.cs" />
     <Compile Include="Views\CustomViews\AlbumListView.xaml.cs">
       <DependentUpon>AlbumListView.xaml</DependentUpon>
@@ -136,6 +140,9 @@
     </Compile>
     <Compile Include="Views\TaskManagerView.xaml.cs">
       <DependentUpon>TaskManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VolumeView.xaml.cs">
+      <DependentUpon>VolumeView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +213,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TaskManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VolumeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -330,13 +341,16 @@
   <ItemGroup>
     <Resource Include="Themes\Images\Library.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Volume.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(SolutionDir)Solution Items\Librairies\ikpMP3.dll" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(SolutionDir)Solution Items\Librairies\irrKlang\ikpMP3.dll" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

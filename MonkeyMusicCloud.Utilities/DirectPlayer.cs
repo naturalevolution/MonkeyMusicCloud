@@ -11,31 +11,25 @@ namespace MonkeyMusicCloud.Utilities
     {
         private FilgraphManager objFilterGraph;
         private IMediaPosition objMediaPosition;
+        private IBasicAudio audio;
         private Timer tmProgressionFlux = new Timer(500);
         
-        private static DirectPlayer instance;
-        static readonly object InstanceLock = new object();
-
-        public static DirectPlayer GetInstance()
+        public DirectPlayer()
         {
-            lock (InstanceLock)
-            {
-                string directoryPath = ConfigurationManager.AppSettings["MediaCache"];
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
-                return instance ?? (instance = new DirectPlayer());
-            }
+            objFilterGraph = new FilgraphManager();
+            audio = (IBasicAudio) objFilterGraph;
         }
 
         //TODO Fichier déjà utilisé.... surement par Quartz. Essayer de libérer les ressources de la librairie
         public void Play(Guid id, byte[] file)
         {
+
+            objFilterGraph = new FilgraphManager();
+            audio = (IBasicAudio) objFilterGraph;
             //pb d'accès concurrenciel
             string path = ConfigurationManager.AppSettings["MediaCache"] + id + ".mp3";
             File.WriteAllBytes(path, file);
-            objFilterGraph = new FilgraphManager();
+            
             objFilterGraph.RenderFile(path);
             objMediaPosition = objFilterGraph as IMediaPosition;
 
@@ -98,6 +92,11 @@ namespace MonkeyMusicCloud.Utilities
             int totalTime = (int) objMediaPosition.Duration;
             objMediaPosition.CurrentPosition =  totalTime * purcentage / 100;
             Resume();
+        }
+
+        public void ChangeVolume(double volume)
+        {
+            audio.Volume = (int) volume;
         }
 
         public event PurcentagePlayedHandler PurcentagePlayed;

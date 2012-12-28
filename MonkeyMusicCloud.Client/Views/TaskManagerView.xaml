@@ -4,19 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
+             xmlns:ctrl="clr-namespace:Itenso.Windows.Controls.ListViewLayout;assembly=Itenso.Windows.Controls.ListViewLayout"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="300">
     <UserControl.DataContext>
         <viewModels:TaskManagerViewModel />
     </UserControl.DataContext>
     <Grid x:Name="Layout">
-        <ListView VerticalAlignment="Top" Height="{Binding ElementName=Layout, Path=ActualHeight}"
+        <ListView ctrl:ListViewLayoutManager.Enabled="true" VerticalAlignment="Top" Height="{Binding ElementName=Layout, Path=ActualHeight}"
                   Margin="0,0,0,0" ItemsSource="{Binding TaskList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   HorizontalAlignment="Stretch" ItemContainerStyle="{StaticResource ListViewItemStyle}">
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Tasks">
-                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding StringDescription}" />
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding State}" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="2" Header="Task" DisplayMemberBinding="{Binding StringDescription}" />
+                    <GridViewColumn ctrl:ProportionalColumn.Width="1" Header="Status" DisplayMemberBinding="{Binding State}" />
                 </GridView>
             </ListView.View>
         </ListView>
