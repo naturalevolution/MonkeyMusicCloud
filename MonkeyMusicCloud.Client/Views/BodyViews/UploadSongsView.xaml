@@ -35,7 +35,7 @@
                     <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Song.Title}" />
                     <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.AlbumHeader}" DisplayMemberBinding="{Binding Path=Song.Album}" />
                     <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.ArtistHeader}" DisplayMemberBinding="{Binding Path=Song.Artist}" />
-                    <GridViewColumn >
+                    <GridViewColumn ctrl:ProportionalColumn.Width="1" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />

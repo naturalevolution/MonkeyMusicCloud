@@ -52,7 +52,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             PlayerObserver.NotifyResumeSong();
 
-            MockMusicPlayer.Verify(mp => mp.Resume(), Times.Once());
+            MockMusicPlayer.Verify(mp => mp.Resume());
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             PlayerObserver.NotifyPauseSong();
 
-            MockMusicPlayer.Verify(mp => mp.Pause(), Times.Once());
+            MockMusicPlayer.Verify(mp => mp.Pause());
         }
         
         [TestMethod]

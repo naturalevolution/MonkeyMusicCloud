@@ -13,7 +13,7 @@
         <bodyViewModels:SongListViewModel />
     </UserControl.DataContext>
     <Grid x:Name="Layout">
-        <ListView Name="LvSongList" ctrl:ListViewLayoutManager.Enabled="true" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <ListView Name="LvSongList" ctrl:ListViewLayoutManager.Enabled="True" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   MouseMove="List_MouseMove" IsSynchronizedWithCurrentItem="True" util:GridViewSort.AutoSort="True"
                   Height="{Binding ElementName=Layout, Path=ActualHeight}"  Width="{Binding ElementName=Layout, Path=ActualWidth}">
             <ListView.ItemContainerStyle>
@@ -23,10 +23,10 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
-                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" util:GridViewSort.PropertyName="Title" />
-                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.AlbumHeader}" CellTemplate="{StaticResource LinkButtonAlbum}" util:GridViewSort.PropertyName="Album" />
-                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.ArtistHeader}" CellTemplate="{StaticResource LinkButtonArtist}" util:GridViewSort.PropertyName="Artist" />
-                    <GridViewColumn ctrl:ProportionalColumn.Width="1" CellTemplate="{StaticResource PlayButtonTemplate}" >
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.TitleHeader}" DisplayMemberBinding="{Binding Path=Title}" util:GridViewSort.PropertyName="Title" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.AlbumHeader}" CellTemplate="{StaticResource LinkButtonAlbum}" util:GridViewSort.PropertyName="Album" />
+                    <GridViewColumn  ctrl:ProportionalColumn.Width="4" Header="{x:Static const:MusicResource.ArtistHeader}" CellTemplate="{StaticResource LinkButtonArtist}" util:GridViewSort.PropertyName="Artist" />
+                    <GridViewColumn  CellTemplate="{StaticResource PlayButtonTemplate}" >
                         <GridViewColumnHeader Command="{Binding  DataContext.AddSongsToPlayListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type bodyViews:SongListView}}}"
                                               CommandParameter="{Binding ElementName=LvSongList, Path=ItemsSource}">
                                 <Image Source="../../Themes/Images/Add.png" Width="20" Height="20" VerticalAlignment="Center" ToolTip="{x:Static const:MusicResource.PlayAllHeader}" />

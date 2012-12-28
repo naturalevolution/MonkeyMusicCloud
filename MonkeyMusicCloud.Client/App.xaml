@@ -1,11 +1,10 @@
-﻿<Application x:Class="MonkeyMusicCloud.App"
+﻿<Application x:Class="MonkeyMusicCloud.Client.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="Themes\Theme.xaml"/>
                 <ResourceDictionary Source="Themes\Styles.xaml"/>
                 <ResourceDictionary Source="Themes\Templates.xaml"/>

@@ -33,7 +33,7 @@ namespace MonkeyMusicCloud.Client.Views.BodyViews
             ((SongListView) dobj).LvSongList.ItemsSource = (ObservableCollection<Song>) e.NewValue;
         }
 
-        private static bool SongListValidate(object Value)
+        private static bool SongListValidate(object value)
         {
             return true;
         }

@@ -39,12 +39,15 @@
     <Reference Include="FluidKit">
       <HintPath>..\Solution Items\Librairies\FluidKit\FluidKit.dll</HintPath>
     </Reference>
-    <Reference Include="Itenso.Windows.Controls.ListViewLayout">
+    <Reference Include="Itenso.Windows.Controls.ListViewLayout, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution Items\Librairies\ColumnWidthHelper\Itenso.Windows.Controls.ListViewLayout.dll</HintPath>
     </Reference>
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />
@@ -58,8 +61,6 @@
       <HintPath>..\Solution Items\Librairies\TagLib\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

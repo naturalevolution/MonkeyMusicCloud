@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Service.Proxy;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Utilities.Interface;
@@ -19,7 +22,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         {
             MockService = new Mock<IMusicService>();
             new ServiceInstance(MockService.Object);
-            
+
             MockStreamHelper = new Mock<IStreamHelper>();
             new StreamInstance(MockStreamHelper.Object);
 
@@ -28,6 +31,41 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             MockImageSearch = new Mock<IImageSearch>();
             new ImageSearchInstance(MockImageSearch.Object);
+
+            LoadResourcesFiles();
+        }
+
+        private void LoadResourcesFiles()
+        {
+            string rootPath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\MonkeyMusicCloud.Client\\Themes\\";
+
+            IList<string> ressourceFiles = new List<string>()
+                {
+                    "Styles.xaml",
+                    "Template.xaml"
+                };
+
+           
+            if (Application.Current == null)
+            {
+                // create the Application object
+                new Application();
+
+                // merge in your application resources
+                Application.Current.Resources.MergedDictionaries.Add(
+                    Application.LoadComponent(
+                        new Uri("MonkeyMusicCloud.Client;component/Themes/Theme.xaml",
+                        UriKind.Relative)) as ResourceDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(
+                    Application.LoadComponent(
+                        new Uri("MonkeyMusicCloud.Client;component/Themes/Styles.xaml",
+                        UriKind.Relative)) as ResourceDictionary);
+                Application.Current.Resources.MergedDictionaries.Add(
+                    Application.LoadComponent(
+                        new Uri("MonkeyMusicCloud.Client;component/Themes/Templates.xaml",
+                        UriKind.Relative)) as ResourceDictionary);
+                
+            }
         }
     }
 }

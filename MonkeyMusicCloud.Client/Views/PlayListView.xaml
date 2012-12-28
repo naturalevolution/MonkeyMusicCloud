@@ -37,7 +37,7 @@
         <views:PlayerView  Grid.Row="1" Grid.ColumnSpan="2" />
         <views:VolumeView Grid.Row="0" Grid.Column="1" />
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" x:Name="Layout">
-            <ListView ctrl:ListViewLayoutManager.Enabled="true" Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}" 
+            <ListView ctrl:ListViewLayoutManager.Enabled="True"  Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}" 
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding ActualPlayedSong, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                   DragOver="DragOverMethode" Drop="LvSongList_OnDrop"  AllowDrop="True">
@@ -48,8 +48,8 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View >
                 <GridView>
-                    <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />
-                    <GridViewColumn ctrl:ProportionalColumn.Width="1" HeaderTemplate="{StaticResource ClearPlayListTemplate}">
+                        <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />
+                        <GridViewColumn ctrl:ProportionalColumn.Width="1" HeaderTemplate="{StaticResource ClearPlayListTemplate}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate></DataTemplate>
                         </GridViewColumn.CellTemplate>

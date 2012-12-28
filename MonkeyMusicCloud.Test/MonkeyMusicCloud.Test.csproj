@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Itenso.Windows.Controls.ListViewLayout">
+      <HintPath>..\Solution Items\Librairies\ColumnWidthHelper\Itenso.Windows.Controls.ListViewLayout.dll</HintPath>
+    </Reference>
     <Reference Include="MicroMvvm">
       <HintPath>..\Solution Items\Librairies\MicroMvvm.dll</HintPath>
     </Reference>
@@ -42,8 +45,11 @@
       <HintPath>..\Solution Items\Librairies\Moq.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">

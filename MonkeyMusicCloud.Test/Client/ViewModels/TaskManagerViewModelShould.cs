@@ -30,7 +30,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             Assert.AreEqual(1, viewModel.TaskList.Count);
             Assert.IsTrue(viewModel.ThreadInProgress);
-            mockTask.Verify(mt => mt.DoActionInNewThread(), Times.Once());
+            mockTask.Verify(mt => mt.DoActionInNewThread());
             CollectionAssert.Contains(viewModel.TaskList, mockTask.Object);
 
         }
