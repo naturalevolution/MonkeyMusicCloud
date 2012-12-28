@@ -66,24 +66,30 @@
         </Button>
     </DataTemplate>
 
-    <DataTemplate x:Key="TabHeaderItemTemplate">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Image Source="{Binding ImagePath}"  Width="15" Height="15"/>
-            <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
-            <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:ContentBodyView}}}" 
+    <DataTemplate x:Key="TabHeaderItemTemplate" >
+        <Grid>
+            <Grid.InputBindings>
+                <MouseBinding Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:ContentBodyView}}}" 
+                                                  CommandParameter="{Binding}" MouseAction="MiddleClick" />
+            </Grid.InputBindings>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Image Source="{Binding ImagePath}"  Width="15" Height="15"/>
+                <TextBlock Text="{Binding Label}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="5" />
+                <Button HorizontalAlignment="Center"  Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type views:ContentBodyView}}}" 
                                                   CommandParameter="{Binding}" Width="20" Height="20">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Name="ImageClose"  Source="../Themes/Images/Close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/Close_hover.png" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Name="ImageClose"  Source="../Themes/Images/Close.png" Style="{StaticResource ImageClickable}" Width="15" Height="15" />
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ImageClose" Property="Source" Value="../Themes/Images/Close_hover.png" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="ClearPlayListTemplate">
