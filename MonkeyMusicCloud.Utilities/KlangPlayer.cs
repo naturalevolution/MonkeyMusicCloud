@@ -32,7 +32,7 @@ namespace MonkeyMusicCloud.Utilities
             int total = (int)ActualSound.PlayLength / 1000;
             int current = (int)ActualSound.PlayPosition / 1000;
             PurcentagePlayed.Invoke(current, total);
-            if (ActualSound.PlayPosition == ActualSound.PlayLength)
+            if (ActualSound.Finished)
             {
                 SongFinished.Invoke();
             }
