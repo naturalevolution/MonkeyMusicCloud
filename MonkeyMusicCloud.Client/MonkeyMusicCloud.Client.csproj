@@ -345,6 +345,9 @@
   <ItemGroup>
     <Resource Include="Themes\Images\Volume.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Repeat.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

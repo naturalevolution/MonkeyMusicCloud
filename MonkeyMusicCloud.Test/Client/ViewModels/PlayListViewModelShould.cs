@@ -317,6 +317,26 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
                 Assert.IsNull(ViewModel.ActualPlayedSong);
                 Assert.AreEqual(State.Stop, ViewModel.PlayerState);
             }
+
+            [TestMethod]
+            public void IfPlayListIsFinishedAndRepeatIsActivatedPlayTheFirstSong()
+            {
+                Song song1 = Create.Song();
+                Song song2 = Create.Song();
+                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+                ViewModel.SongList = new ObservableCollection<Song> { song1, song2 };
+                ViewModel.ActualPlayedSong = song2;
+                ViewModel.PlayerState = State.Play;
+                ViewModel.Repeat = true;
+
+                PlayerObserver.NotifyCurrentSongFinished();
+
+                Assert.IsTrue(eventCatcher.PlaySongInvoked);
+                Assert.AreEqual(song1, eventCatcher.SongToPlay);
+                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
+                Assert.AreEqual(State.Play, ViewModel.PlayerState);
+            }
+
         #endregion
     }
 }

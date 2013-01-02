@@ -11,6 +11,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
     {
         private Song actualPlayedSong;
         private State playerState;
+        private bool repeat;
         private ObservableCollection<Song> songList;
 
         public PlayListViewModel()
@@ -26,14 +27,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
                         }
                     }
                 };
-            PlayerObserver.CurrentSongFinished += delegate
-                {
-                    if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
-                    {
-                        ClearPlayer();
-                    }
-                    RaiseNewNextSongDemand();
-                };
+            PlayerObserver.CurrentSongFinished += OnCurrentSongFinished;
             PlayerState = State.Stop;
         }
 
@@ -94,6 +88,35 @@ namespace MonkeyMusicCloud.Client.ViewModels
             {
                 playerState = value;
                 RaisePropertyChanged("PlayerState");
+            }
+        }
+
+        public bool Repeat
+        {
+            get { return repeat; }
+            set
+            {
+                repeat = value;
+                RaisePropertyChanged("Repeat");
+            }
+        }
+
+        private void OnCurrentSongFinished()
+        {
+            if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
+            {
+                if (Repeat)
+                {
+                    RaiseNewPlaySongDemand(SongList[0]);
+                }
+                else
+                {
+                    ClearPlayer();
+                }
+            }
+            else
+            {
+                RaiseNewNextSongDemand();
             }
         }
 
