@@ -133,6 +133,15 @@ namespace MonkeyMusicCloud.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is playing.
+        /// </summary>
+        public static string IsPlaying {
+            get {
+                return ResourceManager.GetString("IsPlaying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Library.
         /// </summary>
         public static string LibraryMenu {

@@ -101,5 +101,19 @@
             </Button.Template>
         </Button>
     </DataTemplate>
+
+    <DataTemplate x:Key="IsPlayingCellTemplate">
+        <Label Content="{x:Static const:MusicResource.IsPlaying}">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPlaying}" Value="false">
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+    </DataTemplate>
     
 </ResourceDictionary>

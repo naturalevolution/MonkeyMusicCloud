@@ -86,6 +86,7 @@
     <Compile Include="ViewModels\BodyViewModels\ArtistDetailViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\SongToPlay.cs" />
     <Compile Include="ViewModels\SubViewModels\GridViewSort.cs" />
     <Compile Include="ViewModels\SubViewModels\Tasks\UploadTask.cs" />
     <Compile Include="ViewModels\VolumeViewModel.cs" />
@@ -345,16 +346,20 @@
     <Resource Include="Themes\Images\Volume.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Repeat.png" />
+    <Resource Include="Themes\Images\Repeat_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Repeat_alt.png" />
+    <Resource Include="Themes\Images\Repeat_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Random.png" />
+    <Resource Include="Themes\Images\Random_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Random_alt.png" />
+    <Resource Include="Themes\Images\Random_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Random_hover.png" />
+    <Resource Include="Themes\Images\Repeat_hover.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

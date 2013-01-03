@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Service.Proxy;
@@ -37,21 +36,10 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
         private void LoadResourcesFiles()
         {
-            string rootPath = AppDomain.CurrentDomain.BaseDirectory + "\\..\\MonkeyMusicCloud.Client\\Themes\\";
-
-            IList<string> ressourceFiles = new List<string>()
-                {
-                    "Styles.xaml",
-                    "Template.xaml"
-                };
-
-           
             if (Application.Current == null)
             {
-                // create the Application object
                 new Application();
 
-                // merge in your application resources
                 Application.Current.Resources.MergedDictionaries.Add(
                     Application.LoadComponent(
                         new Uri("MonkeyMusicCloud.Client;component/Themes/Theme.xaml",

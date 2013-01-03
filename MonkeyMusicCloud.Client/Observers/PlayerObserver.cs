@@ -3,11 +3,6 @@ using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.Observers
 {
-    /// <summary>
-    /// TODO : Surement mieux à faire
-    /// Classe fourre-tout, mais permet de s'abstraire d'une relation entre les vueModel. 
-    /// Permet aussi de pouvoir partager un event commun
-    /// </summary>
     public class PlayerObserver
     {
         public static event AddToPlayListHandler AddToPlayList;

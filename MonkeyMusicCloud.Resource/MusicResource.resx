@@ -141,6 +141,9 @@
   <data name="DownloadSongTask" xml:space="preserve">
     <value>Song Download : {0}</value>
   </data>
+  <data name="IsPlaying" xml:space="preserve">
+    <value>Is playing</value>
+  </data>
   <data name="LibraryMenu" xml:space="preserve">
     <value>Library</value>
   </data>

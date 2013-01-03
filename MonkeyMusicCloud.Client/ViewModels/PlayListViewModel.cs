@@ -3,28 +3,29 @@ using System.Linq;
 using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 
 namespace MonkeyMusicCloud.Client.ViewModels
 {
     public class PlayListViewModel : ViewModelBase
     {
-        private Song actualPlayedSong;
+        private SongToPlay actualPlayedSong;
         private State playerState;
-        private bool repeat;
         private bool random;
-        private ObservableCollection<Song> songList;
+        private bool repeat;
+        private ObservableCollection<SongToPlay> songList;
 
         public PlayListViewModel()
         {
-            SongList = new ObservableCollection<Song>();
+            SongList = new ObservableCollection<SongToPlay>();
             PlayerObserver.AddToPlayList += delegate(ObservableCollection<Song> songs)
                 {
                     foreach (Song song in songs)
                     {
-                        if (!SongList.Contains(song))
+                        if (!SongList.Select(sl => sl.Song).Contains(song))
                         {
-                            SongList.Add(song);
+                            SongList.Add(new SongToPlay {Song = song});
                         }
                     }
                 };
@@ -32,7 +33,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
             PlayerState = State.Stop;
         }
 
-        public ObservableCollection<Song> SongList
+        public ObservableCollection<SongToPlay> SongList
         {
             get { return songList; }
             set
@@ -42,7 +43,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
             }
         }
 
-        public Song ActualPlayedSong
+        public SongToPlay ActualPlayedSong
         {
             get { return actualPlayedSong; }
             set
@@ -54,7 +55,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         public ICommand PlaySongCommand
         {
-            get { return new RelayCommand<Song>(RaiseNewPlaySongDemand); }
+            get { return new RelayCommand<SongToPlay>(RaiseNewPlaySongDemand); }
         }
 
         public ICommand ClearPlayListCommand
@@ -92,16 +93,6 @@ namespace MonkeyMusicCloud.Client.ViewModels
             get { return new RelayCommand(RaiseNewSwitchRandomModeDemand); }
         }
 
-        private void RaiseNewSwitchRepeatModeDemand()
-        {
-            Repeat = !Repeat;
-        }
-
-        private void RaiseNewSwitchRandomModeDemand()
-        {
-            Random = !Random;
-        }
-
         public State PlayerState
         {
             get { return playerState; }
@@ -132,18 +123,28 @@ namespace MonkeyMusicCloud.Client.ViewModels
             }
         }
 
+        private void RaiseNewSwitchRepeatModeDemand()
+        {
+            Repeat = !Repeat;
+        }
+
+        private void RaiseNewSwitchRandomModeDemand()
+        {
+            Random = !Random;
+        }
 
         private void OnCurrentSongFinished()
         {
             if (SongList.IndexOf(ActualPlayedSong) == SongList.Count - 1)
             {
+                ClearPlayer();
                 if (Repeat)
                 {
+                    foreach (SongToPlay songToPlay in SongList)
+                    {
+                        songToPlay.AlreadyPlayed = false;
+                    }
                     RaiseNewPlaySongDemand(SongList[0]);
-                }
-                else
-                {
-                    ClearPlayer();
                 }
             }
             else
@@ -158,13 +159,20 @@ namespace MonkeyMusicCloud.Client.ViewModels
             PlayerState = State.Stop;
         }
 
-        private void RaiseNewPlaySongDemand(Song song)
+        private void RaiseNewPlaySongDemand(SongToPlay song)
         {
             if (SongList.Count > 0)
             {
-                Song songToPlay = song ?? SongList.First();
+                SongToPlay songToPlay = song ?? SongList.First();
+                if (ActualPlayedSong != null)
+                {
+                    ActualPlayedSong.AlreadyPlayed = true;
+                    ActualPlayedSong.IsPlaying = false;
+                }
+
                 ActualPlayedSong = songToPlay;
-                PlayerObserver.NotifyPlayNewSong(songToPlay);
+                songToPlay.IsPlaying = true;
+                PlayerObserver.NotifyPlayNewSong(songToPlay.Song);
                 PlayerState = State.Play;
             }
         }
@@ -180,11 +188,16 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         private void RaiseNewNextSongDemand()
         {
-            if (ActualPlayedSong != null && SongList.IndexOf(ActualPlayedSong) != SongList.Count - 1)
+            if (ActualPlayedSong != null && PlayListIsNotFinished())
             {
                 int indexOfActualSong = SongList.IndexOf(ActualPlayedSong);
                 RaiseNewPlaySongDemand(SongList[indexOfActualSong + 1]);
             }
+        }
+
+        private bool PlayListIsNotFinished()
+        {
+            return SongList.IndexOf(ActualPlayedSong) != SongList.Count - 1;
         }
 
         private void RaiseNewPreviousSongDemand()

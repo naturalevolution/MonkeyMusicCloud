@@ -52,7 +52,7 @@
             </StackPanel>
             <views:VolumeView Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" />
         </Grid>
-        
+
         <views:PlayerView  Grid.Row="1" Grid.ColumnSpan="2" />
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" x:Name="Layout">
             <ListView ctrl:ListViewLayoutManager.Enabled="True"  Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}" 
@@ -65,16 +65,12 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View >
-                <GridView>
-                        <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Title}" />
-                        <GridViewColumn ctrl:ProportionalColumn.Width="1" HeaderTemplate="{StaticResource ClearPlayListTemplate}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate></DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                    <GridView>
+                        <GridViewColumn ctrl:ProportionalColumn.Width="4" Header="{x:Static resource:MusicResource.TitleHeader }" DisplayMemberBinding="{Binding Song.Title}" />
+                        <GridViewColumn ctrl:ProportionalColumn.Width="1" HeaderTemplate="{StaticResource ClearPlayListTemplate}" CellTemplate="{StaticResource IsPlayingCellTemplate }" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
     </Grid>
 </UserControl>

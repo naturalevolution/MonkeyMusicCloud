@@ -69,20 +69,28 @@
     </Style>
 
     <Style BasedOn="{StaticResource ImageClickable}" TargetType="Image" x:Key="RepeatImageStyle">
-        <Setter Property="Source" Value="../Themes/Images/Repeat.png" />
+        <Setter Property="Source" Value="../Themes/Images/Repeat_off.png" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding Repeat}" Value="true">
-                <Setter Property="Source" Value="../Themes/Images/Repeat_alt.png" />
+                <Setter Property="Source" Value="../Themes/Images/Repeat_on.png" />
             </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="../Themes/Images/Repeat_hover.png"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
     
+
+
     <Style BasedOn="{StaticResource ImageClickable}" TargetType="Image" x:Key="RandomImageStyle">
-        <Setter Property="Source" Value="../Themes/Images/Random.png" />
+        <Setter Property="Source" Value="../Themes/Images/Random_off.png" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding Random}" Value="true">
-                <Setter Property="Source" Value="../Themes/Images/Random_alt.png" />
+                <Setter Property="Source" Value="../Themes/Images/Random_on.png" />
             </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="../Themes/Images/Random_hover.png"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>
