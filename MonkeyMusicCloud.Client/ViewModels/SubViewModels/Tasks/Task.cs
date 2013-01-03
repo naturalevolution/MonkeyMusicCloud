@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
+namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks
 {
     public abstract class Task : ViewModelBase
     {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Resource;
 using MonkeyMusicCloud.Test.Helper;

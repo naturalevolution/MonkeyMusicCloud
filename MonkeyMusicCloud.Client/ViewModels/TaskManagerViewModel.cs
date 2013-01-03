@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using MonkeyMusicCloud.Client.Observers;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 
 namespace MonkeyMusicCloud.Client.ViewModels
 {

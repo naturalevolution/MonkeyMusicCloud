@@ -76,6 +76,7 @@
     <Compile Include="Client\ViewModels\BodyViewModels\SongListViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\MenuItemShould.cs" />
     <Compile Include="Client\ViewModels\ViewModelsBaseTest.cs" />
+    <Compile Include="Domain\Model\EntityShould.cs" />
     <Compile Include="Domain\Model\FileShould.cs" />
     <Compile Include="Domain\Model\SongShould.cs" />
     <Compile Include="Helper\EventCatchers\ExceptionEventCatcher.cs" />

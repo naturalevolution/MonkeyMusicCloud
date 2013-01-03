@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
@@ -67,7 +67,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             mockTask1.Object.NotifyActionFinished();
 
-            mockTask2.Verify(mt => mt.DoActionInNewThread(), Times.Once());
+            mockTask2.Verify(mt => mt.DoActionInNewThread());
             Assert.IsTrue(viewModel.ThreadInProgress);
             CollectionAssert.DoesNotContain(viewModel.TaskList, mockTask1.Object);
 
@@ -75,7 +75,7 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
 
             mockTask2.Object.NotifyActionFinished();
 
-            mockTask3.Verify(mt => mt.DoActionInNewThread(), Times.Once());
+            mockTask3.Verify(mt => mt.DoActionInNewThread());
             Assert.IsTrue(viewModel.ThreadInProgress);
             CollectionAssert.DoesNotContain(viewModel.TaskList, mockTask2.Object);
         }

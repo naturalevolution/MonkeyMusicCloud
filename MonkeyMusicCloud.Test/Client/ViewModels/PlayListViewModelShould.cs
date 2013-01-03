@@ -53,13 +53,40 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         public void DoNotDuplicateSongIntoSongListWhenAddToPlayListEventIsCatched()
         {
             Song song1 = Create.Song();
-            PlayListViewModel viewModel = new PlayListViewModel();
 
             PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
             PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
 
-            Assert.AreEqual(1, viewModel.SongList.Count);
-            CollectionAssert.Contains(viewModel.SongList, song1);
+            Assert.AreEqual(1, ViewModel.SongList.Count);
+            CollectionAssert.Contains(ViewModel.SongList, song1);
+        }
+
+        [TestMethod]
+        public void SwitchRepeatMode()
+        {
+            Assert.IsFalse(ViewModel.Repeat);
+
+            ViewModel.SwitchRepeatModeCommand.Execute(null);
+
+            Assert.IsTrue(ViewModel.Repeat);
+
+            ViewModel.SwitchRepeatModeCommand.Execute(null);
+
+            Assert.IsFalse(ViewModel.Repeat);
+        }
+
+        [TestMethod]
+        public void SwitchRandomMode()
+        {
+            Assert.IsFalse(ViewModel.Random);
+
+            ViewModel.SwitchRandomModeCommand.Execute(null);
+
+            Assert.IsTrue(ViewModel.Random);
+
+            ViewModel.SwitchRandomModeCommand.Execute(null);
+
+            Assert.IsFalse(ViewModel.Random);
         }
 
         #region PlayCommands

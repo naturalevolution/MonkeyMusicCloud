@@ -12,6 +12,7 @@ namespace MonkeyMusicCloud.Client.ViewModels
         private Song actualPlayedSong;
         private State playerState;
         private bool repeat;
+        private bool random;
         private ObservableCollection<Song> songList;
 
         public PlayListViewModel()
@@ -81,6 +82,26 @@ namespace MonkeyMusicCloud.Client.ViewModels
             get { return new RelayCommand(RaiseNewResumeSongDemand); }
         }
 
+        public ICommand SwitchRepeatModeCommand
+        {
+            get { return new RelayCommand(RaiseNewSwitchRepeatModeDemand); }
+        }
+
+        public ICommand SwitchRandomModeCommand
+        {
+            get { return new RelayCommand(RaiseNewSwitchRandomModeDemand); }
+        }
+
+        private void RaiseNewSwitchRepeatModeDemand()
+        {
+            Repeat = !Repeat;
+        }
+
+        private void RaiseNewSwitchRandomModeDemand()
+        {
+            Random = !Random;
+        }
+
         public State PlayerState
         {
             get { return playerState; }
@@ -100,6 +121,17 @@ namespace MonkeyMusicCloud.Client.ViewModels
                 RaisePropertyChanged("Repeat");
             }
         }
+
+        public bool Random
+        {
+            get { return random; }
+            set
+            {
+                random = value;
+                RaisePropertyChanged("Random");
+            }
+        }
+
 
         private void OnCurrentSongFinished()
         {

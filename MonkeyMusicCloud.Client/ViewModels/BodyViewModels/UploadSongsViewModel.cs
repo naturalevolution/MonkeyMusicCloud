@@ -8,6 +8,7 @@ using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.Utilities;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Utilities.Interface;
 using File = TagLib.File;

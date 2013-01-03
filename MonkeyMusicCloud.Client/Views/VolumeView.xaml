@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="75" d:DesignWidth="32">
+             mc:Ignorable="d" >
     <UserControl.DataContext>
         <viewModels:VolumeViewModel />
     </UserControl.DataContext>
-    <Grid HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Right">
         <StackPanel Orientation="Vertical">
             <Slider Orientation="Vertical" Height="50" HorizontalAlignment="Center" Minimum="0" Maximum="1" Ticks="100" 
                     IsMoveToPointEnabled="True" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}" />

@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <viewModels:PlayListViewModel />
     </UserControl.DataContext>
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -21,12 +21,25 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Height="53" Margin="20,0,20,22">
+        <Grid Grid.ColumnSpan="2" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical">
+                <Image Width="25" Height="25" Style="{StaticResource RepeatImageStyle}" >
+                    <Image.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding SwitchRepeatModeCommand}" />
+                    </Image.InputBindings>
+                </Image>
+                <Image Width="25" Height="25" Style="{StaticResource RandomImageStyle}"  >
+                    <Image.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding SwitchRandomModeCommand}" />
+                    </Image.InputBindings>
+                </Image>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Height="53" Margin="20,0,20,22">
                 <Button Margin="5,0,5,0" Width="48" Height="48" Command="{Binding PreviousSongCommand}" Style="{StaticResource PlayerButton}">
                     <Image Width="38" Height="38" Source="../Themes/Images/PlayerPrecedente.png" />
                 </Button>
@@ -37,10 +50,10 @@
                     <Image Width="38" Height="38" Source="../Themes/Images/PlayerSuivante.png"/>
                 </Button>
             </StackPanel>
+            <views:VolumeView Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" HorizontalContentAlignment="Right" />
         </Grid>
         
         <views:PlayerView  Grid.Row="1" Grid.ColumnSpan="2" />
-        <views:VolumeView Grid.Row="0" Grid.Column="1" />
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" x:Name="Layout">
             <ListView ctrl:ListViewLayoutManager.Enabled="True"  Name="LvSongList" Height="{Binding ElementName=Layout, Path=ActualHeight}" 
                   VerticalAlignment="Top" ItemsSource="{Binding SongList, UpdateSourceTrigger=PropertyChanged}"

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
-using MonkeyMusicCloud.Test.Helper;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels.SubViewModels
 {

@@ -3,7 +3,7 @@ using System.IO;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Resource;
 
-namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
+namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks
 {
     public class DownloadTask : Task
     {

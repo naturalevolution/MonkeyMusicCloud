@@ -67,5 +67,22 @@
     <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}" x:Key="ListViewItemStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
+
+    <Style BasedOn="{StaticResource ImageClickable}" TargetType="Image" x:Key="RepeatImageStyle">
+        <Setter Property="Source" Value="../Themes/Images/Repeat.png" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Repeat}" Value="true">
+                <Setter Property="Source" Value="../Themes/Images/Repeat_alt.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
     
+    <Style BasedOn="{StaticResource ImageClickable}" TargetType="Image" x:Key="RandomImageStyle">
+        <Setter Property="Source" Value="../Themes/Images/Random.png" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Random}" Value="true">
+                <Setter Property="Source" Value="../Themes/Images/Random_alt.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

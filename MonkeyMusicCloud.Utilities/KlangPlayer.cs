@@ -9,21 +9,33 @@ namespace MonkeyMusicCloud.Utilities
 {
     public class KlangPlayer : IMusicPlayer
     {
-        ISoundEngine engine = new ISoundEngine();
+        ISoundEngine Engine { get; set; }
         ISound ActualSound { get; set; }
-        private Timer tmProgressionFlux = new Timer(500);
+        Timer TmProgressionFlux { get; set; }
+
+        public KlangPlayer()
+        {
+            try
+            {
+                Engine = new ISoundEngine();
+            }
+            catch (Exception)
+            {
+                Engine = null;
+            }
+            TmProgressionFlux = new Timer(500);
+
+        }
 
         public void Play(Guid id, byte[] file)
         {
-
-            //pb d'accès concurrenciel
             string path = ConfigurationManager.AppSettings["MediaCache"] + id + ".mp3";
             File.WriteAllBytes(path, file);
 
-            ActualSound = engine.Play3D(path, 1, 1, 1);
+            ActualSound = Engine.Play3D(path, 1, 1, 1);
 
-            tmProgressionFlux = new Timer(1000) { Enabled = true };
-            tmProgressionFlux.Elapsed += TmProgressionFluxTick;
+            TmProgressionFlux = new Timer(1000) { Enabled = true };
+            TmProgressionFlux.Elapsed += TmProgressionFluxTick;
             TimerResume();
         }
 
@@ -40,12 +52,12 @@ namespace MonkeyMusicCloud.Utilities
 
         private void TimerPause()
         {
-            tmProgressionFlux.Stop();
+            TmProgressionFlux.Stop();
         }
 
         private void TimerResume()
         {
-            tmProgressionFlux.Start();
+            TmProgressionFlux.Start();
         }
 
         public void Stop()

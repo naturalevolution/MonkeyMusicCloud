@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
-using MonkeyMusicCloud.Domain.Model;
+﻿using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 
 namespace MonkeyMusicCloud.Client.Observers
 {

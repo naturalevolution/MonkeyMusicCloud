@@ -5,6 +5,7 @@ using System.Windows.Input;
 using MicroMvvm;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
+using MonkeyMusicCloud.Client.ViewModels.SubViewModels.Tasks;
 using MonkeyMusicCloud.Client.Views.BodyViews;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Resource;

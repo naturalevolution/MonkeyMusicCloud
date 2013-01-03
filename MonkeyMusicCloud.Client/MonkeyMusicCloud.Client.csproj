@@ -87,14 +87,13 @@
     <Compile Include="ViewModels\BodyViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\BodyViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\GridViewSort.cs" />
+    <Compile Include="ViewModels\SubViewModels\Tasks\UploadTask.cs" />
     <Compile Include="ViewModels\VolumeViewModel.cs" />
     <Compile Include="ViewModels\CustomViewModels\AlbumListViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AlbumItemCarousel.cs" />
-    <Compile Include="ViewModels\SubViewModels\DownloadTask.cs" />
-    <Compile Include="ViewModels\SubViewModels\OrgItems\OrgItem.cs" />
-    <Compile Include="ViewModels\SubViewModels\UploadTask.cs" />
-    <Compile Include="ViewModels\SubViewModels\Task.cs" />
+    <Compile Include="ViewModels\SubViewModels\Tasks\DownloadTask.cs" />
+    <Compile Include="ViewModels\SubViewModels\Tasks\Task.cs" />
     <Compile Include="ViewModels\TaskManagerViewModel.cs" />
     <Compile Include="Views\BodyViews\ArtistDetailView.xaml.cs">
       <DependentUpon>ArtistDetailView.xaml</DependentUpon>
@@ -347,6 +346,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\Images\Repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Repeat_alt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Random.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Images\Random_alt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
