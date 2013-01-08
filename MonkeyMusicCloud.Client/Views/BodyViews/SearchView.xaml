@@ -4,23 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:bodyViewModels="clr-namespace:MonkeyMusicCloud.Client.ViewModels.BodyViewModels"
-             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="200">
+             xmlns:const="clr-namespace:MonkeyMusicCloud.Resource;assembly=MonkeyMusicCloud.Resource"
+             mc:Ignorable="d" d:DesignHeight="70" d:DesignWidth="200">
     <UserControl.DataContext>
         <bodyViewModels:SearchViewModel />
     </UserControl.DataContext>
     <Grid Margin="2">
-        <TextBox x:Name="TbSearch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBox x:Name="TbSearch" Grid.Row="0">
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding  SearchSongsListCommand}" CommandParameter="{Binding ElementName=TbSearch, Path=Text}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox >
-        <Button HorizontalAlignment="Right" Margin="5"  Command="{Binding SearchSongsListCommand}" CommandParameter="{Binding ElementName=TbSearch, Path=Text}">
+        <Button Grid.Row="0" HorizontalAlignment="Right" Margin="5"  Command="{Binding SearchSongsListCommand}" CommandParameter="{Binding ElementName=TbSearch, Path=Text}">
             <Button.Template>
                 <ControlTemplate>
                     <Image Source="../../Themes/Images/Search.png" Style="{StaticResource ResourceKey=ImageClickable}" />
                 </ControlTemplate>
             </Button.Template>    
         </Button>
-        <Image HorizontalAlignment="Right" Width="25" />
+        <Image HorizontalAlignment="Right" Width="25" Grid.Row="0" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <CheckBox Grid.Row="1" Content="{x:Static const:MusicResource.TitleHeader}" IsChecked="{Binding SearchOnTitle}" Margin="5" />
+            <CheckBox Grid.Row="1" Content="{x:Static const:MusicResource.ArtistHeader}" IsChecked="{Binding SearchOnArtist}" Margin="5" />
+            <CheckBox Grid.Row="1" Content="{x:Static const:MusicResource.AlbumHeader}" IsChecked="{Binding SearchOnAlbum}" Margin="5" />
+        </StackPanel>
     </Grid>
 </UserControl>

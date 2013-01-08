@@ -137,6 +137,24 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         }
 
         [TestMethod]
+        public void DoNotRefreshTimeIfTotalTimeIsEqualToZero()
+        {
+            const int elapsedTime = 3010;
+            const int totalTime = 0;
+            PlayerViewModel viewModel = new PlayerViewModel
+            {
+                SliderIsOnDrag = true,
+                PurcentagePlayed = 5
+            };
+
+            MockMusicPlayer.Raise(mp => mp.PurcentagePlayed += null, elapsedTime, totalTime);
+
+            Assert.AreEqual(5, viewModel.PurcentagePlayed);
+            Assert.AreEqual("00:00:00", viewModel.ElapsedTime);
+            Assert.AreEqual("00:00:00", viewModel.TotalTime);
+        }
+
+        [TestMethod]
         public void SetSliderIsOnDragOnStartDragCommand()
         {
             PlayerViewModel viewModel = new PlayerViewModel { SliderIsOnDrag = false };

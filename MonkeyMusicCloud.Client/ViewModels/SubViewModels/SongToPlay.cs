@@ -6,7 +6,7 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
     {
         private Song song;
         private bool isPlaying;
-        private bool alreadyPlayed;
+        private bool played;
 
         public Song Song
         {
@@ -27,13 +27,13 @@ namespace MonkeyMusicCloud.Client.ViewModels.SubViewModels
             }
         }
 
-        public bool AlreadyPlayed
+        public bool Played
         {
-            get { return alreadyPlayed; }
+            get { return played; }
             set
             {
-                alreadyPlayed = value;
-                RaisePropertyChanged("AlreadyPlayed");
+                played = value;
+                RaisePropertyChanged("Played");
             }
         }
     }

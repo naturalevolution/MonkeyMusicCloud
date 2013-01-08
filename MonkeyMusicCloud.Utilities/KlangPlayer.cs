@@ -39,14 +39,18 @@ namespace MonkeyMusicCloud.Utilities
             TimerResume();
         }
 
+        //TODO BUG Actual song null :/
         private void TmProgressionFluxTick(object sender, EventArgs e)
         {
-            int total = (int)ActualSound.PlayLength / 1000;
-            int current = (int)ActualSound.PlayPosition / 1000;
-            PurcentagePlayed.Invoke(current, total);
-            if (ActualSound.Finished)
+            if (ActualSound != null)
             {
-                SongFinished.Invoke();
+                int total = (int)ActualSound.PlayLength / 1000;
+                int current = (int)ActualSound.PlayPosition / 1000;
+                PurcentagePlayed.Invoke(current, total);
+                if (ActualSound.Finished)
+                {
+                    SongFinished.Invoke();
+                }
             }
         }
 

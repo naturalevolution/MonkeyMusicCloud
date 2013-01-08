@@ -29,7 +29,7 @@ namespace MonkeyMusicCloud.Test.Repository
             Repository.Add(expectedMusic2);
             Repository.Add(expectedMusic3);
             Repository.Add(expectedMusic4);
-            IList<Song> gettedMusics = Repository.GetByFilter("ilt");
+            IList<Song> gettedMusics = Repository.GetByFilter("ilt", true, true, true);
 
             Assert.AreEqual(3, gettedMusics.Count);
             CollectionAssert.Contains(gettedMusics.Select(g => g.Title).ToList(), expectedMusic1.Title);

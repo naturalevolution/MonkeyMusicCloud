@@ -12,7 +12,7 @@ namespace MonkeyMusicCloud.Service
         IList<Song> GetAllSongs();
 
         [OperationContract]
-        IList<Song> SearchSongs(string filter);
+        IList<Song> SearchSongs(string filter, bool onTitle, bool onArtist, bool onAlbum);
 
         [OperationContract]
         void AddASong(Song song, MediaFile mediaFile);

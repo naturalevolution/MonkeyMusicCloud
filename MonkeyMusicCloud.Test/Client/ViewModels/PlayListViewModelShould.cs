@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonkeyMusicCloud.Client.Observers;
 using MonkeyMusicCloud.Client.ViewModels;
@@ -7,60 +6,53 @@ using MonkeyMusicCloud.Client.ViewModels.SubViewModels;
 using MonkeyMusicCloud.Domain.Model;
 using MonkeyMusicCloud.Test.Helper;
 using MonkeyMusicCloud.Test.Helper.EventCatchers;
+using Moq;
 
 namespace MonkeyMusicCloud.Test.Client.ViewModels
 {
     [TestClass]
     public class PlayListViewModelShould : ViewModelsBaseTest
     {
+        private readonly Mock<PlayList> mockPlayList = new Mock<PlayList>();
         private PlayListViewModel ViewModel { get; set; }
 
         [TestInitialize]
         public override void Initialize()
         {
             base.Initialize();
+            ViewModel = new PlayListViewModel
+                {
+                    PlayList = mockPlayList.Object
+                };
+        }
+
+        [TestMethod]
+        public void InstantiateCorrectly()
+        {
             ViewModel = new PlayListViewModel();
+            Assert.IsNotNull(ViewModel.PlayList);
             Assert.AreEqual(State.Stop, ViewModel.PlayerState);
         }
 
         [TestMethod]
         public void RefreshSongWhenAddToPlayListEventIsCatched()
         {
-            Song song1 = Create.Song();
-            ViewModel.SongList = new ObservableCollection<SongToPlay>() ;
-            
+            ObservableCollection<Song> songsToAdd = new ObservableCollection<Song> {Create.Song()};
 
-            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
+            PlayerObserver.NotifyAddToPlayList(songsToAdd);
 
-            Assert.AreEqual(1, ViewModel.SongList.Count);
-            CollectionAssert.Contains(ViewModel.SongList.Select(sl => sl.Song).ToList(), song1);
+            mockPlayList.Verify(pl => pl.AddSongs(songsToAdd), Times.Once());
         }
 
         [TestMethod]
-        public void ClearPlayListAndRaiseStopEvent()
+        public void IfShuffleIsActivatedWhenASongIsAddedMixThePlayList()
         {
-            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-            Song song1 = Create.Song();
-            ViewModel.PlayerState = State.Play;
-            ViewModel.SongList = new ObservableCollection<SongToPlay>() { new SongToPlay(){Song = song1}};
+            ObservableCollection<Song> songsToAdd = new ObservableCollection<Song> {Create.Song()};
+            ViewModel.Shuffle = true;
 
-            ViewModel.ClearPlayListCommand.Execute(null);
+            PlayerObserver.NotifyAddToPlayList(songsToAdd);
 
-            Assert.AreEqual(0, ViewModel.SongList.Count);
-            Assert.IsTrue(eventCatcher.StopSongInvoked);
-            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
-        }
-        
-        [TestMethod]
-        public void DoNotDuplicateSongIntoSongListWhenAddToPlayListEventIsCatched()
-        {
-            Song song1 = Create.Song();
-
-            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
-            PlayerObserver.NotifyAddToPlayList(new ObservableCollection<Song>{song1});
-
-            Assert.AreEqual(1, ViewModel.SongList.Count);
-            CollectionAssert.Contains(ViewModel.SongList.Select(sl => sl.Song).ToList(), song1);
+            mockPlayList.Verify(pl => pl.Mix(), Times.Once());
         }
 
         [TestMethod]
@@ -78,322 +70,281 @@ namespace MonkeyMusicCloud.Test.Client.ViewModels
         }
 
         [TestMethod]
-        public void SwitchRandomMode()
+        public void ClearPlayListAndRaiseStopEvent()
         {
-            Assert.IsFalse(ViewModel.Random);
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            ViewModel.PlayerState = State.Play;
 
-            ViewModel.SwitchRandomModeCommand.Execute(null);
+            ViewModel.ClearPlayListCommand.Execute(null);
 
-            Assert.IsTrue(ViewModel.Random);
+            Assert.IsTrue(eventCatcher.StopSongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+            mockPlayList.Verify(pl => pl.Clear(), Times.Once());
+        }
 
-            ViewModel.SwitchRandomModeCommand.Execute(null);
+        [TestMethod]
+        public void SwitchShuffleMode()
+        {
+            Assert.IsFalse(ViewModel.Shuffle);
 
-            Assert.IsFalse(ViewModel.Random);
+            ViewModel.SwitchShuffleModeCommand.Execute(null);
+
+            mockPlayList.Verify(pl => pl.Mix(), Times.Once());
+            Assert.IsTrue(ViewModel.Shuffle);
+
+            ViewModel.SwitchShuffleModeCommand.Execute(null);
+
+            mockPlayList.Verify(pl => pl.Restaure(), Times.Once());
+            Assert.IsFalse(ViewModel.Shuffle);
         }
 
         #region PlayCommands
-            [TestMethod]
-            public void RaiseNewPlayDemandEvent()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1 };
 
-                ViewModel.PlaySongCommand.Execute(song1);
+        [TestMethod]
+        public void PlayASong()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            SongToPlay song = new SongToPlay {Song = Create.Song()};
 
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
-            }
+            ViewModel.PlaySongCommand.Execute(song);
 
-            [TestMethod]
-            public void SetIsPlayingAndAlereadyPlayedPropertiesOnPlayCommand()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
-                ViewModel.SongList = new ObservableCollection<SongToPlay> { song1, song2 };
-                
-                Assert.IsNull(ViewModel.ActualPlayedSong);
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        }
 
-                ViewModel.PlaySongCommand.Execute(song1);
-                
-                Assert.IsTrue(song1.IsPlaying);
-                Assert.IsFalse(song1.AlreadyPlayed);
-                Assert.IsFalse(song2.IsPlaying);
-                Assert.IsFalse(song2.AlreadyPlayed);
+        [TestMethod]
+        public void PlayTheFirstSongOfPlayListIfParameterIsNull()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            SongToPlay song = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.GetFirst()).Returns(song);
 
-                ViewModel.PlaySongCommand.Execute(song2);
+            ViewModel.PlaySongCommand.Execute(null);
 
-                Assert.IsFalse(song1.IsPlaying);
-                Assert.IsTrue(song1.AlreadyPlayed);
-                Assert.IsTrue(song2.IsPlaying);
-                Assert.IsFalse(song2.AlreadyPlayed);
-            }
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        }
 
-            [TestMethod]
-            public void DoNotRaiseTheEventIfTheListIsEmpty()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+        [TestMethod]
+        public void DoNotPlayIfPlayListIsEmpty()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            mockPlayList.Setup(pl => pl.IsEmpty).Returns(true);
 
-                ViewModel.PlaySongCommand.Execute(null);
+            ViewModel.PlaySongCommand.Execute(null);
 
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(State.Stop, ViewModel.PlayerState);
-            }
+            Assert.IsFalse(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+        }
 
-            [TestMethod]
-            public void RaiseThePlayEventWithTheFirstSongOfTheListIfNoSongIsSelected()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> { song1, song2 };
+        [TestMethod]
+        public void WhenASongIsPlayedSetPlayedProperties()
+        {
+            SongToPlay beforeSong = new SongToPlay {Song = Create.Song(), IsPlaying = true, Played = true};
+            SongToPlay afterSong = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.ActualSong).Returns(beforeSong);
 
-                ViewModel.PlaySongCommand.Execute(null);
+            ViewModel.PlaySongCommand.Execute(afterSong);
 
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
-            }
+            Assert.IsFalse(beforeSong.IsPlaying);
+            Assert.IsTrue(beforeSong.Played);
+            Assert.IsTrue(afterSong.IsPlaying);
+            Assert.IsTrue(afterSong.Played);
+        }
 
-            [TestMethod]
-            public void ChangeTheActualSelectedSongOnPlayDemand()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
+        [TestMethod]
+        public void WhenASongIsPlayedSetPlayedUnlessActualSongIfNull()
+        {
+            SongToPlay beforeSong = null;
+            SongToPlay afterSong = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.ActualSong).Returns(beforeSong);
 
-                ViewModel.SongList = new ObservableCollection<SongToPlay> { song1, song2 };
-                ViewModel.PlaySongCommand.Execute(song2);
+            ViewModel.PlaySongCommand.Execute(afterSong);
 
-                Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
-            }
+            Assert.IsTrue(afterSong.IsPlaying);
+            Assert.IsTrue(afterSong.Played);
+        }
+
         #endregion
 
         #region PauseCommands
 
-            [TestMethod]
-            public void RaisePauseDemandEvent()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.PlayerState = State.Play;
+        [TestMethod]
+        public void RaisePauseDemandEvent()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            ViewModel.PlayerState = State.Play;
 
-                ViewModel.PauseSongCommand.Execute(null);
+            ViewModel.PauseSongCommand.Execute(null);
 
-                Assert.IsTrue(eventCatcher.PauseSongInvoked);
-                Assert.AreEqual(State.Pause, ViewModel.PlayerState);
-            }
+            Assert.IsTrue(eventCatcher.PauseSongInvoked);
+            Assert.AreEqual(State.Pause, ViewModel.PlayerState);
+        }
 
-            [TestMethod]
-            public void DoNothingOnPauseCommandIfPlayerIsNotPlaying()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay>();
+        [TestMethod]
+        public void DoNothingOnPauseCommandIfPlayerIsNotPlaying()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
-                ViewModel.PlayerState = State.Pause;
-                ViewModel.PauseSongCommand.Execute(null);
+            ViewModel.PlayerState = State.Pause;
+            ViewModel.PauseSongCommand.Execute(null);
 
-                Assert.IsFalse(eventCatcher.PauseSongInvoked);
-                Assert.AreEqual(State.Pause, ViewModel.PlayerState);
+            Assert.IsFalse(eventCatcher.PauseSongInvoked);
+            Assert.AreEqual(State.Pause, ViewModel.PlayerState);
 
-                ViewModel.PlayerState = State.Stop;
-                ViewModel.PauseSongCommand.Execute(null);
+            ViewModel.PlayerState = State.Stop;
+            ViewModel.PauseSongCommand.Execute(null);
 
-                Assert.IsFalse(eventCatcher.PauseSongInvoked);
-                Assert.AreEqual(State.Stop, ViewModel.PlayerState);
-            }
-            
-            [TestMethod]
-            public void RaiseResumeDemandEvent()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay>();
-                ViewModel.PlayerState = State.Pause;
+            Assert.IsFalse(eventCatcher.PauseSongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+        }
 
-                ViewModel.ResumeSongCommand.Execute(null);
 
-                Assert.IsTrue(eventCatcher.ResumeSongInvoked);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
-            }
+        [TestMethod]
+        public void RaiseResumeDemandEvent()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            ViewModel.PlayerState = State.Pause;
 
-            [TestMethod]
-            public void DoNothingOnResumeCommandIfPlayerIsNotOnPause()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay>();
+            ViewModel.ResumeSongCommand.Execute(null);
 
-                ViewModel.PlayerState = State.Play;
-                ViewModel.ResumeSongCommand.Execute(null);
+            Assert.IsTrue(eventCatcher.ResumeSongInvoked);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        }
 
-                Assert.IsFalse(eventCatcher.ResumeSongInvoked);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        [TestMethod]
+        public void DoNothingOnResumeCommandIfPlayerIsNotOnPause()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
-                ViewModel.PlayerState = State.Stop;
-                ViewModel.ResumeSongCommand.Execute(null);
+            ViewModel.PlayerState = State.Play;
+            ViewModel.ResumeSongCommand.Execute(null);
 
-                Assert.IsFalse(eventCatcher.ResumeSongInvoked);
-                Assert.AreEqual(State.Stop, ViewModel.PlayerState);
-            }
+            Assert.IsFalse(eventCatcher.ResumeSongInvoked);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
 
+            ViewModel.PlayerState = State.Stop;
+            ViewModel.ResumeSongCommand.Execute(null);
+
+            Assert.IsFalse(eventCatcher.ResumeSongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+        }
 
         #endregion
 
         #region PreviousCommands
-            [TestMethod]
-            public void PlayPreviousSong()
-            {
-                SongToPlay song1 = new SongToPlay(){Song = Create.Song()};
-                SongToPlay song2 = new SongToPlay(){Song = Create.Song()};
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel
-                {
-                    SongList = new ObservableCollection<SongToPlay> { song1, song2 },
-                    ActualPlayedSong = song2
-                };
 
-                viewModel.PreviousSongCommand.Execute(null);
+        [TestMethod]
+        public void PlayPreviousSong()
+        {
+            SongToPlay song1 = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.GetPreviousSong()).Returns(song1);
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(song1, viewModel.ActualPlayedSong);
-            }
+            ViewModel.PreviousSongCommand.Execute(null);
 
-            [TestMethod]
-            public void DoNothingIfThereIsNoActualSongOnPreviousSongCommand()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                PlayListViewModel viewModel = new PlayListViewModel { SongList = new ObservableCollection<SongToPlay>() };
+            mockPlayList.Verify();
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song1.Song, eventCatcher.SongToPlay);
+        }
 
-                viewModel.PreviousSongCommand.Execute(null);
+        [TestMethod]
+        public void IfPlayListIsTheBeginningAndRepeatIsActivatedPlayTheLastSong()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            SongToPlay song = new SongToPlay();
+            ViewModel.PlayerState = State.Play;
+            ViewModel.Repeat = true;
+            mockPlayList.Setup(pl => pl.PlayingTheFirst).Returns(true);
+            mockPlayList.Setup(pl => pl.GetLast()).Returns(song);
 
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-            }
+            ViewModel.PreviousSongCommand.Execute(null);
 
-            [TestMethod]
-            public void DoNothingIfThereIsNoActualSongOnSongFinished()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            mockPlayList.Verify(pl => pl.ResetAllSongs(), Times.Once());
+            mockPlayList.Verify(pl => pl.GetLast(), Times.Once());
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        }
 
-                PlayerObserver.NotifyCurrentSongFinished();
-
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-            }
-
-            [TestMethod]
-            public void DoNothingIfTheActualSOngIsTheFirstOfTheList()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1, song2};
-                ViewModel.ActualPlayedSong = song1;
-
-                ViewModel.PreviousSongCommand.Execute(null);
-
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
-            }
         #endregion
 
         #region NextCommands
 
-            [TestMethod]
-            public void PlayNextSong()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1, song2};
-                ViewModel.ActualPlayedSong = song1;
+        [TestMethod]
+        public void PlayNextSongOfPlayList()
+        {
+            SongToPlay song = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.GetNextSong()).Returns(song);
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
-                ViewModel.NextSongCommand.Execute(null);
+            ViewModel.NextSongCommand.Execute(null);
 
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song2.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
-            }
+            mockPlayList.Verify(pl => pl.GetNextSong(), Times.Once());
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+        }
 
-            [TestMethod]
-            public void PlayNextSongWhenTheCurrentIsFinished()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                SongToPlay song2 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1, song2};
-                ViewModel.ActualPlayedSong = song1;
+        [TestMethod]
+        public void PlayNextSongWhenTheCurrentIsFinished()
+        {
+            SongToPlay song = new SongToPlay {Song = Create.Song()};
+            mockPlayList.Setup(pl => pl.GetNextSong()).Returns(song);
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
 
-                PlayerObserver.NotifyCurrentSongFinished();
+            PlayerObserver.NotifyCurrentSongFinished();
 
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song2.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(song2, ViewModel.ActualPlayedSong);
-            }
+            mockPlayList.Verify(pl => pl.GetNextSong(), Times.Once());
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+        }
 
-            [TestMethod]
-            public void DoNothingIfThereIsNoActualSongOnNextSongCommand()
-            {
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay>();
+        [TestMethod]
+        public void DoNothingIfThereIsTheEndOfPlayListOnNextSongDemand()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            mockPlayList.Setup(pl => pl.IsFinished).Returns(true);
 
-                ViewModel.NextSongCommand.Execute(null);
+            ViewModel.NextSongCommand.Execute(null);
 
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-            }
-        
-            [TestMethod]
-            public void DoNothingIfThereIsTheEndOfPlayListOnNextSongDemand()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1};
-                ViewModel.ActualPlayedSong = song1;
+            Assert.IsFalse(eventCatcher.PlaySongInvoked);
+        }
 
-                ViewModel.NextSongCommand.Execute(null);
+        [TestMethod]
+        public void ClearPlayerIfThereIsTheEndOfPlayListOnSongFinished()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            ViewModel.PlayerState = State.Play;
+            mockPlayList.Setup(pl => pl.IsFinished).Returns(true);
 
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
-            }
+            PlayerObserver.NotifyCurrentSongFinished();
 
-            [TestMethod]
-            public void ClearPlayerIfThereIsTheEndOfPlayListOnSongFinished()
-            {
-                SongToPlay song1 = new SongToPlay() { Song = Create.Song() };
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> {song1};
-                ViewModel.ActualPlayedSong = song1;
-                ViewModel.PlayerState = State.Play;
+            Assert.IsFalse(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(State.Stop, ViewModel.PlayerState);
+            Assert.IsTrue(eventCatcher.StopSongInvoked);
+            mockPlayList.Verify(pl => pl.ResetAllSongs(), Times.Once());
+        }
 
-                PlayerObserver.NotifyCurrentSongFinished();
+        [TestMethod]
+        public void IfPlayListIsFinishedAndRepeatIsActivatedPlayTheFirstSong()
+        {
+            PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
+            SongToPlay song = new SongToPlay();
+            ViewModel.PlayerState = State.Play;
+            ViewModel.Repeat = true;
+            mockPlayList.Setup(pl => pl.IsFinished).Returns(true);
+            mockPlayList.Setup(pl => pl.GetFirst()).Returns(song);
 
-                Assert.IsFalse(eventCatcher.PlaySongInvoked);
-                Assert.IsNull(ViewModel.ActualPlayedSong);
-                Assert.AreEqual(State.Stop, ViewModel.PlayerState);
-            }
+            PlayerObserver.NotifyCurrentSongFinished();
 
-            [TestMethod]
-            public void IfPlayListIsFinishedAndRepeatIsActivatedPlayTheFirstSong()
-            {
-                SongToPlay song1 = new SongToPlay { Song = Create.Song(), AlreadyPlayed = true};
-                SongToPlay song2 = new SongToPlay { Song = Create.Song(), AlreadyPlayed = true, IsPlaying = true};
-                PlayerEventCatcher eventCatcher = new PlayerEventCatcher();
-                ViewModel.SongList = new ObservableCollection<SongToPlay> { song1, song2 };
-                ViewModel.ActualPlayedSong = song2;
-                ViewModel.PlayerState = State.Play;
-                ViewModel.Repeat = true;
-
-                PlayerObserver.NotifyCurrentSongFinished();
-
-                Assert.IsTrue(eventCatcher.PlaySongInvoked);
-                Assert.AreEqual(song1.Song, eventCatcher.SongToPlay);
-                Assert.AreEqual(song1, ViewModel.ActualPlayedSong);
-                Assert.AreEqual(State.Play, ViewModel.PlayerState);
-                Assert.IsTrue(ViewModel.SongList.All(sl => sl.AlreadyPlayed == false));
-                Assert.IsTrue(song1.IsPlaying);
-            }
-
-
-           
+            mockPlayList.Verify(pl => pl.ResetAllSongs(), Times.Once());
+            mockPlayList.Verify(pl => pl.GetFirst(), Times.Once());
+            Assert.IsTrue(eventCatcher.PlaySongInvoked);
+            Assert.AreEqual(song.Song, eventCatcher.SongToPlay);
+            Assert.AreEqual(State.Play, ViewModel.PlayerState);
+        }
 
         #endregion
     }

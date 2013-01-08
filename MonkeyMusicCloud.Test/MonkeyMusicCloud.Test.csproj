@@ -62,13 +62,14 @@
     <Compile Include="Client\ViewModels\BodyViewModels\AlbumDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\ArtistDetailViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\LibraryViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SubViewModels\PlayListShould.cs" />
     <Compile Include="Client\ViewModels\VolumeViewModelShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\DownloadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\UploadTaskShould.cs" />
     <Compile Include="Client\ViewModels\SubViewModels\TaskShould.cs" />
     <Compile Include="Client\ViewModels\TaskManagerViewModelShould.cs" />
     <Compile Include="Client\ViewModels\MenuViewModelShould.cs" />
-    <Compile Include="Client\ViewModels\BodyViewModels\SearchViewModelShould.cs" />
+    <Compile Include="Client\ViewModels\SearchViewModelShould.cs" />
     <Compile Include="Client\ViewModels\BodyViewModels\UploadSongsViewModelShould.cs" />
     <Compile Include="Client\ViewModels\ContentBodyViewModelShould.cs" />
     <Compile Include="Client\ViewModels\PlayerViewModelShould.cs" />

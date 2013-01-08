@@ -25,11 +25,11 @@ namespace MonkeyMusicCloud.Service
             return SongRepository.GetAll();
         }
 
-        public IList<Song> SearchSongs(string filter)
+        public IList<Song> SearchSongs(string filter, bool onTitle, bool onArtist, bool onAlbum)
         {
             if (!string.IsNullOrEmpty(filter))
             {
-                return SongRepository.GetByFilter(filter);
+                return SongRepository.GetByFilter(filter, onTitle, onArtist, onAlbum);
             }
             return new List<Song>();
         }

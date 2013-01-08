@@ -93,7 +93,14 @@ namespace MonkeyMusicCloud.Client.ViewModels
 
         private void RefreshSongTimes(int elapsedTimeFromEvent, int totalTimeFromEvent)
         {
-            PurcentagePlayed = !SliderIsOnDrag ? (100*elapsedTimeFromEvent/totalTimeFromEvent) : PurcentagePlayed;
+            if (totalTimeFromEvent != 0)
+            {
+                PurcentagePlayed = !SliderIsOnDrag ? (100 * elapsedTimeFromEvent / totalTimeFromEvent) : PurcentagePlayed;
+            }
+            else
+            {
+                elapsedTimeFromEvent = 0;
+            }
             ElapsedTime = TimeSpan.FromSeconds(elapsedTimeFromEvent).ToString("T", DateTimeFormatInfo.InvariantInfo);
             TotalTime = TimeSpan.FromSeconds(totalTimeFromEvent).ToString("T", DateTimeFormatInfo.InvariantInfo);
         }

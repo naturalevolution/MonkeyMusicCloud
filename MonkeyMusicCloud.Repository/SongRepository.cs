@@ -8,7 +8,7 @@ namespace MonkeyMusicCloud.Repository
 {
     public class SongRepository : Repository<Song>
     {
-        public virtual IList<Song> GetByFilter(string filter)
+        public virtual IList<Song> GetByFilter(string filter, bool onTitle, bool onAlbum, bool onArtist)
         {
             IMongoQuery query = Query<Song>.Where(s => s.Title.ToUpper().Contains(filter.ToUpper()) ||
                                                        s.Album.ToUpper().Contains(filter.ToUpper()) ||
